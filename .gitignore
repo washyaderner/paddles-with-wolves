@@ -171,3 +171,7 @@ Thumbs.db
 
 # Turbo
 .turbo
+
+# Astro
+.astro/
+dist/

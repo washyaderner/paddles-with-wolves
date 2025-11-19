@@ -1,0 +1,245 @@
+---
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/apothecary', label: 'Apothecary' },
+  { href: '/booking', label: 'Booking' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="floating-nav">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="logo-text">Paddles with Wolves</span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-menu">
+      {navItems.map(item => (
+        <li class="nav-item">
+          <a
+            href={item.href}
+            class:list={['nav-link', { active: currentPath === item.href }]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .floating-nav {
+    position: fixed;
+    top: var(--space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - var(--space-8));
+    max-width: 1200px;
+    z-index: var(--z-sticky);
+    transition: all var(--transition-base);
+  }
+
+  .nav-container {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-4) var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .nav-logo {
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--sunset-gold), var(--mystic-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger {
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: var(--sunset-gold);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--sunset-gold);
+    transition: all var(--transition-base);
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .nav-item {
+    list-style: none;
+  }
+
+  .nav-link {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    position: relative;
+  }
+
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 2px;
+    background: var(--sunset-gold);
+    transition: transform var(--transition-base);
+  }
+
+  .nav-link:hover {
+    color: var(--sunset-gold);
+    background: rgba(107, 70, 193, 0.2);
+  }
+
+  .nav-link:hover::before {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  .nav-link.active {
+    color: var(--sunset-gold);
+    background: rgba(107, 70, 193, 0.3);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .floating-nav {
+      top: var(--space-2);
+      width: calc(100% - var(--space-4));
+    }
+
+    .nav-container {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 80px;
+      left: var(--space-2);
+      right: var(--space-2);
+      flex-direction: column;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(107, 70, 193, 0.3);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      gap: var(--space-2);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-20px);
+      transition: all var(--transition-base);
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      width: 100%;
+      text-align: center;
+      padding: var(--space-3) var(--space-4);
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  navToggle?.addEventListener('click', () => {
+    navMenu?.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.floating-nav')) {
+      navMenu?.classList.remove('active');
+    }
+  });
+
+  // Scroll effect
+  let lastScroll = 0;
+  const nav = document.querySelector('.floating-nav') as HTMLElement;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      nav.style.transform = 'translateX(-50%) translateY(-120%)';
+    } else {
+      nav.style.transform = 'translateX(-50%) translateY(0)';
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>

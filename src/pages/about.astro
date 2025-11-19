@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About - Paddles with Wolves">
+  <section class="page-section">
+    <div class="container">
+      <h1>About Us</h1>
+      <p>Learn more about our healing practice...</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    min-height: 60vh;
+    padding: var(--space-20) 0;
+  }
+
+  .page-section h1 {
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-section p {
+    color: var(--light-gray);
+    font-size: var(--text-lg);
+  }
+</style>

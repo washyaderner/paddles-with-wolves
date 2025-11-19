@@ -1,0 +1,208 @@
+---
+import Navigation from '../components/Navigation.astro';
+import MountainSilhouette from '../components/MountainSilhouette.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Paddles with Wolves - Healing Arts & Wellness',
+  description = 'Holistic healing services combining ancient wisdom with modern wellness practices. Discover transformative healing through massage, energy work, and natural apothecary.',
+  image = '/og-images/default-og.jpg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+    <!-- Preload fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <!-- SVG Background -->
+    <div class="background-container">
+      <div class="gradient-overlay"></div>
+      <div id="mountain-silhouette">
+        <MountainSilhouette />
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <Navigation />
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Paddles with Wolves</h3>
+            <p>Healing arts and wellness services rooted in ancient wisdom.</p>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/apothecary">Apothecary</a></li>
+              <li><a href="/booking">Book Now</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Connect</h4>
+            <ul>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="mailto:info@paddleswithwolves.com">Email</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Paddles with Wolves. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .gradient-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-mystic);
+      }
+
+      #mountain-silhouette {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        opacity: 0.3;
+      }
+
+      .main-content {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        padding-top: 100px;
+      }
+
+      .site-footer {
+        position: relative;
+        z-index: 1;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(107, 70, 193, 0.3);
+        padding: var(--space-16) 0 var(--space-8);
+        margin-top: var(--space-32);
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-8);
+        margin-bottom: var(--space-8);
+      }
+
+      .footer-section h3,
+      .footer-section h4 {
+        color: var(--sunset-gold);
+        margin-bottom: var(--space-4);
+      }
+
+      .footer-section p {
+        color: var(--light-gray);
+        font-size: var(--text-sm);
+      }
+
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-section ul li {
+        margin-bottom: var(--space-2);
+      }
+
+      .footer-section ul li a {
+        color: var(--light-gray);
+        text-decoration: none;
+        transition: color var(--transition-base);
+        font-size: var(--text-sm);
+      }
+
+      .footer-section ul li a:hover {
+        color: var(--sunset-gold);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: var(--space-8);
+        border-top: 1px solid rgba(107, 70, 193, 0.2);
+      }
+
+      .footer-bottom p {
+        color: var(--medium-gray);
+        font-size: var(--text-sm);
+      }
+
+      @media (max-width: 768px) {
+        .main-content {
+          padding-top: 80px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: var(--space-6);
+        }
+      }
+    </style>
+  </body>
+</html>
