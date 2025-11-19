@@ -42,8 +42,9 @@
     <!-- Sun Glow Gradient -->
     <radialGradient id="sun-glow">
       <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
-      <stop offset="20%" style="stop-color:#FDB462;stop-opacity:0.95" />
-      <stop offset="50%" style="stop-color:#F2A74B;stop-opacity:0.7" />
+      <stop offset="15%" style="stop-color:#FDB462;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FDB462;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F2A74B;stop-opacity:0.9" />
       <stop offset="100%" style="stop-color:#FDB462;stop-opacity:0" />
     </radialGradient>
 
@@ -58,28 +59,132 @@
   <!-- Main Sunset Sky -->
   <rect x="0" y="0" width="1200" height="800" fill="url(#sunset-sky)"/>
 
-  <!-- Sun -->
+  <!-- Sun positioned behind the hill (partially hidden) -->
   <g class="sun-group">
-    <circle cx="600" cy="550" r="120" fill="url(#sun-glow)" opacity="0.9">
+    <!-- Sun rays emanating from behind the hill -->
+    <g class="light-rays" opacity="0.3">
+      <path
+        d="M 600,620 L 200,100"
+        stroke="#FDB462"
+        stroke-width="40"
+        stroke-linecap="round"
+        opacity="0.4"
+      >
+        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite"/>
+      </path>
+      <path
+        d="M 600,620 L 450,50"
+        stroke="#FDB462"
+        stroke-width="50"
+        stroke-linecap="round"
+        opacity="0.5"
+      >
+        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite"/>
+      </path>
+      <path
+        d="M 600,620 L 750,50"
+        stroke="#FDB462"
+        stroke-width="50"
+        stroke-linecap="round"
+        opacity="0.5"
+      >
+        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite" begin="1s"/>
+      </path>
+      <path
+        d="M 600,620 L 1000,100"
+        stroke="#FDB462"
+        stroke-width="40"
+        stroke-linecap="round"
+        opacity="0.4"
+      >
+        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite" begin="0.5s"/>
+      </path>
+    </g>
+    
+    <!-- Sun circle - partially hidden behind hill -->
+    <circle cx="600" cy="620" r="120" fill="url(#sun-glow)" opacity="1">
       <animate attributeName="r" values="120;125;120" dur="8s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.9;1;0.9" dur="8s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="600" cy="550" r="80" fill="#FDB462" opacity="1">
+    <circle cx="600" cy="620" r="80" fill="#FDB462" opacity="1">
       <animate attributeName="r" values="80;82;80" dur="8s" repeatCount="indefinite"/>
     </circle>
   </g>
 
-  <!-- Green Grass Hill -->
-  <ellipse cx="600" cy="600" rx="600" ry="120" fill="url(#horizon-glow)" opacity="0.85">
-    <animate attributeName="opacity" values="0.85;0.95;0.85" dur="10s" repeatCount="indefinite"/>
-  </ellipse>
-  
-  <!-- Additional grass texture layer for depth -->
+  <!-- Single Rolling Hill with Pine Trees -->
+  <!-- Hill shape: one continuous rolling curve from left to right, high enough to cover sun -->
   <path
-    d="M 0,580 Q 200,600 400,590 T 800,595 T 1200,585 L 1200,800 L 0,800 Z"
+    d="M 0,650 Q 150,580 300,600 Q 450,610 550,600 Q 600,595 650,600 Q 750,610 900,600 Q 1050,590 1200,580 L 1200,800 L 0,800 Z"
     fill="url(#horizon-glow)"
-    opacity="0.6"
-  />
+    opacity="0.9"
+  >
+    <animate attributeName="opacity" values="0.85;0.95;0.85" dur="10s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Pine Tree Silhouettes positioned along the hill curve -->
+  <g class="pine-trees" opacity="0.8">
+    <!-- Left side trees - bases aligned with hill curve -->
+    <path d="M 80,650 L 95,590 L 110,650 Z" fill="#1A3A2C" opacity="0.9"/>
+    <path d="M 87,650 L 95,610 L 103,650 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <path d="M 180,600 L 195,540 L 210,600 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 187,600 L 195,560 L 203,600 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <path d="M 280,605 L 295,545 L 310,605 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="9s" repeatCount="indefinite" begin="1s"/>
+    </path>
+    <path d="M 287,605 L 295,565 L 303,605 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <!-- Center-left trees -->
+    <path d="M 380,615 L 395,555 L 410,615 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="10s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+    <path d="M 387,615 L 395,575 L 403,615 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <!-- Center trees (around sun area) -->
+    <path d="M 480,610 L 495,550 L 510,610 Z" fill="#1A3A2C" opacity="0.7">
+      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="11s" repeatCount="indefinite" begin="1.5s"/>
+    </path>
+    <path d="M 487,610 L 495,570 L 503,610 Z" fill="#1A3A2C" opacity="0.8"/>
+    
+    <path d="M 520,608 L 535,548 L 550,608 Z" fill="#1A3A2C" opacity="0.7">
+      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="11s" repeatCount="indefinite" begin="2s"/>
+    </path>
+    <path d="M 527,608 L 535,568 L 543,608 Z" fill="#1A3A2C" opacity="0.8"/>
+    
+    <!-- Center-right trees -->
+    <path d="M 620,608 L 635,548 L 650,608 Z" fill="#1A3A2C" opacity="0.7">
+      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="10s" repeatCount="indefinite" begin="1.8s"/>
+    </path>
+    <path d="M 627,608 L 635,568 L 643,608 Z" fill="#1A3A2C" opacity="0.8"/>
+    
+    <path d="M 720,615 L 735,555 L 750,615 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="9s" repeatCount="indefinite" begin="2s"/>
+    </path>
+    <path d="M 727,615 L 735,575 L 743,615 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <!-- Right side trees -->
+    <path d="M 820,610 L 835,550 L 850,610 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite" begin="0.8s"/>
+    </path>
+    <path d="M 827,610 L 835,570 L 843,610 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <path d="M 920,605 L 935,545 L 950,605 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="10s" repeatCount="indefinite" begin="1.2s"/>
+    </path>
+    <path d="M 927,605 L 935,565 L 943,605 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <path d="M 1020,602 L 1035,542 L 1050,602 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="9s" repeatCount="indefinite" begin="2.5s"/>
+    </path>
+    <path d="M 1027,602 L 1035,562 L 1043,602 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <path d="M 1120,600 L 1135,540 L 1150,600 Z" fill="#1A3A2C" opacity="0.9">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite" begin="1.5s"/>
+    </path>
+    <path d="M 1127,600 L 1135,560 L 1143,600 Z" fill="#1A3A2C" opacity="1"/>
+  </g>
 
   <!-- Stylized Clouds -->
   <g class="clouds-layer-1" opacity="0.6">
@@ -111,49 +216,6 @@
       <animate attributeName="cx" values="1050;1070;1050" dur="55s" repeatCount="indefinite"/>
     </ellipse>
     <ellipse cx="1085" cy="330" rx="60" ry="24" fill="url(#cloud-gradient)"/>
-  </g>
-
-  <!-- Light Rays from Sun -->
-  <g class="light-rays" opacity="0.3">
-    <path
-      d="M 600,550 L 200,100"
-      stroke="url(#horizon-glow)"
-      stroke-width="40"
-      stroke-linecap="round"
-      opacity="0.4"
-    >
-      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite"/>
-    </path>
-
-    <path
-      d="M 600,550 L 450,50"
-      stroke="url(#horizon-glow)"
-      stroke-width="50"
-      stroke-linecap="round"
-      opacity="0.5"
-    >
-      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite"/>
-    </path>
-
-    <path
-      d="M 600,550 L 750,50"
-      stroke="url(#horizon-glow)"
-      stroke-width="50"
-      stroke-linecap="round"
-      opacity="0.5"
-    >
-      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite" begin="1s"/>
-    </path>
-
-    <path
-      d="M 600,550 L 1000,100"
-      stroke="url(#horizon-glow)"
-      stroke-width="40"
-      stroke-linecap="round"
-      opacity="0.4"
-    >
-      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite" begin="0.5s"/>
-    </path>
   </g>
 
   <!-- Flying Birds Silhouettes -->

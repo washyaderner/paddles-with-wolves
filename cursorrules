@@ -1,0 +1,271 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again.
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task.
+
+# Project Context - Paddles with Wolves
+
+Building a mystical healing arts website for Tony, a Pacific Northwest energy worker. The site features:
+- Canvas-based energy particle animations
+- Comprehensive booking system (Cal.com)
+- E-commerce for herbal products (Stripe)
+- Rich animation system using GSAP
+- Mobile-first responsive design
+
+## Tech Stack
+- **Framework:** Astro 4.16.18 (Static Site Generation)
+- **Styling:** Vanilla CSS with extensive custom properties
+- **Animations:** GSAP 3.12.5 with ScrollTrigger
+- **Icons:** Lucide-astro 0.554.0
+- **Payments:** Stripe.js 4.10.0
+- **Deployment:** Vercel (static output)
+- **Port:** 4321 for development
+- **Site URL:** https://paddleswithwolves.com
+
+## Project Structure
+```
+/src
+  /components
+    /about (PhilosophySection.astro, PractitionerBio.astro)
+    /backgrounds (AnimatedBackground.astro, ForestTreeline.astro, MountainSilhouette.astro, SunsetOverlay.astro, WaterReflection.astro)
+    /booking (BookingConfirmation.astro, CalendarEmbed.astro, ServiceSelector.astro)
+    /cart (ShoppingCart.astro)
+    /contact (FloatingContactBubbles.astro, ContactForm.astro, LocationMap.astro)
+    /hero (HeroSection.astro, EnergyParticles.astro)
+    /navigation (FloatingNav.astro)
+    /products (ProductCard.astro, ProductFilter.astro, ProductGrid.astro)
+    /seo (SEOHead.astro)
+    /services (ServiceCard.astro, ServiceDetail.astro)
+    /testimonials (TestimonialCarousel.astro)
+    /ui (LoadingScreen.astro, OptimizedImage.astro, ScrollProgress.astro)
+  /layouts
+    BaseLayout.astro (main layout with SEO, ViewTransitions)
+  /pages
+    index.astro, about.astro, apothecary.astro, booking.astro, contact.astro, services.astro, sitemap.xml.ts
+  /scripts
+    scroll-animations.ts
+    button-magnetic.ts
+    page-transitions.ts
+    scroll-trigger-config.ts (ScrollTrigger configuration and helper functions)
+    gsap-mobile-optimizer.ts (mobile performance optimizations)
+  /styles
+    global.css
+    variables.css (extensive color system)
+    utilities.css (glow, float, fade, glass effects)
+    button-interactions.css
+    typography.css
+    mobile.css
+  /data
+    products.json
+```
+
+## Design System
+
+### Color Palette (from variables.css)
+- **Core:** mystic-purple (#6B46C1), sunset-gold (#FDB462), twilight-blue (#1E293B), forest-shadow (#0F172A), flame-orange (#EA580C), water-teal (#0891B2)
+- **Extended Nature Themes:**
+  - Sky: dawn-rose, dusk-lavender, midnight-indigo, storm-gray
+  - Earth: river-stone, canyon-clay, desert-sand, volcanic-ash
+  - Flora: pine-green, moss-jade, sage-mist, wildflower-violet
+  - Water: deep-lake, alpine-stream, glacier-ice, ocean-depths
+  - Fire: ember-red, amber-glow, honey-gold, sunrise-coral
+
+### Gradients
+- **Primary:** gradient-mystic (darker water theme), gradient-sunset, gradient-twilight, gradient-water, gradient-healing (purple variations)
+- **Extended:** gradient-dawn, gradient-forest, gradient-lake, gradient-canyon, gradient-ember
+
+### Typography
+- Font stack: System fonts with Georgia fallback for headings
+- Size scale: text-xs through text-7xl
+- Line heights: tight (1.2), normal (1.5), relaxed (1.75)
+
+### Spacing
+- Scale: space-1 (0.25rem) through space-32 (8rem)
+
+### Effects & Utilities
+- Glow effects (purple, gold, teal, healing)
+- Float animations (gentle, rotate, horizontal)
+- Fade-in scroll animations (multiple directions)
+- Glassmorphism variants
+- Shimmer effects
+- Gradient text
+- Mystical borders
+
+## Animation System
+
+### GSAP Implementation
+- Energy particles using canvas and GSAP ticker
+- ScrollTrigger for reveal animations (configured via scroll-trigger-config.ts)
+- Mobile optimizer (gsap-mobile-optimizer.ts) for performance on mobile devices
+- Magnetic button effects
+- Page transitions with View Transitions API
+- Mobile-optimized particle counts (30 mobile, 50 desktop)
+
+### Performance Optimizations
+- CSS animations use transforms only
+- Will-change used sparingly
+- Reduced motion media query support
+- Canvas particles with mouse/touch interaction
+
+## Environment Variables (.env)
+```bash
+# Cal.com
+PUBLIC_CAL_COM_USERNAME
+PUBLIC_CAL_COM_EVENT_TYPE_[SERVICE]
+
+# Stripe
+PUBLIC_STRIPE_PUBLISHABLE_KEY
+STRIPE_SECRET_KEY
+
+# Email
+EMAIL_SERVICE_API_KEY
+EMAIL_FROM_ADDRESS
+
+# Analytics (optional)
+PUBLIC_GOOGLE_ANALYTICS_ID
+
+# Social Media
+PUBLIC_INSTAGRAM_URL
+```
+
+## Key Components
+
+### BaseLayout.astro
+- Full SEO meta tags and Open Graph
+- Structured data (JSON-LD)
+- View Transitions enabled
+- Footer with hours and links
+- Shopping cart and floating contacts
+- AnimatedBackground with theme support (mountain, water, forest, sunset, mystic)
+
+### EnergyParticles.astro
+- Canvas-based particle system
+- Mouse/touch interaction
+- Staggered initial positions
+- Color palette from design system
+- Pulse and glow effects
+- Reinitializes on astro:page-load event for View Transitions
+
+### HeroSection.astro
+- Gradient text animations
+- Button variants (primary, ghost)
+- Scroll indicator with animation
+- Responsive CTAs
+
+### SEOHead.astro
+- Comprehensive SEO component with meta tags
+- Open Graph and Twitter Card support
+- Structured data (JSON-LD) with HealthAndBeautyBusiness schema
+- Geo tags for Pacific Northwest location
+
+### Background Components
+- AnimatedBackground.astro (main background component with theme support)
+- ForestTreeline.astro
+- MountainSilhouette.astro
+- SunsetOverlay.astro
+- WaterReflection.astro
+
+## Git Workflow
+- main: Production branch
+- develop: Development branch
+- feature/*: Feature branches
+
+## Development Commands
+```bash
+npm run dev      # Start dev server on port 4321
+npm run build    # Build static site
+npm run preview  # Preview production build
+```
+
+## Build Configuration
+- Static output mode
+- CSS minification enabled
+- HTML compression enabled
+- Prefetch: prefetchAll: true, defaultStrategy: 'viewport'
+- Manual chunks for GSAP
+- Site URL: https://paddleswithwolves.com
+
+## Vercel Configuration (vercel.json)
+- Build command: npm run build
+- Output directory: dist
+- Security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy)
+- Cache control for fonts, images, and _astro assets (max-age: 31536000)
+- Rewrites for sitemap.xml and robots.txt
+- Clean URLs enabled, trailing slash disabled
+- Node version: 18
+
+## Critical Implementation Notes
+- Canvas particles reinitialize on `astro:page-load` event
+- Styles are scoped by default in Astro components
+- Client-side scripts need hydration directives
+- Use Astro's Image component for optimization
+- ScrollTrigger cleanup required on component unmount
+
+# Lessons
+
+## Project-Specific Patterns
+- Energy particles use canvas for performance over DOM elements
+- GSAP ticker integration for smooth animation loops
+- Multiple gradient themes available via backgroundTheme prop (mountain, water, forest, sunset, mystic)
+- Shopping cart component suggests e-commerce functionality
+- Floating contact bubbles for quick user access
+- Loading screen component for smooth transitions
+- Button magnetic effects in separate script file
+- ScrollTrigger configuration centralized in scroll-trigger-config.ts with helper functions
+- Mobile optimizer script (gsap-mobile-optimizer.ts) reduces animation complexity on mobile
+- Extensive use of CSS custom properties for theming
+- Mobile-first with 768px breakpoint for major changes
+- Accessibility considerations with prefers-reduced-motion
+- SEOHead component for reusable SEO meta tags
+- OptimizedImage component for image optimization
+
+## File Naming Conventions
+- Components: PascalCase (EnergyParticles.astro)
+- Scripts: kebab-case (scroll-animations.ts)
+- Styles: kebab-case (button-interactions.css)
+- Pages: kebab-case for URLs
+
+## Color Usage Patterns
+- Primary actions: mystic-purple with glow
+- Highlights: sunset-gold
+- Text on dark: light-gray, medium-gray
+- Backgrounds: twilight-blue with transparency
+- Glass effects with backdrop-filter
+
+# Scratchpad
+
+## Current Task
+[x] Updated cursorrules file to match actual project structure
+- Added missing components (about, booking, products, seo, services, testimonials)
+- Added missing scripts (scroll-trigger-config.ts, gsap-mobile-optimizer.ts)
+- Added missing style files (typography.css, mobile.css)
+- Updated color palette with all actual variables
+- Added Vercel configuration documentation
+- Added site URL information
+- Fixed prefetch configuration description
+- Removed non-existent Navigation.astro reference
+
+## Project Status
+- Core structure implemented and documented
+- All components and scripts now accurately reflected in cursorrules
+- Ready for API integrations (Cal.com, Stripe)
+
+## Next Priority Items
+1. Cal.com booking integration
+2. Stripe product checkout
+3. Contact form email handling
+4. Analytics setup
+5. Production deployment to Vercel
+
+## Performance Targets
+- Lighthouse 90+ all categories
+- First Contentful Paint <1.5s
+- 60fps animations on mobile
+- Reduced particle count for mobile devices
+
+## Notes
+- Site emphasizes mystical/healing aesthetic
+- Smooth, flowing animations are priority
+- Mobile performance critical
+- Accessibility must be maintained

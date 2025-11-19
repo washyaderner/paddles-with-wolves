@@ -50,8 +50,8 @@
   /* Additional Nature Colors */
   --forest-green: #2D5F4C;
 
-  /* Gradient Backgrounds - Primary */
-  --gradient-mystic: linear-gradient(180deg, #0A3A4A 0%, #1A5F7A 30%, #0369A1 60%, #0891B2 100%);
+  /* Gradient Backgrounds - Primary - Darker theme matching SunsetOverlay */
+  --gradient-mystic: linear-gradient(180deg, #0A3A4A 0%, #0F4A5A 20%, #1A5F7A 40%, #0369A1 70%, #0891B2 100%);
   --gradient-sunset: linear-gradient(135deg, var(--flame-orange) 0%, var(--sunset-gold) 100%);
   --gradient-twilight: linear-gradient(180deg, var(--forest-shadow) 0%, var(--twilight-blue) 100%);
   --gradient-water: linear-gradient(135deg, var(--water-teal) 0%, var(--mystic-purple) 100%);
