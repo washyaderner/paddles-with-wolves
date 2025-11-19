@@ -1,29 +1,503 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductFilter from '../components/products/ProductFilter.astro';
+import ProductGrid from '../components/products/ProductGrid.astro';
+import productsData from '../data/products.json';
+
+const { products, categories } = productsData;
 ---
 
-<BaseLayout title="Apothecary - Paddles with Wolves">
-  <section class="page-section">
+<BaseLayout
+  title="Herbal Apothecary - Paddles with Wolves"
+  description="Explore our collection of wildcrafted herbal tinctures, healing balms, and natural remedies. Pacific Northwest botanicals crafted with care for pain relief, stress management, energy, and restful sleep."
+  keywords="herbal tinctures, healing balms, natural remedies, wildcrafted herbs, organic herbalism, pain relief tincture, stress relief herbs, energy tonic, sleep herbs, Pacific Northwest apothecary"
+>
+  <!-- Page Hero -->
+  <section class="apothecary-hero">
     <div class="container">
-      <h1>Apothecary</h1>
-      <p>Explore our natural remedies and healing products...</p>
+      <div class="hero-content fade-in-up">
+        <div class="hero-icon">🌿</div>
+        <h1 class="page-title text-gradient-forest">Herbal Apothecary</h1>
+        <p class="page-subtitle">
+          Wildcrafted & organic herbal remedies from the Pacific Northwest
+        </p>
+        <p class="page-description">
+          Each tincture and balm is carefully handcrafted using traditional methods and
+          the finest botanical ingredients. These remedies honor ancient plant wisdom while
+          meeting modern wellness needs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Filter -->
+  <ProductFilter categories={categories} />
+
+  <!-- Product Grid -->
+  <ProductGrid products={products} />
+
+  <!-- Info Section -->
+  <section class="apothecary-info-section fade-in-scroll">
+    <div class="container">
+      <div class="info-grid">
+        <!-- Crafting Philosophy -->
+        <div class="info-card glass">
+          <div class="info-icon">🌱</div>
+          <h3>Handcrafted with Intention</h3>
+          <p>
+            Every remedy is prepared in small batches with deep respect for the plants
+            and the healing they offer. I work closely with the rhythms of nature,
+            wildcrafting herbs at their peak potency and infusing them with care.
+          </p>
+        </div>
+
+        <!-- Sourcing -->
+        <div class="info-card glass">
+          <div class="info-icon">🏔️</div>
+          <h3>Sustainably Sourced</h3>
+          <p>
+            Our herbs come from ethical wildcrafting in the Cascade Mountains and local
+            organic farms. We harvest with gratitude, taking only what's needed and
+            ensuring plant populations thrive for future generations.
+          </p>
+        </div>
+
+        <!-- Quality -->
+        <div class="info-card glass">
+          <div class="info-icon">✨</div>
+          <h3>Potency & Purity</h3>
+          <p>
+            Using traditional extraction methods—organic cane alcohol for tinctures,
+            cold-pressed oils for balms—we preserve the full spectrum of each plant's
+            healing compounds. No fillers, no synthetics, just pure plant medicine.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Guide -->
+  <section class="usage-guide-section fade-in-scroll">
+    <div class="container">
+      <div class="guide-header">
+        <h2 class="section-title text-gradient-sunset">How to Use Your Remedies</h2>
+        <p class="section-subtitle">
+          Getting the most from your herbal preparations
+        </p>
+      </div>
+
+      <div class="guide-content glass">
+        <div class="guide-section">
+          <h3>🧪 Tinctures</h3>
+          <ul>
+            <li>Take the recommended dosage in a small amount of water</li>
+            <li>Hold under tongue for 30 seconds before swallowing for faster absorption</li>
+            <li>Best taken on an empty stomach or between meals</li>
+            <li>Store in a cool, dark place. Shelf life: 3-5 years</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>💚 Balms & Salves</h3>
+          <ul>
+            <li>Apply a small amount to affected area and massage gently</li>
+            <li>Wash hands after use (especially with warming balms)</li>
+            <li>Can be reapplied 2-4 times daily as needed</li>
+            <li>Store in a cool place. Shelf life: 1-2 years</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>⚠️ Important Notes</h3>
+          <ul>
+            <li>Consult your healthcare provider if pregnant, nursing, or on medications</li>
+            <li>Start with the lower end of dosage recommendations</li>
+            <li>Discontinue use if any adverse reactions occur</li>
+            <li>These statements have not been evaluated by the FDA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation CTA -->
+  <section class="consultation-cta-section fade-in-scroll">
+    <div class="container">
+      <div class="cta-card glass">
+        <div class="cta-icon">🌸</div>
+        <h2>Need Personalized Guidance?</h2>
+        <p>
+          Not sure which remedy is right for you? Schedule a complimentary 15-minute
+          consultation to discuss your wellness goals and find the perfect herbal support.
+        </p>
+        <div class="cta-buttons">
+          <a href="/booking?service=herbal-consultation" class="btn-primary-large">
+            Book Free Consultation
+          </a>
+          <a href="/contact" class="btn-ghost-large">
+            Ask a Question
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .page-section {
-    min-height: 60vh;
-    padding: var(--space-20) 0;
+  /* Page Hero */
+  .apothecary-hero {
+    padding: var(--space-32) 0 var(--space-12);
+    text-align: center;
   }
 
-  .page-section h1 {
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-icon {
+    font-size: 5rem;
+    margin-bottom: var(--space-6);
+    filter: drop-shadow(0 0 20px rgba(107, 70, 193, 0.5));
+    animation: float-gentle 4s ease-in-out infinite;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-6);
+    font-weight: var(--font-weight-semibold);
+    font-style: italic;
+  }
+
+  .page-description {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Info Section */
+  .apothecary-info-section {
+    padding: var(--space-20) 0;
+    background: rgba(15, 23, 42, 0.3);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .info-card {
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    text-align: center;
+    transition: all var(--transition-base);
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+  }
+
+  .info-icon {
+    font-size: 3.5rem;
+    margin-bottom: var(--space-4);
+    filter: drop-shadow(0 0 10px rgba(253, 180, 98, 0.5));
+  }
+
+  .info-card h3 {
+    font-size: var(--text-xl);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-heading);
+  }
+
+  .info-card p {
+    font-size: var(--text-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--light-gray);
+    margin: 0;
+  }
+
+  /* Usage Guide Section */
+  .usage-guide-section {
+    padding: var(--space-32) 0;
+  }
+
+  .guide-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--medium-gray);
+    font-style: italic;
+  }
+
+  .guide-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--space-12);
+    border-radius: var(--radius-2xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .guide-section h3 {
+    font-size: var(--text-lg);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-heading);
+  }
+
+  .guide-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .guide-section li {
+    font-size: var(--text-sm);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    padding-left: var(--space-5);
+    position: relative;
+  }
+
+  .guide-section li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--mystic-purple);
+    font-weight: bold;
+  }
+
+  /* Consultation CTA */
+  .consultation-cta-section {
+    padding: var(--space-32) 0;
+  }
+
+  .cta-card {
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+    border-radius: var(--radius-2xl);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-6);
+    filter: drop-shadow(0 0 15px rgba(253, 180, 98, 0.5));
+  }
+
+  .cta-card h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--sunset-gold);
     margin-bottom: var(--space-6);
   }
 
-  .page-section p {
+  .cta-card p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: var(--line-height-relaxed);
     color: var(--light-gray);
-    font-size: var(--text-lg);
+    margin-bottom: var(--space-8);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Button Styles */
+  .btn-primary-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border: none;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+  }
+
+  .btn-primary-large:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .btn-ghost-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: transparent;
+    border: 2px solid var(--mystic-purple);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .btn-ghost-large:hover {
+    border-color: var(--sunset-gold);
+    color: var(--sunset-gold);
+    box-shadow: var(--shadow-glow-purple);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .apothecary-hero {
+      padding: var(--space-20) 0 var(--space-8);
+    }
+
+    .hero-icon {
+      font-size: 3.5rem;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .guide-content {
+      grid-template-columns: 1fr;
+      padding: var(--space-8);
+      gap: var(--space-6);
+    }
+
+    .cta-card {
+      padding: var(--space-12) var(--space-6);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-primary-large,
+    .btn-ghost-large {
+      width: 100%;
+      padding: var(--space-4) var(--space-8);
+      font-size: var(--text-lg);
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-icon,
+    .info-card,
+    .btn-primary-large,
+    .btn-ghost-large {
+      animation: none;
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initApothecaryAnimations() {
+    // Animate info cards
+    const infoCards = document.querySelectorAll('.info-card');
+    infoCards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none none',
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.15,
+        ease: 'power3.out'
+      });
+    });
+
+    // Animate guide content
+    const guideContent = document.querySelector('.guide-content');
+    if (guideContent) {
+      gsap.from(guideContent, {
+        scrollTrigger: {
+          trigger: guideContent,
+          start: 'top bottom-=50',
+          toggleActions: 'play none none none',
+        },
+        scale: 0.95,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'back.out(1.2)'
+      });
+    }
+
+    // Animate CTA card
+    const ctaCard = document.querySelector('.cta-card');
+    if (ctaCard) {
+      gsap.from(ctaCard, {
+        scrollTrigger: {
+          trigger: ctaCard,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none none',
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'back.out(1.4)'
+      });
+    }
+  }
+
+  // Initialize animations
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApothecaryAnimations);
+  } else {
+    initApothecaryAnimations();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initApothecaryAnimations);
+</script>

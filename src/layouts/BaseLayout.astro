@@ -1,6 +1,7 @@
 ---
 import FloatingNav from '../components/navigation/FloatingNav.astro';
 import AnimatedBackground from '../components/backgrounds/AnimatedBackground.astro';
+import ShoppingCart from '../components/cart/ShoppingCart.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -189,6 +190,9 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
     </footer>
+
+    <!-- Shopping Cart -->
+    <ShoppingCart />
 
     <!-- Scroll Animations Script -->
     <script src="../scripts/scroll-animations.ts"></script>

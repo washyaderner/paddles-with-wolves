@@ -1,0 +1,529 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  category: string;
+  type: string;
+  price: number;
+  size: string;
+  description: string;
+  ingredients: string[];
+  benefits: string[];
+  usage: string;
+  botanicalIcon: string;
+  stripeProductId: string;
+}
+
+const {
+  id,
+  name,
+  category,
+  type,
+  price,
+  size,
+  description,
+  ingredients,
+  benefits,
+  usage,
+  botanicalIcon,
+  stripeProductId
+} = Astro.props;
+
+// Determine botanical background gradient based on category
+const getCategoryGradient = (cat: string) => {
+  switch (cat) {
+    case 'Pain Relief':
+      return 'var(--gradient-ember)';
+    case 'Stress':
+      return 'var(--gradient-lake)';
+    case 'Energy':
+      return 'var(--gradient-forest)';
+    case 'Sleep':
+      return 'var(--gradient-dawn)';
+    default:
+      return 'var(--gradient-healing)';
+  }
+};
+
+const gradient = getCategoryGradient(category);
+---
+
+<article class="product-card" data-product-id={id} data-category={category}>
+  <div class="product-card-inner">
+    <!-- Front: Product Display -->
+    <div class="product-front">
+      <!-- Botanical Background Pattern -->
+      <div class="botanical-bg" style={`background: ${gradient};`}>
+        <div class="botanical-pattern">
+          <span class="botanical-icon-large">{botanicalIcon}</span>
+        </div>
+      </div>
+
+      <!-- Product Image Placeholder -->
+      <div class="product-image">
+        <div class="product-type-badge">{type}</div>
+        <div class="product-icon">{botanicalIcon}</div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <span class="product-category">{category}</span>
+        <h3 class="product-name">{name}</h3>
+        <p class="product-description">{description}</p>
+
+        <div class="product-meta">
+          <span class="product-size">{size}</span>
+          <span class="product-price">${price}</span>
+        </div>
+
+        <button class="btn-add-to-cart" data-stripe-id={stripeProductId}>
+          <span class="cart-icon">🛒</span>
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- Hover Indicator -->
+      <div class="hover-indicator">
+        <span>Hover for details</span>
+        <span class="hover-icon">↑</span>
+      </div>
+    </div>
+
+    <!-- Back: Ingredients & Benefits Overlay -->
+    <div class="product-overlay">
+      <div class="overlay-content">
+        <h4>Ingredients</h4>
+        <ul class="ingredients-list">
+          {ingredients.map(ingredient => (
+            <li>{ingredient}</li>
+          ))}
+        </ul>
+
+        <h4>Benefits</h4>
+        <ul class="benefits-list">
+          {benefits.map(benefit => (
+            <li><span class="benefit-icon">✨</span> {benefit}</li>
+          ))}
+        </ul>
+
+        <div class="usage-note">
+          <strong>Usage:</strong> {usage}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    position: relative;
+    height: 600px;
+    perspective: 1000px;
+    transition: transform var(--transition-base);
+  }
+
+  .product-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .product-card:hover .product-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Front and Back shared styles */
+  .product-front,
+  .product-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+  }
+
+  /* Front side */
+  .product-front {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-xl);
+    transition: all var(--transition-base);
+  }
+
+  .product-card:hover .product-front {
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  /* Botanical Background */
+  .botanical-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  .botanical-pattern {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .botanical-icon-large {
+    font-size: 8rem;
+    opacity: 0.2;
+    filter: blur(2px);
+  }
+
+  /* Product Image/Icon */
+  .product-image {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .product-type-badge {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    background: rgba(253, 180, 98, 0.9);
+    color: var(--deep-charcoal);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  .product-icon {
+    font-size: 6rem;
+    filter: drop-shadow(0 0 20px rgba(253, 180, 98, 0.5));
+    animation: float-gentle 4s ease-in-out infinite;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Product Info */
+  .product-info {
+    position: relative;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+    z-index: 1;
+  }
+
+  .product-category {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--sunset-gold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  .product-name {
+    font-size: var(--text-xl);
+    font-family: var(--font-heading);
+    color: var(--white);
+    margin: 0;
+    line-height: var(--line-height-tight);
+  }
+
+  .product-description {
+    font-size: var(--text-sm);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+    flex: 1;
+  }
+
+  .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(107, 70, 193, 0.3);
+  }
+
+  .product-size {
+    font-size: var(--text-sm);
+    color: var(--medium-gray);
+  }
+
+  .product-price {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--sunset-gold);
+    font-family: var(--font-heading);
+  }
+
+  /* Add to Cart Button */
+  .btn-add-to-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-4);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+  }
+
+  .btn-add-to-cart:active {
+    transform: translateY(0);
+  }
+
+  .cart-icon {
+    font-size: var(--text-lg);
+  }
+
+  /* Hover Indicator */
+  .hover-indicator {
+    position: absolute;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--medium-gray);
+    opacity: 0.6;
+    z-index: 1;
+  }
+
+  .hover-icon {
+    font-size: var(--text-sm);
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* Overlay (Back side) */
+  .product-overlay {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--sunset-gold);
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .overlay-content {
+    padding: var(--space-8);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .overlay-content h4 {
+    font-size: var(--text-lg);
+    color: var(--sunset-gold);
+    margin: 0 0 var(--space-2) 0;
+    font-family: var(--font-heading);
+    border-bottom: 2px solid rgba(253, 180, 98, 0.3);
+    padding-bottom: var(--space-2);
+  }
+
+  .ingredients-list,
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .ingredients-list li {
+    font-size: var(--text-sm);
+    color: var(--light-gray);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .ingredients-list li::before {
+    content: '🌿';
+    position: absolute;
+    left: 0;
+    font-size: var(--text-xs);
+  }
+
+  .benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--off-white);
+  }
+
+  .benefit-icon {
+    flex-shrink: 0;
+    font-size: var(--text-base);
+  }
+
+  .usage-note {
+    margin-top: auto;
+    padding: var(--space-4);
+    background: rgba(107, 70, 193, 0.2);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+  }
+
+  .usage-note strong {
+    color: var(--sunset-gold);
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .usage-note {
+    font-size: var(--text-xs);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Scrollbar styling for overlay */
+  .overlay-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .overlay-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  .overlay-content::-webkit-scrollbar-thumb {
+    background: var(--sunset-gold);
+    border-radius: 3px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .product-card {
+      height: 550px;
+    }
+
+    .product-icon {
+      font-size: 4rem;
+    }
+
+    .botanical-icon-large {
+      font-size: 6rem;
+    }
+
+    .product-name {
+      font-size: var(--text-lg);
+    }
+
+    .hover-indicator {
+      display: none;
+    }
+
+    /* On mobile, tap to flip */
+    .product-card:active .product-card-inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .product-card-inner,
+    .product-icon,
+    .hover-icon,
+    .btn-add-to-cart {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Add to cart functionality (Stripe integration placeholder)
+  function initProductCards() {
+    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const stripeId = button.getAttribute('data-stripe-id');
+        const productCard = button.closest('.product-card');
+        const productId = productCard?.getAttribute('data-product-id');
+
+        // Placeholder for Stripe integration
+        console.log('Add to cart:', { productId, stripeId });
+
+        // Visual feedback
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span>✓</span> Added!';
+        button.style.background = 'linear-gradient(135deg, var(--forest-green), var(--water-teal))';
+
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.style.background = '';
+        }, 2000);
+
+        // Dispatch custom event for cart system
+        window.dispatchEvent(new CustomEvent('addToCart', {
+          detail: { productId, stripeId }
+        }));
+      });
+    });
+  }
+
+  // Initialize product cards
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductCards);
+  } else {
+    initProductCards();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initProductCards);
+</script>

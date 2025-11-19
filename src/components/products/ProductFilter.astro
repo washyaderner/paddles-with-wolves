@@ -1,0 +1,358 @@
+---
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface Props {
+  categories: Category[];
+}
+
+const { categories } = Astro.props;
+---
+
+<section class="product-filter-section">
+  <div class="filter-header">
+    <h2 class="filter-title text-gradient-healing">Browse Our Apothecary</h2>
+    <p class="filter-subtitle" id="category-description">
+      Browse our complete collection of wildcrafted and organic herbal remedies
+    </p>
+  </div>
+
+  <div class="filter-buttons" id="filter-buttons">
+    {categories.map((category, index) => (
+      <button
+        class={`filter-btn ${index === 0 ? 'active' : ''}`}
+        data-category={category.id}
+        data-description={category.description}
+      >
+        <span class="filter-btn-text">{category.name}</span>
+        <span class="filter-btn-underline"></span>
+      </button>
+    ))}
+  </div>
+
+  <div class="active-filter-indicator">
+    <span class="indicator-label">Showing:</span>
+    <span class="indicator-value" id="active-category">All Products</span>
+    <span class="product-count" id="product-count"></span>
+  </div>
+</section>
+
+<style>
+  .product-filter-section {
+    padding: var(--space-12) 0 var(--space-8) 0;
+    position: sticky;
+    top: 80px;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(107, 70, 193, 0.3);
+    margin-bottom: var(--space-12);
+  }
+
+  /* Filter Header */
+  .filter-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .filter-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-3);
+  }
+
+  .filter-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: var(--medium-gray);
+    font-style: italic;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: var(--line-height-relaxed);
+    transition: all var(--transition-base);
+    min-height: 3em;
+  }
+
+  /* Filter Buttons */
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .filter-btn {
+    position: relative;
+    padding: var(--space-3) var(--space-6);
+    background: transparent;
+    border: 2px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-full);
+    color: var(--light-gray);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    overflow: hidden;
+  }
+
+  .filter-btn-text {
+    position: relative;
+    z-index: 2;
+    transition: color var(--transition-base);
+  }
+
+  .filter-btn-underline {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--sunset-gold);
+    transform: translateX(-50%);
+    transition: width var(--transition-base);
+  }
+
+  .filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--sunset-gold);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-purple);
+  }
+
+  .filter-btn:hover::before {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+  }
+
+  .filter-btn.active {
+    border-color: var(--sunset-gold);
+    color: var(--white);
+    background: rgba(253, 180, 98, 0.1);
+    box-shadow: var(--shadow-glow-gold);
+  }
+
+  .filter-btn.active .filter-btn-underline {
+    width: 100%;
+  }
+
+  /* Active Filter Indicator */
+  .active-filter-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--medium-gray);
+  }
+
+  .indicator-label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--light-gray);
+  }
+
+  .indicator-value {
+    color: var(--sunset-gold);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .product-count {
+    padding: var(--space-1) var(--space-3);
+    background: rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--white);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .product-filter-section {
+      top: 70px;
+      padding: var(--space-8) 0 var(--space-6) 0;
+    }
+
+    .filter-buttons {
+      gap: var(--space-2);
+    }
+
+    .filter-btn {
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm);
+    }
+
+    .active-filter-indicator {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .filter-btn,
+    .filter-subtitle,
+    .filter-btn-underline,
+    .filter-btn::before {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initProductFilter() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const categoryDescription = document.getElementById('category-description');
+    const activeCategorySpan = document.getElementById('active-category');
+    const productCountSpan = document.getElementById('product-count');
+
+    if (!filterButtons.length || !categoryDescription || !activeCategorySpan) return;
+
+    let currentCategory = 'all';
+
+    // Update product count
+    function updateProductCount() {
+      const visibleProducts = document.querySelectorAll(
+        currentCategory === 'all'
+          ? '.product-card'
+          : `.product-card[data-category="${currentCategory}"]`
+      );
+      if (productCountSpan) {
+        productCountSpan.textContent = `${visibleProducts.length} products`;
+      }
+    }
+
+    // Filter products with GSAP animation
+    function filterProducts(category: string) {
+      const allProducts = document.querySelectorAll('.product-card');
+
+      // First, fade out all products
+      gsap.to(allProducts, {
+        opacity: 0,
+        y: 20,
+        scale: 0.95,
+        duration: 0.3,
+        stagger: 0.02,
+        ease: 'power2.in',
+        onComplete: () => {
+          // Hide products that don't match
+          allProducts.forEach(product => {
+            const productCategory = product.getAttribute('data-category');
+            if (category === 'all' || productCategory === category) {
+              (product as HTMLElement).style.display = 'block';
+            } else {
+              (product as HTMLElement).style.display = 'none';
+            }
+          });
+
+          // Then fade in matching products
+          const visibleProducts = document.querySelectorAll(
+            category === 'all'
+              ? '.product-card'
+              : `.product-card[data-category="${category}"]`
+          );
+
+          gsap.fromTo(visibleProducts,
+            { opacity: 0, y: 20, scale: 0.95 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.5,
+              stagger: 0.05,
+              ease: 'power2.out'
+            }
+          );
+
+          updateProductCount();
+        }
+      });
+    }
+
+    // Update description with smooth transition
+    function updateDescription(description: string, categoryName: string) {
+      gsap.to(categoryDescription, {
+        opacity: 0,
+        y: -10,
+        duration: 0.2,
+        onComplete: () => {
+          categoryDescription.textContent = description;
+          if (activeCategorySpan) {
+            activeCategorySpan.textContent = categoryName;
+          }
+          gsap.to(categoryDescription, {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        }
+      });
+    }
+
+    // Button click handlers
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category') || 'all';
+        const description = button.getAttribute('data-description') || '';
+        const categoryName = button.querySelector('.filter-btn-text')?.textContent || 'All Products';
+
+        // Update active state
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Animate button
+        gsap.fromTo(button,
+          { scale: 1 },
+          {
+            scale: 1.1,
+            duration: 0.1,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power2.inOut'
+          }
+        );
+
+        // Update category and filter products
+        currentCategory = category;
+        updateDescription(description, categoryName);
+        filterProducts(category);
+      });
+    });
+
+    // Initial count
+    updateProductCount();
+
+    // Update count when products are added/removed
+    window.addEventListener('productsLoaded', updateProductCount);
+  }
+
+  // Initialize filter
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductFilter);
+  } else {
+    initProductFilter();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initProductFilter);
+</script>

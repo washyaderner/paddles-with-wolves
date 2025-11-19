@@ -1,0 +1,281 @@
+{
+  "products": [
+    {
+      "id": "pain-relief-tincture",
+      "name": "Mountain Arnica Pain Relief Tincture",
+      "category": "Pain Relief",
+      "type": "tincture",
+      "price": 32,
+      "size": "2 oz",
+      "description": "Fast-acting herbal formula for muscle aches, joint pain, and inflammation",
+      "ingredients": [
+        "Arnica montana (mountain arnica)",
+        "Turmeric root",
+        "Willow bark",
+        "Devil's claw root",
+        "Organic cane alcohol"
+      ],
+      "benefits": [
+        "Reduces inflammation",
+        "Relieves muscle soreness",
+        "Supports joint health",
+        "Natural pain management"
+      ],
+      "usage": "Take 30-40 drops in water, 2-3 times daily or as needed",
+      "botanicalIcon": "🌼",
+      "stripeProductId": "prod_pain_tincture"
+    },
+    {
+      "id": "pain-relief-balm",
+      "name": "Deep Woods Pain Relief Balm",
+      "category": "Pain Relief",
+      "type": "balm",
+      "price": 28,
+      "size": "2 oz",
+      "description": "Warming herbal balm for topical relief of muscle tension and joint discomfort",
+      "ingredients": [
+        "Cayenne-infused oil",
+        "Arnica oil",
+        "St. John's Wort oil",
+        "Beeswax",
+        "Essential oils (wintergreen, eucalyptus)"
+      ],
+      "benefits": [
+        "Immediate warming relief",
+        "Increases circulation",
+        "Eases muscle tension",
+        "Penetrates deeply"
+      ],
+      "usage": "Apply to affected area 2-3 times daily. Wash hands after use.",
+      "botanicalIcon": "🌶️",
+      "stripeProductId": "prod_pain_balm"
+    },
+    {
+      "id": "stress-calm-tincture",
+      "name": "Pacific Calm Stress Relief Tincture",
+      "category": "Stress",
+      "type": "tincture",
+      "price": 30,
+      "size": "2 oz",
+      "description": "Gentle nervine blend to ease anxiety and promote emotional balance",
+      "ingredients": [
+        "Milky oat tops",
+        "Skullcap",
+        "Passionflower",
+        "Lemon balm",
+        "Organic cane alcohol"
+      ],
+      "benefits": [
+        "Calms nervous system",
+        "Reduces anxiety",
+        "Promotes emotional balance",
+        "Non-drowsy daytime support"
+      ],
+      "usage": "Take 30-50 drops in water, up to 3 times daily",
+      "botanicalIcon": "🌾",
+      "stripeProductId": "prod_stress_tincture"
+    },
+    {
+      "id": "stress-heart-balm",
+      "name": "Heart-Centered Calm Balm",
+      "category": "Stress",
+      "type": "balm",
+      "price": 24,
+      "size": "1 oz",
+      "description": "Aromatic chest balm to ease tension and open the breath",
+      "ingredients": [
+        "Rose-infused oil",
+        "Hawthorn berry oil",
+        "Chamomile oil",
+        "Beeswax",
+        "Essential oils (lavender, bergamot, frankincense)"
+      ],
+      "benefits": [
+        "Reduces chest tension",
+        "Opens breathing",
+        "Calms heart rate",
+        "Grounding aromatherapy"
+      ],
+      "usage": "Apply to chest, temples, or wrists. Breathe deeply.",
+      "botanicalIcon": "🌹",
+      "stripeProductId": "prod_stress_balm"
+    },
+    {
+      "id": "energy-vitality-tincture",
+      "name": "Cascade Vitality Energy Tincture",
+      "category": "Energy",
+      "type": "tincture",
+      "price": 35,
+      "size": "2 oz",
+      "description": "Adaptogenic formula to boost energy, stamina, and mental clarity",
+      "ingredients": [
+        "Rhodiola root",
+        "Eleuthero (Siberian ginseng)",
+        "Schisandra berry",
+        "Nettles",
+        "Organic cane alcohol"
+      ],
+      "benefits": [
+        "Increases sustained energy",
+        "Enhances mental focus",
+        "Builds stress resilience",
+        "Supports adrenal health"
+      ],
+      "usage": "Take 40-60 drops in water, 1-2 times daily (morning and midday)",
+      "botanicalIcon": "⚡",
+      "stripeProductId": "prod_energy_tincture"
+    },
+    {
+      "id": "energy-wake-up-balm",
+      "name": "Forest Wake-Up Balm",
+      "category": "Energy",
+      "type": "balm",
+      "price": 22,
+      "size": "1 oz",
+      "description": "Invigorating aromatic balm for mental alertness and focus",
+      "ingredients": [
+        "Rosemary-infused oil",
+        "Peppermint oil",
+        "Pine needle oil",
+        "Beeswax",
+        "Essential oils (eucalyptus, lemon)"
+      ],
+      "benefits": [
+        "Awakens the senses",
+        "Sharpens mental focus",
+        "Opens airways",
+        "Energizing aromatherapy"
+      ],
+      "usage": "Apply to temples, neck, or under nose when needing alertness",
+      "botanicalIcon": "🌲",
+      "stripeProductId": "prod_energy_balm"
+    },
+    {
+      "id": "sleep-dream-tincture",
+      "name": "Moonlight Dreams Sleep Tincture",
+      "category": "Sleep",
+      "type": "tincture",
+      "price": 30,
+      "size": "2 oz",
+      "description": "Restorative nighttime blend for deep, peaceful sleep",
+      "ingredients": [
+        "Valerian root",
+        "California poppy",
+        "Hops flowers",
+        "Chamomile",
+        "Organic cane alcohol"
+      ],
+      "benefits": [
+        "Promotes deep sleep",
+        "Calms racing thoughts",
+        "Eases nighttime restlessness",
+        "Non-habit forming"
+      ],
+      "usage": "Take 40-60 drops in water, 30 minutes before bed",
+      "botanicalIcon": "🌙",
+      "stripeProductId": "prod_sleep_tincture"
+    },
+    {
+      "id": "sleep-pillow-balm",
+      "name": "Dreamweaver Pillow Balm",
+      "category": "Sleep",
+      "type": "balm",
+      "price": 24,
+      "size": "1 oz",
+      "description": "Soothing aromatic balm to invite restful sleep and sweet dreams",
+      "ingredients": [
+        "Lavender-infused oil",
+        "Chamomile oil",
+        "Mugwort oil",
+        "Beeswax",
+        "Essential oils (lavender, vetiver, cedarwood)"
+      ],
+      "benefits": [
+        "Promotes relaxation",
+        "Enhances dream recall",
+        "Calms the mind",
+        "Creates sleep ritual"
+      ],
+      "usage": "Apply to temples, wrists, or chest before bed. Can also apply to pillow.",
+      "botanicalIcon": "🌸",
+      "stripeProductId": "prod_sleep_balm"
+    },
+    {
+      "id": "immune-defense-tincture",
+      "name": "Cascade Defense Immune Tincture",
+      "category": "Energy",
+      "type": "tincture",
+      "price": 32,
+      "size": "2 oz",
+      "description": "Powerful immune-supporting formula for seasonal wellness",
+      "ingredients": [
+        "Echinacea root & flower",
+        "Elderberry",
+        "Astragalus root",
+        "Ginger root",
+        "Organic cane alcohol"
+      ],
+      "benefits": [
+        "Strengthens immune response",
+        "Fights seasonal illness",
+        "Reduces cold/flu duration",
+        "Rich in antioxidants"
+      ],
+      "usage": "Take 30-40 drops in water, 3 times daily at first sign of illness",
+      "botanicalIcon": "🛡️",
+      "stripeProductId": "prod_immune_tincture"
+    },
+    {
+      "id": "digestion-tincture",
+      "name": "Gentle Roots Digestive Tincture",
+      "category": "Stress",
+      "type": "tincture",
+      "price": 28,
+      "size": "2 oz",
+      "description": "Soothing blend for digestive comfort and gut health",
+      "ingredients": [
+        "Fennel seed",
+        "Ginger root",
+        "Peppermint",
+        "Chamomile",
+        "Organic cane alcohol"
+      ],
+      "benefits": [
+        "Eases digestive discomfort",
+        "Reduces bloating",
+        "Calms upset stomach",
+        "Supports healthy digestion"
+      ],
+      "usage": "Take 20-30 drops in water before or after meals",
+      "botanicalIcon": "🌿",
+      "stripeProductId": "prod_digestion_tincture"
+    }
+  ],
+  "categories": [
+    {
+      "id": "all",
+      "name": "All Products",
+      "description": "Browse our complete collection of wildcrafted and organic herbal remedies"
+    },
+    {
+      "id": "Pain Relief",
+      "name": "Pain Relief",
+      "description": "Natural solutions for muscle aches, joint pain, and inflammation"
+    },
+    {
+      "id": "Stress",
+      "name": "Stress & Calm",
+      "description": "Gentle nervines to ease anxiety and restore emotional balance"
+    },
+    {
+      "id": "Energy",
+      "name": "Energy & Vitality",
+      "description": "Adaptogenic herbs to boost energy, focus, and resilience"
+    },
+    {
+      "id": "Sleep",
+      "name": "Sleep & Dreams",
+      "description": "Restorative blends for deep, peaceful sleep and dream work"
+    }
+  ]
+}
