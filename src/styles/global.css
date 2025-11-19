@@ -1,6 +1,7 @@
 @import './variables.css';
 @import './typography.css';
 @import './utilities.css';
+@import './mobile.css';
 
 /* CSS Reset */
 *, *::before, *::after {

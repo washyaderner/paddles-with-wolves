@@ -235,6 +235,28 @@ const bgGradients: Record<string, string> = {
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .service-card {
+      transition: transform 0.2s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Touch feedback */
+    @media (hover: none) {
+      .service-card:active {
+        transform: scale(0.98);
+      }
+
+      /* Show glow on tap */
+      .service-card:active .icon-glow {
+        opacity: 1;
+      }
+
+      .service-card:active .service-icon {
+        transform: scale(1.05);
+      }
+    }
+
     .service-icon-container {
       height: 160px;
     }
@@ -247,13 +269,25 @@ const bgGradients: Record<string, string> = {
       padding: var(--space-5);
     }
 
+    .service-title {
+      font-size: var(--text-xl);
+    }
+
+    .service-description {
+      font-size: var(--text-sm);
+    }
+
     .service-footer {
       flex-direction: column;
       align-items: stretch;
+      gap: var(--space-3);
     }
 
     .btn-primary-small {
       width: 100%;
+      padding: var(--space-4);
+      font-size: var(--text-base);
+      min-height: 48px;
     }
   }
 
