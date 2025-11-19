@@ -9,48 +9,49 @@
   xmlns="http://www.w3.org/2000/svg"
 >
   <defs>
-    <!-- Main Sunset Gradient -->
+    <!-- Deep Blue Sky Gradient -->
     <linearGradient id="sunset-sky" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#2D3561;stop-opacity:1">
-        <animate attributeName="stop-color" values="#2D3561;#3A4575;#2D3561" dur="20s" repeatCount="indefinite"/>
+      <stop offset="0%" style="stop-color:#0A3A4A;stop-opacity:1">
+        <animate attributeName="stop-color" values="#0A3A4A;#0F4A5A;#0A3A4A" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="20%" style="stop-color:#9D7FB8;stop-opacity:1">
-        <animate attributeName="stop-color" values="#9D7FB8;#B89FCE;#9D7FB8" dur="20s" repeatCount="indefinite"/>
+      <stop offset="20%" style="stop-color:#1A5F7A;stop-opacity:1">
+        <animate attributeName="stop-color" values="#1A5F7A;#2A6F8A;#1A5F7A" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="40%" style="stop-color:#F4A7B9;stop-opacity:1">
-        <animate attributeName="stop-color" values="#F4A7B9;#FFB8CA;#F4A7B9" dur="20s" repeatCount="indefinite"/>
+      <stop offset="40%" style="stop-color:#0369A1;stop-opacity:1">
+        <animate attributeName="stop-color" values="#0369A1;#0479B1;#0369A1" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="60%" style="stop-color:#FF9B85;stop-opacity:1">
-        <animate attributeName="stop-color" values="#FF9B85;#FFAB95;#FF9B85" dur="20s" repeatCount="indefinite"/>
+      <stop offset="60%" style="stop-color:#0891B2;stop-opacity:1">
+        <animate attributeName="stop-color" values="#0891B2;#18A1C2;#0891B2" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="80%" style="stop-color:#F2A74B;stop-opacity:1">
-        <animate attributeName="stop-color" values="#F2A74B;#FFB75B;#F2A74B" dur="20s" repeatCount="indefinite"/>
+      <stop offset="80%" style="stop-color:#0EA5E9;stop-opacity:1">
+        <animate attributeName="stop-color" values="#0EA5E9;#1EB5F9;#0EA5E9" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="100%" style="stop-color:#D4A259;stop-opacity:1">
-        <animate attributeName="stop-color" values="#D4A259;#E4B269;#D4A259" dur="20s" repeatCount="indefinite"/>
+      <stop offset="100%" style="stop-color:#57B8D4;stop-opacity:1">
+        <animate attributeName="stop-color" values="#57B8D4;#67C8E4;#57B8D4" dur="20s" repeatCount="indefinite"/>
       </stop>
     </linearGradient>
 
-    <!-- Lower Horizon Gradient -->
+    <!-- Green Grass Hill Gradient -->
     <linearGradient id="horizon-glow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#EA580C;stop-opacity:0.8" />
-      <stop offset="50%" style="stop-color:#F2A74B;stop-opacity:0.5" />
-      <stop offset="100%" style="stop-color:#FDB462;stop-opacity:0.2" />
+      <stop offset="0%" style="stop-color:#2D5F4C;stop-opacity:0.9" />
+      <stop offset="30%" style="stop-color:#7BA05B;stop-opacity:0.8" />
+      <stop offset="60%" style="stop-color:#7BA05B;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#2D5F4C;stop-opacity:0.6" />
     </linearGradient>
 
     <!-- Sun Glow Gradient -->
     <radialGradient id="sun-glow">
       <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
-      <stop offset="20%" style="stop-color:#FDB462;stop-opacity:0.9" />
-      <stop offset="50%" style="stop-color:#EA580C;stop-opacity:0.6" />
-      <stop offset="100%" style="stop-color:#C84630;stop-opacity:0" />
+      <stop offset="20%" style="stop-color:#FDB462;stop-opacity:0.95" />
+      <stop offset="50%" style="stop-color:#F2A74B;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#FDB462;stop-opacity:0" />
     </radialGradient>
 
     <!-- Cloud Gradient -->
     <linearGradient id="cloud-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#FF9B85;stop-opacity:0.6" />
-      <stop offset="50%" style="stop-color:#F4A7B9;stop-opacity:0.8" />
-      <stop offset="100%" style="stop-color:#FF9B85;stop-opacity:0.6" />
+      <stop offset="0%" style="stop-color:#C8E3E8;stop-opacity:0.7" />
+      <stop offset="50%" style="stop-color:#E2E8F0;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#C8E3E8;stop-opacity:0.7" />
     </linearGradient>
   </defs>
 
@@ -68,10 +69,17 @@
     </circle>
   </g>
 
-  <!-- Horizon Glow Band -->
-  <ellipse cx="600" cy="600" rx="600" ry="100" fill="url(#horizon-glow)" opacity="0.7">
-    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="10s" repeatCount="indefinite"/>
+  <!-- Green Grass Hill -->
+  <ellipse cx="600" cy="600" rx="600" ry="120" fill="url(#horizon-glow)" opacity="0.85">
+    <animate attributeName="opacity" values="0.85;0.95;0.85" dur="10s" repeatCount="indefinite"/>
   </ellipse>
+  
+  <!-- Additional grass texture layer for depth -->
+  <path
+    d="M 0,580 Q 200,600 400,590 T 800,595 T 1200,585 L 1200,800 L 0,800 Z"
+    fill="url(#horizon-glow)"
+    opacity="0.6"
+  />
 
   <!-- Stylized Clouds -->
   <g class="clouds-layer-1" opacity="0.6">
@@ -150,7 +158,7 @@
 
   <!-- Flying Birds Silhouettes -->
   <g class="birds" opacity="0.4">
-    <path d="M 300,250 Q 295,245 290,250 Q 295,255 300,250" fill="none" stroke="#2D3561" stroke-width="2">
+    <path d="M 300,250 Q 295,245 290,250 Q 295,255 300,250" fill="none" stroke="#0A3A4A" stroke-width="2">
       <animateTransform
         attributeName="transform"
         type="translate"
@@ -160,7 +168,7 @@
       />
     </path>
 
-    <path d="M 320,260 Q 315,255 310,260 Q 315,265 320,260" fill="none" stroke="#2D3561" stroke-width="1.5">
+    <path d="M 320,260 Q 315,255 310,260 Q 315,265 320,260" fill="none" stroke="#0A3A4A" stroke-width="1.5">
       <animateTransform
         attributeName="transform"
         type="translate"
@@ -170,7 +178,7 @@
       />
     </path>
 
-    <path d="M 340,255 Q 335,250 330,255 Q 335,260 340,255" fill="none" stroke="#2D3561" stroke-width="2">
+    <path d="M 340,255 Q 335,250 330,255 Q 335,260 340,255" fill="none" stroke="#0A3A4A" stroke-width="2">
       <animateTransform
         attributeName="transform"
         type="translate"
@@ -183,24 +191,24 @@
 
   <!-- Atmospheric Particles/Dust -->
   <g class="particles">
-    <circle cx="200" cy="300" r="1" fill="#FDB462" opacity="0.6">
+    <circle cx="200" cy="300" r="1" fill="#FDB462" opacity="0.5">
       <animate attributeName="cy" values="300;100;300" dur="15s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="15s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.2;0.5" dur="15s" repeatCount="indefinite"/>
     </circle>
 
-    <circle cx="500" cy="400" r="1.5" fill="#FF9B85" opacity="0.5">
+    <circle cx="500" cy="400" r="1.5" fill="#C8E3E8" opacity="0.4">
       <animate attributeName="cy" values="400;150;400" dur="18s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.5;0.1;0.5" dur="18s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.1;0.4" dur="18s" repeatCount="indefinite"/>
     </circle>
 
-    <circle cx="800" cy="350" r="1" fill="#F2A74B" opacity="0.7">
+    <circle cx="800" cy="350" r="1" fill="#F2A74B" opacity="0.6">
       <animate attributeName="cy" values="350;100;350" dur="20s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="20s" repeatCount="indefinite"/>
     </circle>
 
-    <circle cx="1000" cy="450" r="1.5" fill="#EA580C" opacity="0.5">
+    <circle cx="1000" cy="450" r="1.5" fill="#57B8D4" opacity="0.4">
       <animate attributeName="cy" values="450;200;450" dur="22s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.5;0.1;0.5" dur="22s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.1;0.4" dur="22s" repeatCount="indefinite"/>
     </circle>
   </g>
 </svg>

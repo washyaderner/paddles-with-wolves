@@ -10,9 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^4.10.0",
     "astro": "^4.16.18",
     "gsap": "^3.12.5",
-    "@stripe/stripe-js": "^4.10.0"
+    "lucide-astro": "^0.554.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

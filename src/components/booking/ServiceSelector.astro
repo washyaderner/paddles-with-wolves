@@ -1,9 +1,11 @@
 ---
+import { Zap, Hand, Leaf, Waves } from 'lucide-astro';
+
 interface Service {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  iconComponent: string;
   durations: {
     minutes: number;
     price: number;
@@ -15,13 +17,21 @@ interface Props {
   services?: Service[];
 }
 
+// Icon component mapping
+const iconComponents: Record<string, any> = {
+  'zap': Zap,
+  'hand': Hand,
+  'leaf': Leaf,
+  'waves': Waves,
+};
+
 // Default services if not provided
 const defaultServices: Service[] = [
   {
     id: 'energy-healing',
     name: 'Energy Healing Session',
     description: 'Qi Gong and Tai Chi energy work to restore balance and vitality',
-    icon: '⚡',
+    iconComponent: 'zap',
     durations: [
       { minutes: 60, price: 90 },
       { minutes: 90, price: 120 }
@@ -32,7 +42,7 @@ const defaultServices: Service[] = [
     id: 'therapeutic-bodywork',
     name: 'Therapeutic Bodywork',
     description: 'Deep tissue massage combined with energy healing techniques',
-    icon: '💆',
+    iconComponent: 'hand',
     durations: [
       { minutes: 60, price: 100 },
       { minutes: 90, price: 140 }
@@ -43,7 +53,7 @@ const defaultServices: Service[] = [
     id: 'herbal-consultation',
     name: 'Herbal Consultation',
     description: 'Personalized guidance for selecting herbal remedies',
-    icon: '🌿',
+    iconComponent: 'leaf',
     durations: [
       { minutes: 30, price: 0 }, // Free consultation
       { minutes: 60, price: 80 }
@@ -54,7 +64,7 @@ const defaultServices: Service[] = [
     id: 'movement-session',
     name: 'Movement Arts Session',
     description: 'Kayaking or disc golf flow for embodied wellness',
-    icon: '🛶',
+    iconComponent: 'waves',
     durations: [
       { minutes: 90, price: 60 },
       { minutes: 120, price: 100 }
@@ -82,7 +92,12 @@ const { services = defaultServices } = Astro.props;
         <div class="service-option-inner">
           <!-- Service Icon -->
           <div class="service-icon-container">
-            <div class="service-icon">{service.icon}</div>
+            <div class="service-icon">
+              {service.iconComponent === 'zap' && <Zap class="icon-svg" />}
+              {service.iconComponent === 'hand' && <Hand class="icon-svg" />}
+              {service.iconComponent === 'leaf' && <Leaf class="icon-svg" />}
+              {service.iconComponent === 'waves' && <Waves class="icon-svg" />}
+            </div>
             <div class="service-category">{service.category}</div>
           </div>
 
@@ -204,10 +219,25 @@ const { services = defaultServices } = Astro.props;
   }
 
   .service-icon {
-    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: var(--space-3);
+  }
+
+  .service-icon .icon-svg {
+    width: 64px;
+    height: 64px;
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 15px rgba(253, 180, 98, 0.5));
     animation: float-gentle 3s ease-in-out infinite;
+    transition: all var(--transition-base);
+  }
+
+  .service-option:hover .service-icon .icon-svg {
+    color: var(--mystic-purple);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(107, 70, 193, 0.8));
   }
 
   @keyframes float-gentle {
@@ -409,8 +439,9 @@ const { services = defaultServices } = Astro.props;
       gap: var(--space-6);
     }
 
-    .service-icon {
-      font-size: 3rem;
+    .service-icon .icon-svg {
+      width: 48px;
+      height: 48px;
     }
 
     .duration-options {

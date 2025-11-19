@@ -1,4 +1,6 @@
 ---
+import { Flower, Flame, Wheat, Flower2, TreePine, Moon, FlowerIcon, Shield, Sprout, ShoppingCart, Sparkles } from 'lucide-astro';
+
 interface Props {
   id: string;
   name: string;
@@ -14,6 +16,22 @@ interface Props {
   stripeProductId: string;
 }
 
+// Map emoji to Lucide icon component
+const getIconComponent = (emoji: string) => {
+  const iconMap: Record<string, any> = {
+    '🌼': Flower,
+    '🌶️': Flame,
+    '🌾': Wheat,
+    '🌹': Flower2,
+    '🌲': TreePine,
+    '🌙': Moon,
+    '🌸': FlowerIcon,
+    '🛡️': Shield,
+    '🌿': Sprout,
+  };
+  return iconMap[emoji] || Sprout;
+};
+
 const {
   id,
   name,
@@ -28,6 +46,8 @@ const {
   botanicalIcon,
   stripeProductId
 } = Astro.props;
+
+const IconComponent = getIconComponent(botanicalIcon);
 
 // Determine botanical background gradient based on category
 const getCategoryGradient = (cat: string) => {
@@ -55,14 +75,16 @@ const gradient = getCategoryGradient(category);
       <!-- Botanical Background Pattern -->
       <div class="botanical-bg" style={`background: ${gradient};`}>
         <div class="botanical-pattern">
-          <span class="botanical-icon-large">{botanicalIcon}</span>
+          <IconComponent class="botanical-icon-large" />
         </div>
       </div>
 
       <!-- Product Image Placeholder -->
       <div class="product-image">
         <div class="product-type-badge">{type}</div>
-        <div class="product-icon">{botanicalIcon}</div>
+        <div class="product-icon">
+          <IconComponent class="icon-svg" />
+        </div>
       </div>
 
       <!-- Product Info -->
@@ -77,7 +99,7 @@ const gradient = getCategoryGradient(category);
         </div>
 
         <button class="btn-add-to-cart" data-stripe-id={stripeProductId}>
-          <span class="cart-icon">🛒</span>
+          <ShoppingCart class="cart-icon" />
           Add to Cart
         </button>
       </div>
@@ -102,7 +124,7 @@ const gradient = getCategoryGradient(category);
         <h4>Benefits</h4>
         <ul class="benefits-list">
           {benefits.map(benefit => (
-            <li><span class="benefit-icon">✨</span> {benefit}</li>
+            <li><Sparkles class="benefit-icon" /> {benefit}</li>
           ))}
         </ul>
 
@@ -181,9 +203,11 @@ const gradient = getCategoryGradient(category);
   }
 
   .botanical-icon-large {
-    font-size: 8rem;
+    width: 128px;
+    height: 128px;
     opacity: 0.2;
     filter: blur(2px);
+    color: var(--sunset-gold);
   }
 
   /* Product Image/Icon */
@@ -211,7 +235,15 @@ const gradient = getCategoryGradient(category);
   }
 
   .product-icon {
-    font-size: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-icon .icon-svg {
+    width: 96px;
+    height: 96px;
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 20px rgba(253, 180, 98, 0.5));
     animation: float-gentle 4s ease-in-out infinite;
   }
@@ -309,7 +341,8 @@ const gradient = getCategoryGradient(category);
   }
 
   .cart-icon {
-    font-size: var(--text-lg);
+    width: 20px;
+    height: 20px;
   }
 
   /* Hover Indicator */
@@ -389,10 +422,13 @@ const gradient = getCategoryGradient(category);
   }
 
   .ingredients-list li::before {
-    content: '🌿';
+    content: '';
     position: absolute;
     left: 0;
-    font-size: var(--text-xs);
+    width: 16px;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FDB462' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") no-repeat center;
+    background-size: contain;
   }
 
   .benefits-list li {
@@ -405,7 +441,9 @@ const gradient = getCategoryGradient(category);
 
   .benefit-icon {
     flex-shrink: 0;
-    font-size: var(--text-base);
+    width: 18px;
+    height: 18px;
+    color: var(--sunset-gold);
   }
 
   .usage-note {
@@ -450,12 +488,14 @@ const gradient = getCategoryGradient(category);
       height: 550px;
     }
 
-    .product-icon {
-      font-size: 4rem;
+    .product-icon .icon-svg {
+      width: 64px;
+      height: 64px;
     }
 
     .botanical-icon-large {
-      font-size: 6rem;
+      width: 96px;
+      height: 96px;
     }
 
     .product-name {

@@ -1,4 +1,6 @@
 ---
+import { User, Mail, Phone, Sprout, MessageSquare, Sparkles } from 'lucide-astro';
+
 /**
  * ContactForm Component
  * Mystical contact form with glow effects and field validation
@@ -36,7 +38,7 @@ const serviceOptions = [
   <form class="contact-form glass" id="contact-form">
     <!-- Success Message (Hidden by default) -->
     <div class="form-success" id="form-success" style="display: none;">
-      <div class="success-icon">✨</div>
+      <Sparkles class="success-icon" />
       <h3>Message Sent!</h3>
       <p>Thank you for reaching out. We'll get back to you soon.</p>
     </div>
@@ -49,7 +51,7 @@ const serviceOptions = [
           Your Name <span class="required">*</span>
         </label>
         <div class="input-wrapper">
-          <span class="input-icon">👤</span>
+          <User class="input-icon" />
           <input
             type="text"
             id="name"
@@ -70,7 +72,7 @@ const serviceOptions = [
           Email Address <span class="required">*</span>
         </label>
         <div class="input-wrapper">
-          <span class="input-icon">📧</span>
+          <Mail class="input-icon" />
           <input
             type="email"
             id="email"
@@ -91,7 +93,7 @@ const serviceOptions = [
           Phone Number <span class="optional">(optional)</span>
         </label>
         <div class="input-wrapper">
-          <span class="input-icon">📱</span>
+          <Phone class="input-icon" />
           <input
             type="tel"
             id="phone"
@@ -110,7 +112,7 @@ const serviceOptions = [
           Service Interest
         </label>
         <div class="input-wrapper">
-          <span class="input-icon">🌿</span>
+          <Sprout class="input-icon" />
           <select
             id="service"
             name="service"
@@ -130,7 +132,7 @@ const serviceOptions = [
           Your Message <span class="required">*</span>
         </label>
         <div class="input-wrapper">
-          <span class="input-icon textarea-icon">💬</span>
+          <MessageSquare class="input-icon textarea-icon" />
           <textarea
             id="message"
             name="message"
@@ -147,7 +149,7 @@ const serviceOptions = [
 
       <!-- Submit Button -->
       <button type="submit" class="btn-submit" id="btn-submit">
-        <span class="submit-icon">✨</span>
+        <Sparkles class="submit-icon" />
         <span class="submit-text">{submitButtonText}</span>
         <span class="submit-loading" style="display: none;">
           <span class="loading-spinner"></span>
@@ -162,11 +164,11 @@ const serviceOptions = [
     <p class="alternative-text">Or reach us directly:</p>
     <div class="contact-methods">
       <a href="mailto:info@paddleswithwolves.com" class="contact-method">
-        <span class="method-icon">📧</span>
+        <Mail class="method-icon" />
         <span class="method-text">info@paddleswithwolves.com</span>
       </a>
       <a href="tel:+15551234567" class="contact-method">
-        <span class="method-icon">📞</span>
+        <Phone class="method-icon" />
         <span class="method-text">(555) 123-4567</span>
       </a>
     </div>
@@ -246,9 +248,18 @@ const serviceOptions = [
   .input-icon {
     position: absolute;
     left: var(--space-4);
-    font-size: var(--text-xl);
+    width: 20px;
+    height: 20px;
+    color: var(--medium-gray);
     pointer-events: none;
     z-index: 2;
+    transition: color var(--transition-base);
+  }
+
+  .form-input:focus ~ .input-icon,
+  .form-select:focus ~ .input-icon,
+  .form-textarea:focus ~ .input-icon {
+    color: var(--sunset-gold);
   }
 
   .textarea-icon {
@@ -380,7 +391,8 @@ const serviceOptions = [
   }
 
   .submit-icon {
-    font-size: var(--text-xl);
+    width: 20px;
+    height: 20px;
   }
 
   .submit-loading {
@@ -423,8 +435,10 @@ const serviceOptions = [
   }
 
   .success-icon {
-    font-size: 4rem;
+    width: 64px;
+    height: 64px;
     margin-bottom: var(--space-4);
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 20px rgba(253, 180, 98, 0.6));
   }
 
@@ -480,7 +494,9 @@ const serviceOptions = [
   }
 
   .method-icon {
-    font-size: var(--text-xl);
+    width: 20px;
+    height: 20px;
+    color: var(--light-gray);
   }
 
   .method-text {

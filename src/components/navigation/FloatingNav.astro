@@ -1,4 +1,6 @@
 ---
+import { Mountain } from 'lucide-astro';
+
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
@@ -15,7 +17,7 @@ const currentPath = Astro.url.pathname;
   <div class="nav-container">
     <div class="nav-logo">
       <a href="/">
-        <span class="logo-icon">🐺</span>
+        <Mountain class="logo-icon" />
         <span class="logo-text">Paddles with Wolves</span>
       </a>
     </div>
@@ -47,29 +49,48 @@ const currentPath = Astro.url.pathname;
     transform: translateX(-50%);
     width: calc(100% - var(--space-8));
     max-width: 1200px;
-    z-index: var(--z-sticky);
+    z-index: 9999;
     transition: all var(--transition-base);
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   .nav-container {
-    background: rgba(15, 23, 42, 0.3);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(107, 70, 193, 0.2);
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(107, 70, 193, 0.4);
     border-radius: var(--radius-2xl);
     padding: var(--space-3) var(--space-6);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), var(--shadow-glow-purple);
     transition: all var(--transition-base);
+    opacity: 1 !important;
+  }
+
+  /* Hover state - bring nav to full visibility */
+  .floating-nav:hover .nav-container {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    border-color: rgba(107, 70, 193, 0.5);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+    opacity: 1;
   }
 
   /* Solid background class (added via JavaScript on scroll) */
   .floating-nav.solid .nav-container {
     background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(16px);
-    border-color: rgba(107, 70, 193, 0.4);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    backdrop-filter: blur(18px);
+    border-color: rgba(107, 70, 193, 0.5);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+  }
+
+  /* When scrolled and hovered */
+  .floating-nav.solid:hover .nav-container {
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px);
+    border-color: rgba(107, 70, 193, 0.7);
   }
 
   .nav-logo {
@@ -89,8 +110,16 @@ const currentPath = Astro.url.pathname;
   }
 
   .logo-icon {
-    font-size: var(--text-2xl);
+    width: 28px;
+    height: 28px;
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 8px rgba(107, 70, 193, 0.5));
+    transition: all var(--transition-base);
+  }
+
+  .nav-logo a:hover .logo-icon {
+    color: var(--mystic-purple);
+    transform: scale(1.1);
   }
 
   .logo-text {
@@ -315,7 +344,7 @@ const currentPath = Astro.url.pathname;
 
     if (!nav) return;
 
-    // ScrollTrigger for solid background
+    // ScrollTrigger for solid background (makes nav more opaque when scrolled)
     ScrollTrigger.create({
       trigger: 'body',
       start: 'top -100',
@@ -324,43 +353,8 @@ const currentPath = Astro.url.pathname;
       onLeaveBack: () => nav.classList.remove('solid'),
     });
 
-    // Hide/show nav on scroll
-    let lastScroll = 0;
-    let ticking = false;
-
-    ScrollTrigger.create({
-      trigger: 'body',
-      start: 'top top',
-      end: 'bottom top',
-      onUpdate: (self) => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            const currentScroll = self.scroll();
-
-            if (currentScroll > lastScroll && currentScroll > 100) {
-              // Scrolling down - hide nav
-              gsap.to(nav, {
-                y: -120,
-                duration: 0.3,
-                ease: 'power2.out'
-              });
-            } else {
-              // Scrolling up - show nav
-              gsap.to(nav, {
-                y: 0,
-                duration: 0.3,
-                ease: 'power2.out'
-              });
-            }
-
-            lastScroll = currentScroll;
-            ticking = false;
-          });
-
-          ticking = true;
-        }
-      }
-    });
+    // Nav bar stays completely stationary - no hiding or movement
+    // Always visible and accessible
 
     // Mobile menu toggle with GSAP
     if (navToggle && navMenu) {
@@ -418,13 +412,12 @@ const currentPath = Astro.url.pathname;
       });
     }
 
-    // Entrance animation
+    // Entrance animation - simple fade in, no movement
     gsap.from(nav, {
-      y: -100,
       opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.3
+      duration: 0.5,
+      ease: 'power2.out',
+      delay: 0.2
     });
   }
 

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceSelector from '../components/booking/ServiceSelector.astro';
 import CalendarEmbed from '../components/booking/CalendarEmbed.astro';
 import BookingConfirmation from '../components/booking/BookingConfirmation.astro';
+import { Sparkles } from 'lucide-astro';
 ---
 
 <BaseLayout
@@ -15,8 +16,8 @@ import BookingConfirmation from '../components/booking/BookingConfirmation.astro
   <section class="booking-hero">
     <div class="container">
       <div class="hero-content fade-in-up">
-        <div class="hero-icon">🌟</div>
-        <h1 class="page-title text-gradient-mystic">Begin Your Healing Journey</h1>
+        <Sparkles class="hero-icon" />
+        <h1 class="page-title text-gradient-mystic">You're here for a reason. Welcome!</h1>
         <p class="page-subtitle">
           Book a personalized session tailored to your wellness goals
         </p>
@@ -138,8 +139,10 @@ import BookingConfirmation from '../components/booking/BookingConfirmation.astro
   }
 
   .hero-icon {
-    font-size: 5rem;
+    width: 80px;
+    height: 80px;
     margin-bottom: var(--space-6);
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 20px rgba(107, 70, 193, 0.5));
     animation: float-gentle 4s ease-in-out infinite;
   }
@@ -156,6 +159,36 @@ import BookingConfirmation from '../components/booking/BookingConfirmation.astro
   .page-title {
     font-size: clamp(2.5rem, 6vw, 4rem);
     margin-bottom: var(--space-4);
+    color: var(--white);
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.9),
+      0 4px 20px rgba(0, 0, 0, 0.8),
+      0 6px 30px rgba(0, 0, 0, 0.7),
+      0 0 50px rgba(255, 255, 255, 0.5);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    opacity: 1;
+  }
+
+  /* Override gradient for better contrast - fully opaque white text */
+  .page-title.text-gradient-mystic {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FDB462 25%, #FFFFFF 50%, #FDB462 75%, #FFFFFF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 1)) drop-shadow(0 0 30px rgba(253, 180, 98, 0.8));
+    opacity: 1;
+    background-size: 200% 100%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   .page-subtitle {
@@ -302,7 +335,8 @@ import BookingConfirmation from '../components/booking/BookingConfirmation.astro
     }
 
     .hero-icon {
-      font-size: 3.5rem;
+      width: 56px;
+      height: 56px;
     }
 
     .faq-grid {

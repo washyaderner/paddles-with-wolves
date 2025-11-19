@@ -1,13 +1,11 @@
 ---
-// Shopping Cart Placeholder for Stripe Integration
-// This component provides the UI shell and basic cart functionality
-// Stripe checkout integration will be added in a future update
+import { ShoppingCart as CartIcon, X, Sprout, Lock } from 'lucide-astro';
 ---
 
 <div id="shopping-cart" class="shopping-cart">
   <!-- Cart Button -->
   <button class="cart-button" id="cart-toggle" aria-label="Shopping cart">
-    <span class="cart-icon">🛒</span>
+    <CartIcon class="cart-icon" />
     <span class="cart-count" id="cart-count">0</span>
   </button>
 
@@ -16,14 +14,14 @@
     <div class="cart-header">
       <h3>Your Cart</h3>
       <button class="cart-close" id="cart-close" aria-label="Close cart">
-        ✕
+        <X class="close-icon" />
       </button>
     </div>
 
     <div class="cart-items" id="cart-items">
       <!-- Cart items will be dynamically inserted here -->
       <div class="cart-empty" id="cart-empty">
-        <div class="empty-icon">🌿</div>
+        <Sprout class="empty-icon" />
         <p>Your cart is empty</p>
         <p class="empty-subtitle">Browse our apothecary to find remedies</p>
         <a href="/apothecary" class="btn-browse">Browse Products</a>
@@ -41,7 +39,7 @@
       </p>
 
       <button class="btn-checkout" id="btn-checkout" disabled>
-        <span class="checkout-icon">🔒</span>
+        <Lock class="checkout-icon" />
         Proceed to Checkout
       </button>
 
@@ -81,7 +79,8 @@
   }
 
   .cart-icon {
-    font-size: 1.75rem;
+    width: 28px;
+    height: 28px;
   }
 
   .cart-count {
@@ -155,12 +154,16 @@
     border: 2px solid rgba(107, 70, 193, 0.3);
     border-radius: 50%;
     color: var(--light-gray);
-    font-size: var(--text-xl);
     cursor: pointer;
     transition: all var(--transition-base);
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .close-icon {
+    width: 20px;
+    height: 20px;
   }
 
   .cart-close:hover {
@@ -187,9 +190,11 @@
   }
 
   .empty-icon {
-    font-size: 4rem;
+    width: 64px;
+    height: 64px;
     opacity: 0.5;
     filter: grayscale(50%);
+    color: var(--medium-gray);
   }
 
   .cart-empty p {
@@ -232,8 +237,13 @@
   }
 
   .cart-item-icon {
-    font-size: 2.5rem;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem; /* Fallback for emoji if icon not available */
   }
 
   .cart-item-details {
@@ -339,7 +349,8 @@
   }
 
   .checkout-icon {
-    font-size: var(--text-xl);
+    width: 20px;
+    height: 20px;
   }
 
   .stripe-note {
@@ -397,7 +408,8 @@
     }
 
     .cart-icon {
-      font-size: 1.5rem;
+      width: 24px;
+      height: 24px;
     }
   }
 

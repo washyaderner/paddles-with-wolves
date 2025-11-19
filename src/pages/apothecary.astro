@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductFilter from '../components/products/ProductFilter.astro';
 import ProductGrid from '../components/products/ProductGrid.astro';
 import productsData from '../data/products.json';
+import { Sprout, Leaf, Sparkles, Flower, Mountain, Sparkle } from 'lucide-astro';
 
 const { products, categories } = productsData;
 ---
@@ -16,7 +17,7 @@ const { products, categories } = productsData;
   <section class="apothecary-hero">
     <div class="container">
       <div class="hero-content fade-in-up">
-        <div class="hero-icon">🌿</div>
+        <Sprout class="hero-icon" />
         <h1 class="page-title text-gradient-forest">Herbal Apothecary</h1>
         <p class="page-subtitle">
           Wildcrafted & organic herbal remedies from the Pacific Northwest
@@ -42,7 +43,7 @@ const { products, categories } = productsData;
       <div class="info-grid">
         <!-- Crafting Philosophy -->
         <div class="info-card glass">
-          <div class="info-icon">🌱</div>
+          <Sprout class="info-icon" />
           <h3>Handcrafted with Intention</h3>
           <p>
             Every remedy is prepared in small batches with deep respect for the plants
@@ -53,7 +54,7 @@ const { products, categories } = productsData;
 
         <!-- Sourcing -->
         <div class="info-card glass">
-          <div class="info-icon">🏔️</div>
+          <Mountain class="info-icon" />
           <h3>Sustainably Sourced</h3>
           <p>
             Our herbs come from ethical wildcrafting in the Cascade Mountains and local
@@ -64,7 +65,7 @@ const { products, categories } = productsData;
 
         <!-- Quality -->
         <div class="info-card glass">
-          <div class="info-icon">✨</div>
+          <Sparkle class="info-icon" />
           <h3>Potency & Purity</h3>
           <p>
             Using traditional extraction methods—organic cane alcohol for tinctures,
@@ -124,7 +125,7 @@ const { products, categories } = productsData;
   <section class="consultation-cta-section fade-in-scroll">
     <div class="container">
       <div class="cta-card glass">
-        <div class="cta-icon">🌸</div>
+        <Flower class="cta-icon" />
         <h2>Need Personalized Guidance?</h2>
         <p>
           Not sure which remedy is right for you? Schedule a complimentary 15-minute
@@ -156,8 +157,10 @@ const { products, categories } = productsData;
   }
 
   .hero-icon {
-    font-size: 5rem;
+    width: 80px;
+    height: 80px;
     margin-bottom: var(--space-6);
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 20px rgba(107, 70, 193, 0.5));
     animation: float-gentle 4s ease-in-out infinite;
   }
@@ -217,8 +220,10 @@ const { products, categories } = productsData;
   }
 
   .info-icon {
-    font-size: 3.5rem;
+    width: 56px;
+    height: 56px;
     margin-bottom: var(--space-4);
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 10px rgba(253, 180, 98, 0.5));
   }
 
@@ -313,8 +318,10 @@ const { products, categories } = productsData;
   }
 
   .cta-icon {
-    font-size: 4rem;
+    width: 64px;
+    height: 64px;
     margin-bottom: var(--space-6);
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 15px rgba(253, 180, 98, 0.5));
   }
 
@@ -391,7 +398,8 @@ const { products, categories } = productsData;
     }
 
     .hero-icon {
-      font-size: 3.5rem;
+      width: 56px;
+      height: 56px;
     }
 
     .info-grid {
