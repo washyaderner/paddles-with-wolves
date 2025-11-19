@@ -1,0 +1,613 @@
+---
+interface Service {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  durations: {
+    minutes: number;
+    price: number;
+  }[];
+  category: string;
+}
+
+interface Props {
+  services?: Service[];
+}
+
+// Default services if not provided
+const defaultServices: Service[] = [
+  {
+    id: 'energy-healing',
+    name: 'Energy Healing Session',
+    description: 'Qi Gong and Tai Chi energy work to restore balance and vitality',
+    icon: '⚡',
+    durations: [
+      { minutes: 60, price: 90 },
+      { minutes: 90, price: 120 }
+    ],
+    category: 'Energy Work'
+  },
+  {
+    id: 'therapeutic-bodywork',
+    name: 'Therapeutic Bodywork',
+    description: 'Deep tissue massage combined with energy healing techniques',
+    icon: '💆',
+    durations: [
+      { minutes: 60, price: 100 },
+      { minutes: 90, price: 140 }
+    ],
+    category: 'Bodywork'
+  },
+  {
+    id: 'herbal-consultation',
+    name: 'Herbal Consultation',
+    description: 'Personalized guidance for selecting herbal remedies',
+    icon: '🌿',
+    durations: [
+      { minutes: 30, price: 0 }, // Free consultation
+      { minutes: 60, price: 80 }
+    ],
+    category: 'Consultation'
+  },
+  {
+    id: 'movement-session',
+    name: 'Movement Arts Session',
+    description: 'Kayaking or disc golf flow for embodied wellness',
+    icon: '🛶',
+    durations: [
+      { minutes: 90, price: 60 },
+      { minutes: 120, price: 100 }
+    ],
+    category: 'Movement'
+  }
+];
+
+const { services = defaultServices } = Astro.props;
+---
+
+<section class="service-selector" id="service-selector">
+  <div class="selector-header">
+    <h2 class="selector-title text-gradient-healing">Choose Your Healing Experience</h2>
+    <p class="selector-subtitle">Select a service and duration to begin your booking</p>
+  </div>
+
+  <div class="services-grid">
+    {services.map((service, index) => (
+      <div
+        class="service-option"
+        data-service-id={service.id}
+        data-index={index}
+      >
+        <div class="service-option-inner">
+          <!-- Service Icon -->
+          <div class="service-icon-container">
+            <div class="service-icon">{service.icon}</div>
+            <div class="service-category">{service.category}</div>
+          </div>
+
+          <!-- Service Info -->
+          <div class="service-info">
+            <h3 class="service-name">{service.name}</h3>
+            <p class="service-description">{service.description}</p>
+          </div>
+
+          <!-- Duration Selection -->
+          <div class="duration-selector">
+            <label class="duration-label">Select Duration:</label>
+            <div class="duration-options">
+              {service.durations.map((duration) => (
+                <button
+                  class="duration-btn"
+                  data-service-id={service.id}
+                  data-duration={duration.minutes}
+                  data-price={duration.price}
+                  data-service-name={service.name}
+                >
+                  <span class="duration-time">
+                    {duration.minutes === 30 ? '30 min' :
+                     duration.minutes === 60 ? '1 hour' :
+                     duration.minutes === 90 ? '1.5 hours' :
+                     duration.minutes === 120 ? '2 hours' :
+                     `${duration.minutes} min`}
+                  </span>
+                  <span class="duration-price">
+                    {duration.price === 0 ? 'Free' : `$${duration.price}`}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Selected Service Summary -->
+  <div class="selection-summary glass" id="selection-summary" style="display: none;">
+    <div class="summary-content">
+      <div class="summary-icon" id="summary-icon">⚡</div>
+      <div class="summary-details">
+        <h4 id="summary-service-name">Energy Healing Session</h4>
+        <p class="summary-meta">
+          <span id="summary-duration">60 minutes</span>
+          <span class="summary-separator">•</span>
+          <span id="summary-price">$90</span>
+        </p>
+      </div>
+      <button class="btn-continue" id="btn-continue">
+        Continue to Calendar
+        <span class="continue-arrow">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-selector {
+    padding: var(--space-8) 0 var(--space-12);
+  }
+
+  /* Selector Header */
+  .selector-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .selector-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .selector-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--medium-gray);
+    font-style: italic;
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+  }
+
+  .service-option {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .service-option-inner {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    transition: all var(--transition-base);
+    height: 100%;
+  }
+
+  .service-option-inner:hover {
+    border-color: var(--sunset-gold);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+    transform: translateY(-4px);
+  }
+
+  /* Service Icon */
+  .service-icon-container {
+    text-align: center;
+    position: relative;
+  }
+
+  .service-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-3);
+    filter: drop-shadow(0 0 15px rgba(253, 180, 98, 0.5));
+    animation: float-gentle 3s ease-in-out infinite;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .service-category {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    background: rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--sunset-gold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  /* Service Info */
+  .service-info {
+    flex: 1;
+  }
+
+  .service-name {
+    font-size: var(--text-xl);
+    color: var(--white);
+    margin-bottom: var(--space-3);
+    font-family: var(--font-heading);
+    text-align: center;
+  }
+
+  .service-description {
+    font-size: var(--text-sm);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Duration Selector */
+  .duration-selector {
+    border-top: 1px solid rgba(107, 70, 193, 0.3);
+    padding-top: var(--space-6);
+  }
+
+  .duration-label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--medium-gray);
+    margin-bottom: var(--space-3);
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .duration-options {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .duration-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--space-4);
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .duration-btn:hover {
+    border-color: var(--sunset-gold);
+    background: rgba(107, 70, 193, 0.2);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-purple);
+  }
+
+  .duration-btn.selected {
+    border-color: var(--sunset-gold);
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.3), rgba(253, 180, 98, 0.3));
+    box-shadow: var(--shadow-glow-healing);
+  }
+
+  .duration-time {
+    font-size: var(--text-base);
+    color: var(--white);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .duration-price {
+    font-size: var(--text-lg);
+    color: var(--sunset-gold);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-heading);
+  }
+
+  /* Selection Summary */
+  .selection-summary {
+    position: sticky;
+    bottom: var(--space-8);
+    padding: var(--space-6);
+    border-radius: var(--radius-2xl);
+    border: 2px solid var(--sunset-gold);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .selection-summary.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .summary-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .summary-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 10px rgba(253, 180, 98, 0.5));
+  }
+
+  .summary-details {
+    flex: 1;
+  }
+
+  .summary-details h4 {
+    font-size: var(--text-xl);
+    color: var(--white);
+    margin: 0 0 var(--space-2) 0;
+    font-family: var(--font-heading);
+  }
+
+  .summary-meta {
+    font-size: var(--text-base);
+    color: var(--light-gray);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .summary-separator {
+    color: var(--medium-gray);
+  }
+
+  #summary-price {
+    color: var(--sunset-gold);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .btn-continue {
+    padding: var(--space-4) var(--space-8);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-continue:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .continue-arrow {
+    font-size: var(--text-xl);
+    transition: transform var(--transition-base);
+  }
+
+  .btn-continue:hover .continue-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+    }
+
+    .duration-options {
+      flex-direction: column;
+    }
+
+    .duration-btn {
+      min-width: auto;
+    }
+
+    .summary-content {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-4);
+    }
+
+    .summary-meta {
+      justify-content: center;
+    }
+
+    .btn-continue {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .selection-summary {
+      bottom: var(--space-4);
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .service-icon,
+    .service-option-inner,
+    .duration-btn,
+    .btn-continue,
+    .selection-summary {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initServiceSelector() {
+    const serviceOptions = document.querySelectorAll('.service-option');
+    const durationButtons = document.querySelectorAll('.duration-btn');
+    const selectionSummary = document.getElementById('selection-summary');
+    const continueBtn = document.getElementById('btn-continue');
+
+    let selectedService = {
+      id: '',
+      name: '',
+      icon: '',
+      duration: 0,
+      price: 0
+    };
+
+    // Animate service options on load
+    gsap.to(serviceOptions, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power3.out'
+    });
+
+    // Duration button click handler
+    durationButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove selected class from all buttons
+        durationButtons.forEach(btn => btn.classList.remove('selected'));
+
+        // Add selected class to clicked button
+        button.classList.add('selected');
+
+        // Get selected service details
+        const serviceId = button.getAttribute('data-service-id') || '';
+        const serviceName = button.getAttribute('data-service-name') || '';
+        const duration = parseInt(button.getAttribute('data-duration') || '60');
+        const price = parseInt(button.getAttribute('data-price') || '0');
+
+        // Get service icon
+        const serviceOption = button.closest('.service-option');
+        const icon = serviceOption?.querySelector('.service-icon')?.textContent || '⚡';
+
+        // Update selected service
+        selectedService = {
+          id: serviceId,
+          name: serviceName,
+          icon: icon,
+          duration: duration,
+          price: price
+        };
+
+        // Update summary
+        updateSummary();
+
+        // Show summary with animation
+        if (selectionSummary) {
+          selectionSummary.style.display = 'block';
+          gsap.to(selectionSummary, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'back.out(1.2)',
+            onStart: () => {
+              selectionSummary.classList.add('visible');
+            }
+          });
+        }
+
+        // Animate button
+        gsap.fromTo(button,
+          { scale: 1 },
+          {
+            scale: 1.05,
+            duration: 0.2,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power2.inOut'
+          }
+        );
+      });
+    });
+
+    // Update summary display
+    function updateSummary() {
+      const summaryIcon = document.getElementById('summary-icon');
+      const summaryServiceName = document.getElementById('summary-service-name');
+      const summaryDuration = document.getElementById('summary-duration');
+      const summaryPrice = document.getElementById('summary-price');
+
+      if (summaryIcon) summaryIcon.textContent = selectedService.icon;
+      if (summaryServiceName) summaryServiceName.textContent = selectedService.name;
+      if (summaryDuration) {
+        const durationText = selectedService.duration === 30 ? '30 minutes' :
+                            selectedService.duration === 60 ? '1 hour' :
+                            selectedService.duration === 90 ? '1.5 hours' :
+                            selectedService.duration === 120 ? '2 hours' :
+                            `${selectedService.duration} minutes`;
+        summaryDuration.textContent = durationText;
+      }
+      if (summaryPrice) {
+        summaryPrice.textContent = selectedService.price === 0 ? 'Free' : `$${selectedService.price}`;
+      }
+    }
+
+    // Continue button handler
+    continueBtn?.addEventListener('click', () => {
+      // Store selected service in sessionStorage
+      sessionStorage.setItem('selectedService', JSON.stringify(selectedService));
+
+      // Dispatch event to show calendar
+      window.dispatchEvent(new CustomEvent('serviceSelected', {
+        detail: selectedService
+      }));
+
+      // Scroll to calendar
+      const calendarSection = document.getElementById('calendar-embed');
+      if (calendarSection) {
+        gsap.to(window, {
+          scrollTo: { y: calendarSection, offsetY: 100 },
+          duration: 1,
+          ease: 'power3.inOut'
+        });
+      }
+    });
+
+    // Check for pre-selected service from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const preSelectedService = urlParams.get('service');
+    if (preSelectedService) {
+      // Auto-select the first duration option for the pre-selected service
+      const serviceButton = document.querySelector(
+        `.duration-btn[data-service-id="${preSelectedService}"]`
+      );
+      if (serviceButton) {
+        setTimeout(() => {
+          (serviceButton as HTMLElement).click();
+        }, 500);
+      }
+    }
+  }
+
+  // Initialize selector
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServiceSelector);
+  } else {
+    initServiceSelector();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initServiceSelector);
+</script>

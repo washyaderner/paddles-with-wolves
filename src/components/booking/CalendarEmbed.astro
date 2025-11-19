@@ -1,0 +1,668 @@
+---
+/**
+ * CalendarEmbed Component
+ * Placeholder for Cal.com integration
+ *
+ * Setup Instructions:
+ * 1. Sign up for Cal.com account at https://cal.com
+ * 2. Create event types for each service (60min, 90min, etc.)
+ * 3. Get your Cal.com username
+ * 4. Add your Cal.com embed code below
+ * 5. Update calComUsername prop with your actual username
+ */
+
+interface Props {
+  calComUsername?: string;
+  eventType?: string;
+  prefillData?: {
+    name?: string;
+    email?: string;
+    notes?: string;
+  };
+}
+
+const {
+  calComUsername = 'your-calcom-username',
+  eventType = '60min',
+  prefillData
+} = Astro.props;
+
+// Build Cal.com embed URL
+const embedUrl = `https://cal.com/${calComUsername}/${eventType}`;
+---
+
+<section class="calendar-embed-section" id="calendar-embed">
+  <div class="container">
+    <div class="calendar-header">
+      <h2 class="calendar-title text-gradient-sunset">Select Your Appointment</h2>
+      <p class="calendar-subtitle">Choose a time that works best for you</p>
+    </div>
+
+    <!-- Cal.com Embed Container -->
+    <div class="calendar-container glass">
+      <!-- Loading State -->
+      <div class="calendar-loading" id="calendar-loading">
+        <div class="loading-particles">
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+        </div>
+        <p class="loading-text">Loading calendar...</p>
+      </div>
+
+      <!-- Cal.com Setup Instructions (Remove after setup) -->
+      <div class="setup-instructions" id="setup-instructions">
+        <div class="instructions-icon">📅</div>
+        <h3>Cal.com Integration Setup Required</h3>
+
+        <div class="setup-steps">
+          <div class="setup-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Create Cal.com Account</h4>
+              <p>Sign up at <a href="https://cal.com" target="_blank" rel="noopener">cal.com</a></p>
+            </div>
+          </div>
+
+          <div class="setup-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Create Event Types</h4>
+              <p>Set up event types for each service:</p>
+              <ul>
+                <li>Energy Healing - 60min ($90)</li>
+                <li>Energy Healing - 90min ($120)</li>
+                <li>Therapeutic Bodywork - 60min ($100)</li>
+                <li>Therapeutic Bodywork - 90min ($140)</li>
+                <li>Herbal Consultation - 30min (Free)</li>
+                <li>Movement Session - 90min ($60)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="setup-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Get Embed Code</h4>
+              <p>In Cal.com, go to Event Type → Embed & Share → Copy embed code</p>
+            </div>
+          </div>
+
+          <div class="setup-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Update Component</h4>
+              <p>Replace the placeholder code in <code>CalendarEmbed.astro</code></p>
+              <p class="code-hint">Update <code>calComUsername</code> prop with your username</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="setup-example">
+          <h4>Example Integration:</h4>
+          <pre><code>&lt;!-- Replace this section with Cal.com embed script --&gt;
+&lt;div
+  data-cal-link="{calComUsername}/{eventType}"
+  data-cal-config='{"theme":"dark"}'
+&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  (function (C, A, L) {
+    let p = function (a, ar) {
+      a.q.push(ar);
+    };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () {
+          p(api, arguments);
+        };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", {origin:"https://cal.com"});
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="setup-action">
+          <a href="https://cal.com" target="_blank" rel="noopener" class="btn-setup">
+            <span>Get Started with Cal.com</span>
+            <span class="setup-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cal.com Embed Placeholder -->
+      <!--
+        REPLACE THIS SECTION WITH YOUR CAL.COM EMBED CODE
+        Example:
+        <div
+          data-cal-link="your-username/60min"
+          data-cal-config='{"theme":"dark"}'
+        ></div>
+      -->
+      <div class="calendar-iframe-container" id="calendar-iframe" style="display: none;">
+        <!-- Cal.com embed will be inserted here -->
+        <p class="embed-placeholder">Cal.com calendar will appear here after setup</p>
+      </div>
+    </div>
+
+    <!-- Booking Info -->
+    <div class="booking-info">
+      <div class="info-card glass">
+        <div class="info-icon">ℹ️</div>
+        <div class="info-content">
+          <h4>What to Expect</h4>
+          <ul>
+            <li>You'll receive a confirmation email immediately</li>
+            <li>A calendar invite will be sent to your email</li>
+            <li>Reminder notifications 24 hours before</li>
+            <li>Free cancellation up to 24 hours before appointment</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-card glass">
+        <div class="info-icon">📍</div>
+        <div class="info-content">
+          <h4>Session Location</h4>
+          <p>Healing studio address will be included in your confirmation email</p>
+          <p class="location-note">Sessions available in-person or via video call (for consultations)</p>
+        </div>
+      </div>
+
+      <div class="info-card glass">
+        <div class="info-icon">💳</div>
+        <div class="info-content">
+          <h4>Payment</h4>
+          <p>Payment is collected at time of service</p>
+          <p class="payment-methods">We accept cash, card, Venmo, and PayPal</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calendar-embed-section {
+    padding: var(--space-12) 0 var(--space-32);
+  }
+
+  /* Calendar Header */
+  .calendar-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .calendar-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .calendar-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--medium-gray);
+    font-style: italic;
+  }
+
+  /* Calendar Container */
+  .calendar-container {
+    max-width: 1000px;
+    margin: 0 auto var(--space-12);
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    min-height: 600px;
+    position: relative;
+  }
+
+  /* Loading State */
+  .calendar-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  .loading-particles {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: var(--space-8);
+  }
+
+  .particle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, var(--mystic-purple), var(--sunset-gold));
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(107, 70, 193, 0.8);
+  }
+
+  .particle:nth-child(1) {
+    top: 0;
+    left: 50%;
+    animation: orbit 2s linear infinite;
+  }
+
+  .particle:nth-child(2) {
+    top: 50%;
+    right: 0;
+    animation: orbit 2s linear infinite 0.4s;
+  }
+
+  .particle:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+    animation: orbit 2s linear infinite 0.8s;
+  }
+
+  .particle:nth-child(4) {
+    top: 50%;
+    left: 0;
+    animation: orbit 2s linear infinite 1.2s;
+  }
+
+  .particle:nth-child(5) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(0deg) translateX(40px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(40px) rotate(-360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.5;
+    }
+  }
+
+  .loading-text {
+    font-size: var(--text-lg);
+    color: var(--light-gray);
+    animation: fade 2s ease-in-out infinite;
+  }
+
+  @keyframes fade {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Setup Instructions */
+  .setup-instructions {
+    padding: var(--space-8);
+  }
+
+  .instructions-icon {
+    text-align: center;
+    font-size: 5rem;
+    margin-bottom: var(--space-6);
+    filter: drop-shadow(0 0 15px rgba(253, 180, 98, 0.5));
+  }
+
+  .setup-instructions h3 {
+    text-align: center;
+    font-size: var(--text-2xl);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-8);
+    font-family: var(--font-heading);
+  }
+
+  .setup-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .setup-step {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-lg);
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--white);
+  }
+
+  .step-content h4 {
+    font-size: var(--text-lg);
+    color: var(--white);
+    margin-bottom: var(--space-2);
+  }
+
+  .step-content p {
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .step-content ul {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-3) 0 0 0;
+  }
+
+  .step-content li {
+    padding: var(--space-2) 0;
+    color: var(--light-gray);
+    padding-left: var(--space-5);
+    position: relative;
+  }
+
+  .step-content li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--sunset-gold);
+  }
+
+  .step-content a {
+    color: var(--sunset-gold);
+    text-decoration: underline;
+  }
+
+  .step-content a:hover {
+    color: var(--flame-orange);
+  }
+
+  .code-hint {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-sm);
+    background: rgba(0, 0, 0, 0.3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    display: inline-block;
+    margin-top: var(--space-2);
+  }
+
+  .step-content code {
+    background: rgba(253, 180, 98, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9em;
+    color: var(--sunset-gold);
+  }
+
+  /* Setup Example */
+  .setup-example {
+    padding: var(--space-6);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-8);
+  }
+
+  .setup-example h4 {
+    font-size: var(--text-lg);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-4);
+  }
+
+  .setup-example pre {
+    margin: 0;
+    overflow-x: auto;
+    padding: var(--space-4);
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: var(--radius-md);
+  }
+
+  .setup-example code {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-sm);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Setup Action */
+  .setup-action {
+    text-align: center;
+  }
+
+  .btn-setup {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-10);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .btn-setup:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .setup-arrow {
+    font-size: var(--text-2xl);
+    transition: transform var(--transition-base);
+  }
+
+  .btn-setup:hover .setup-arrow {
+    transform: translateX(5px);
+  }
+
+  /* Calendar Iframe */
+  .calendar-iframe-container {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .embed-placeholder {
+    text-align: center;
+    color: var(--medium-gray);
+    font-style: italic;
+  }
+
+  /* Booking Info */
+  .booking-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .info-card {
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .info-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .info-content h4 {
+    font-size: var(--text-lg);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-3);
+    font-family: var(--font-heading);
+  }
+
+  .info-content p {
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .info-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-content li {
+    padding: var(--space-2) 0;
+    color: var(--light-gray);
+    padding-left: var(--space-5);
+    position: relative;
+    font-size: var(--text-sm);
+  }
+
+  .info-content li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--forest-green);
+    font-weight: bold;
+  }
+
+  .location-note,
+  .payment-methods {
+    font-size: var(--text-sm);
+    color: var(--medium-gray);
+    font-style: italic;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .calendar-container {
+      padding: var(--space-6);
+    }
+
+    .setup-step {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .setup-example pre {
+      font-size: var(--text-xs);
+    }
+
+    .booking-info {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .particle,
+    .loading-text,
+    .btn-setup {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initCalendarEmbed() {
+    const setupInstructions = document.getElementById('setup-instructions');
+    const calendarLoading = document.getElementById('calendar-loading');
+    const calendarIframe = document.getElementById('calendar-iframe');
+
+    // Listen for service selection
+    window.addEventListener('serviceSelected', ((e: CustomEvent) => {
+      const selectedService = e.detail;
+      console.log('Service selected for calendar:', selectedService);
+
+      // Show loading state
+      if (setupInstructions) setupInstructions.style.display = 'none';
+      if (calendarLoading) calendarLoading.style.display = 'flex';
+
+      // TODO: Load Cal.com embed based on selected service
+      // For now, show setup instructions after a brief delay
+      setTimeout(() => {
+        if (calendarLoading) calendarLoading.style.display = 'none';
+        if (setupInstructions) setupInstructions.style.display = 'block';
+
+        // Animate instructions
+        gsap.from('.setup-step', {
+          opacity: 0,
+          y: 30,
+          stagger: 0.1,
+          duration: 0.5,
+          ease: 'power3.out'
+        });
+      }, 1500);
+    }) as EventListener);
+
+    // Check if coming from service selection
+    const selectedService = sessionStorage.getItem('selectedService');
+    if (selectedService) {
+      try {
+        const service = JSON.parse(selectedService);
+        console.log('Pre-selected service:', service);
+
+        // Auto-trigger calendar load
+        window.dispatchEvent(new CustomEvent('serviceSelected', {
+          detail: service
+        }));
+      } catch (e) {
+        console.error('Error parsing selected service:', e);
+      }
+    }
+  }
+
+  // Initialize calendar embed
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCalendarEmbed);
+  } else {
+    initCalendarEmbed();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initCalendarEmbed);
+</script>

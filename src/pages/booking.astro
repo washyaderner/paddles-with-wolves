@@ -1,29 +1,390 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceSelector from '../components/booking/ServiceSelector.astro';
+import CalendarEmbed from '../components/booking/CalendarEmbed.astro';
+import BookingConfirmation from '../components/booking/BookingConfirmation.astro';
 ---
 
-<BaseLayout title="Book a Session - Paddles with Wolves">
-  <section class="page-section">
+<BaseLayout
+  title="Book Your Healing Session - Paddles with Wolves"
+  description="Schedule your personalized healing session. Choose from energy healing, therapeutic bodywork, herbal consultations, and movement arts. Flexible scheduling with Cal.com integration."
+  keywords="book healing session, schedule massage, energy healing appointment, herbal consultation booking, Pacific Northwest wellness, online scheduling"
+  backgroundTheme="mystic"
+>
+  <!-- Page Hero -->
+  <section class="booking-hero">
     <div class="container">
-      <h1>Book a Session</h1>
-      <p>Schedule your healing session...</p>
+      <div class="hero-content fade-in-up">
+        <div class="hero-icon">🌟</div>
+        <h1 class="page-title text-gradient-mystic">Begin Your Healing Journey</h1>
+        <p class="page-subtitle">
+          Book a personalized session tailored to your wellness goals
+        </p>
+        <p class="page-description">
+          Choose from energy healing, therapeutic bodywork, herbal consultations, or movement arts.
+          All sessions are crafted with intention to support your unique path to wellness.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Selector -->
+  <div class="container">
+    <ServiceSelector />
+  </div>
+
+  <!-- Calendar Embed -->
+  <CalendarEmbed />
+
+  <!-- Booking Confirmation (Hidden by default, shown after booking) -->
+  <BookingConfirmation />
+
+  <!-- FAQ Section -->
+  <section class="booking-faq-section fade-in-scroll">
+    <div class="container">
+      <h2 class="section-title text-gradient-healing">Frequently Asked Questions</h2>
+
+      <div class="faq-grid">
+        <div class="faq-card glass">
+          <h3>What should I expect during my first session?</h3>
+          <p>
+            Your first session begins with a brief consultation to understand your goals and any
+            specific concerns. We'll discuss the best approach for your needs, and you're welcome
+            to ask questions at any time. Come with an open mind and comfortable clothing.
+          </p>
+        </div>
+
+        <div class="faq-card glass">
+          <h3>How do I prepare for a session?</h3>
+          <p>
+            Arrive 5-10 minutes early to settle in. Wear comfortable, loose clothing. Avoid heavy
+            meals 1-2 hours before. Come hydrated. For bodywork sessions, refrain from applying
+            lotions or oils beforehand. Bring any questions or intentions you'd like to focus on.
+          </p>
+        </div>
+
+        <div class="faq-card glass">
+          <h3>What is your cancellation policy?</h3>
+          <p>
+            We offer free cancellation up to 24 hours before your scheduled appointment. Late
+            cancellations or no-shows may be subject to a 50% fee. We understand life happens—
+            please communicate with us as early as possible if you need to reschedule.
+          </p>
+        </div>
+
+        <div class="faq-card glass">
+          <h3>Do you offer virtual sessions?</h3>
+          <p>
+            Yes! Herbal consultations and some energy healing guidance can be done via video call.
+            In-person sessions are available for therapeutic bodywork and hands-on energy work.
+            Select your preference during booking.
+          </p>
+        </div>
+
+        <div class="faq-card glass">
+          <h3>What payment methods do you accept?</h3>
+          <p>
+            We accept cash, all major credit cards, Venmo, and PayPal. Payment is collected at
+            the time of service. Package deals and sliding scale options are available—
+            please inquire via email if cost is a barrier.
+          </p>
+        </div>
+
+        <div class="faq-card glass">
+          <h3>Can I book recurring sessions?</h3>
+          <p>
+            Absolutely! Many clients find regular sessions (weekly, bi-weekly, or monthly) most
+            beneficial for sustained wellness. After your first session, we can discuss a schedule
+            that works for you and set up recurring appointments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="booking-contact-section fade-in-scroll">
+    <div class="container">
+      <div class="contact-card glass">
+        <div class="contact-icon">💬</div>
+        <h2>Have Questions?</h2>
+        <p>
+          Not sure which service is right for you? Want to discuss specific health concerns
+          or goals? We're here to help guide you.
+        </p>
+        <div class="contact-actions">
+          <a href="/contact" class="btn-contact-primary">
+            Send Us a Message
+          </a>
+          <a href="mailto:info@paddleswithwolves.com" class="btn-contact-secondary">
+            Email Directly
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .page-section {
-    min-height: 60vh;
-    padding: var(--space-20) 0;
+  /* Page Hero */
+  .booking-hero {
+    padding: var(--space-20) 0 var(--space-12);
+    text-align: center;
   }
 
-  .page-section h1 {
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-icon {
+    font-size: 5rem;
+    margin-bottom: var(--space-6);
+    filter: drop-shadow(0 0 20px rgba(107, 70, 193, 0.5));
+    animation: float-gentle 4s ease-in-out infinite;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(5deg);
+    }
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-6);
+    font-weight: var(--font-weight-semibold);
+    font-style: italic;
+  }
+
+  .page-description {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* FAQ Section */
+  .booking-faq-section {
+    padding: var(--space-32) 0;
+    background: rgba(15, 23, 42, 0.3);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-12);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .faq-card {
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    transition: all var(--transition-base);
+  }
+
+  .faq-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+  }
+
+  .faq-card h3 {
+    font-size: var(--text-xl);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-heading);
+  }
+
+  .faq-card p {
+    font-size: var(--text-base);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+  }
+
+  /* Contact Section */
+  .booking-contact-section {
+    padding: var(--space-32) 0;
+  }
+
+  .contact-card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-12);
+    border-radius: var(--radius-2xl);
+    text-align: center;
+    border: 2px solid rgba(107, 70, 193, 0.5);
+  }
+
+  .contact-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-6);
+    filter: drop-shadow(0 0 15px rgba(253, 180, 98, 0.5));
+  }
+
+  .contact-card h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--sunset-gold);
     margin-bottom: var(--space-6);
   }
 
-  .page-section p {
+  .contact-card p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: var(--line-height-relaxed);
     color: var(--light-gray);
+    margin-bottom: var(--space-8);
+  }
+
+  .contact-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-contact-primary,
+  .btn-contact-secondary {
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-full);
     font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-contact-primary {
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    color: var(--white);
+    border: none;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-contact-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .btn-contact-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--mystic-purple);
+  }
+
+  .btn-contact-secondary:hover {
+    border-color: var(--sunset-gold);
+    color: var(--sunset-gold);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .booking-hero {
+      padding: var(--space-16) 0 var(--space-8);
+    }
+
+    .hero-icon {
+      font-size: 3.5rem;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .contact-card {
+      padding: var(--space-8);
+    }
+
+    .contact-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-contact-primary,
+    .btn-contact-secondary {
+      width: 100%;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-icon,
+    .faq-card,
+    .btn-contact-primary,
+    .btn-contact-secondary {
+      animation: none;
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initBookingPage() {
+    // Animate FAQ cards
+    const faqCards = document.querySelectorAll('.faq-card');
+    faqCards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none none',
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: 'power3.out'
+      });
+    });
+
+    // Animate contact card
+    const contactCard = document.querySelector('.contact-card');
+    if (contactCard) {
+      gsap.from(contactCard, {
+        scrollTrigger: {
+          trigger: contactCard,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none none',
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'back.out(1.4)'
+      });
+    }
+  }
+
+  // Initialize booking page
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBookingPage);
+  } else {
+    initBookingPage();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initBookingPage);
+</script>
