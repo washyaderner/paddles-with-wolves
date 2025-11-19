@@ -1,11 +1,42 @@
 :root {
-  /* Brand Colors */
+  /* Primary Brand Colors - Core Palette */
   --mystic-purple: #6B46C1;
   --sunset-gold: #FDB462;
   --twilight-blue: #1E293B;
   --forest-shadow: #0F172A;
   --flame-orange: #EA580C;
   --water-teal: #0891B2;
+
+  /* Extended Nature-Inspired Palette */
+  /* Sky & Atmosphere */
+  --dawn-rose: #F4A7B9;
+  --dusk-lavender: #9D7FB8;
+  --midnight-indigo: #2D3561;
+  --storm-gray: #6B7A8F;
+
+  /* Earth & Stone */
+  --river-stone: #8B8D8A;
+  --canyon-clay: #B85C38;
+  --desert-sand: #E5BE9E;
+  --volcanic-ash: #3A3A3C;
+
+  /* Flora */
+  --pine-green: #2D5F4C;
+  --moss-jade: #7BA05B;
+  --sage-mist: #B8C5B4;
+  --wildflower-violet: #8B6FAB;
+
+  /* Water */
+  --deep-lake: #1A5F7A;
+  --alpine-stream: #57B8D4;
+  --glacier-ice: #C8E3E8;
+  --ocean-depths: #0A3A4A;
+
+  /* Fire & Sun */
+  --ember-red: #C84630;
+  --amber-glow: #F2A74B;
+  --honey-gold: #D4A259;
+  --sunrise-coral: #FF9B85;
 
   /* Neutral Colors */
   --white: #FFFFFF;
@@ -15,11 +46,19 @@
   --dark-gray: #475569;
   --black: #0A0A0A;
 
-  /* Gradient Backgrounds */
+  /* Gradient Backgrounds - Primary */
   --gradient-mystic: linear-gradient(135deg, var(--mystic-purple) 0%, var(--twilight-blue) 100%);
   --gradient-sunset: linear-gradient(135deg, var(--flame-orange) 0%, var(--sunset-gold) 100%);
   --gradient-twilight: linear-gradient(180deg, var(--forest-shadow) 0%, var(--twilight-blue) 100%);
   --gradient-water: linear-gradient(135deg, var(--water-teal) 0%, var(--mystic-purple) 100%);
+
+  /* Gradient Backgrounds - Extended */
+  --gradient-dawn: linear-gradient(180deg, var(--midnight-indigo) 0%, var(--dawn-rose) 50%, var(--amber-glow) 100%);
+  --gradient-forest: linear-gradient(180deg, var(--pine-green) 0%, var(--moss-jade) 100%);
+  --gradient-lake: linear-gradient(180deg, var(--glacier-ice) 0%, var(--deep-lake) 50%, var(--ocean-depths) 100%);
+  --gradient-canyon: linear-gradient(135deg, var(--canyon-clay) 0%, var(--desert-sand) 100%);
+  --gradient-healing: linear-gradient(135deg, var(--wildflower-violet) 0%, var(--dusk-lavender) 50%, var(--mystic-purple) 100%);
+  --gradient-ember: radial-gradient(circle, var(--amber-glow) 0%, var(--ember-red) 50%, var(--volcanic-ash) 100%);
 
   /* Typography */
   --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -68,7 +107,14 @@
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Mystical Glows & Effects */
   --shadow-glow: 0 0 20px rgba(107, 70, 193, 0.3);
+  --shadow-glow-purple: 0 0 30px rgba(107, 70, 193, 0.5), 0 0 60px rgba(107, 70, 193, 0.2);
+  --shadow-glow-gold: 0 0 30px rgba(253, 180, 98, 0.5), 0 0 60px rgba(253, 180, 98, 0.2);
+  --shadow-glow-teal: 0 0 30px rgba(8, 145, 178, 0.5), 0 0 60px rgba(8, 145, 178, 0.2);
+  --shadow-glow-healing: 0 0 40px rgba(157, 127, 184, 0.6), 0 0 80px rgba(107, 70, 193, 0.3);
+  --shadow-inner-glow: inset 0 0 20px rgba(107, 70, 193, 0.2);
 
   /* Transitions */
   --transition-fast: 150ms ease-in-out;

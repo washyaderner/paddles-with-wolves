@@ -1,0 +1,315 @@
+---
+import MountainSilhouette from './MountainSilhouette.astro';
+import WaterReflection from './WaterReflection.astro';
+import ForestTreeline from './ForestTreeline.astro';
+import SunsetOverlay from './SunsetOverlay.astro';
+
+interface Props {
+  theme?: 'mountain' | 'water' | 'forest' | 'sunset' | 'mystic';
+  enableTransitions?: boolean;
+}
+
+const {
+  theme = 'mystic',
+  enableTransitions = true
+} = Astro.props;
+---
+
+<div class="animated-background" data-theme={theme} data-transitions={enableTransitions}>
+  <!-- Base Gradient Layer (always present) -->
+  <div class="gradient-base"></div>
+
+  <!-- Background Component Layers -->
+  <div class="background-layer mountain-layer" data-active={theme === 'mountain' || theme === 'mystic'}>
+    <MountainSilhouette />
+  </div>
+
+  <div class="background-layer water-layer" data-active={theme === 'water'}>
+    <WaterReflection />
+  </div>
+
+  <div class="background-layer forest-layer" data-active={theme === 'forest'}>
+    <ForestTreeline />
+  </div>
+
+  <div class="background-layer sunset-layer" data-active={theme === 'sunset'}>
+    <SunsetOverlay />
+  </div>
+
+  <!-- Animated Overlay Effects -->
+  <div class="mystical-overlay">
+    <!-- Floating particles -->
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+  </div>
+
+  <!-- Ambient glow effect -->
+  <div class="ambient-glow"></div>
+</div>
+
+<style>
+  .animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  /* Base Gradient - Changes based on theme */
+  .gradient-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-mystic);
+    transition: background 2s ease-in-out;
+  }
+
+  /* Theme-specific gradients */
+  .animated-background[data-theme="mountain"] .gradient-base {
+    background: var(--gradient-mystic);
+  }
+
+  .animated-background[data-theme="water"] .gradient-base {
+    background: var(--gradient-lake);
+  }
+
+  .animated-background[data-theme="forest"] .gradient-base {
+    background: var(--gradient-forest);
+  }
+
+  .animated-background[data-theme="sunset"] .gradient-base {
+    background: var(--gradient-dawn);
+  }
+
+  .animated-background[data-theme="mystic"] .gradient-base {
+    background: var(--gradient-healing);
+  }
+
+  /* Background Layers */
+  .background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  .background-layer[data-active="true"] {
+    opacity: 1;
+  }
+
+  .mountain-layer {
+    bottom: 0;
+    top: auto;
+    height: 40%;
+  }
+
+  .water-layer {
+    bottom: 0;
+    top: auto;
+    height: 60%;
+  }
+
+  .forest-layer {
+    bottom: 0;
+    top: auto;
+    height: 50%;
+  }
+
+  .sunset-layer {
+    opacity: 0.7;
+  }
+
+  .sunset-layer[data-active="true"] {
+    opacity: 1;
+  }
+
+  /* Mystical Overlay with Floating Particles */
+  .mystical-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(253, 180, 98, 0.8), transparent);
+    border-radius: 50%;
+    animation: float-particle 15s infinite ease-in-out;
+    opacity: 0.6;
+  }
+
+  .particle-1 {
+    left: 10%;
+    top: 20%;
+    animation-delay: 0s;
+    animation-duration: 18s;
+  }
+
+  .particle-2 {
+    left: 30%;
+    top: 50%;
+    animation-delay: 3s;
+    animation-duration: 20s;
+    width: 3px;
+    height: 3px;
+  }
+
+  .particle-3 {
+    left: 60%;
+    top: 30%;
+    animation-delay: 6s;
+    animation-duration: 22s;
+  }
+
+  .particle-4 {
+    left: 80%;
+    top: 60%;
+    animation-delay: 9s;
+    animation-duration: 19s;
+    width: 2px;
+    height: 2px;
+  }
+
+  .particle-5 {
+    left: 45%;
+    top: 70%;
+    animation-delay: 12s;
+    animation-duration: 21s;
+    width: 3px;
+    height: 3px;
+  }
+
+  @keyframes float-particle {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translate(20px, -30px) scale(1.2);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-10px, -60px) scale(0.9);
+      opacity: 0.6;
+    }
+    75% {
+      transform: translate(15px, -40px) scale(1.1);
+      opacity: 0.7;
+    }
+  }
+
+  /* Ambient Glow Effect */
+  .ambient-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle,
+      rgba(107, 70, 193, 0.15) 0%,
+      rgba(107, 70, 193, 0.05) 50%,
+      transparent 100%
+    );
+    animation: ambient-pulse 10s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes ambient-pulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.8;
+    }
+  }
+
+  /* Disable transitions if specified */
+  .animated-background[data-transitions="false"] .gradient-base,
+  .animated-background[data-transitions="false"] .background-layer {
+    transition: none;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .particle {
+      width: 3px;
+      height: 3px;
+    }
+
+    .ambient-glow {
+      width: 400px;
+      height: 400px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .particle,
+    .ambient-glow {
+      animation: none;
+    }
+
+    .animated-background[data-transitions="true"] .gradient-base,
+    .animated-background[data-transitions="true"] .background-layer {
+      transition: opacity 0.5s ease-in-out;
+    }
+  }
+</style>
+
+<script>
+  // Dynamic theme switching
+  const animatedBg = document.querySelector('.animated-background') as HTMLElement;
+
+  if (animatedBg) {
+    // Listen for custom theme change events
+    document.addEventListener('changeBackgroundTheme', ((e: CustomEvent) => {
+      const newTheme = e.detail.theme;
+      animatedBg.dataset.theme = newTheme;
+
+      // Update active layers
+      const layers = animatedBg.querySelectorAll('.background-layer');
+      layers.forEach(layer => {
+        const layerEl = layer as HTMLElement;
+        const layerClass = layer.classList.toString();
+
+        if (newTheme === 'mystic' && layerClass.includes('mountain')) {
+          layerEl.dataset.active = 'true';
+        } else if (layerClass.includes(newTheme)) {
+          layerEl.dataset.active = 'true';
+        } else {
+          layerEl.dataset.active = 'false';
+        }
+      });
+    }) as EventListener);
+  }
+
+  // Parallax effect for ambient glow
+  window.addEventListener('mousemove', (e) => {
+    const ambientGlow = document.querySelector('.ambient-glow') as HTMLElement;
+    if (ambientGlow && window.innerWidth > 768) {
+      const x = (e.clientX / window.innerWidth - 0.5) * 50;
+      const y = (e.clientY / window.innerHeight - 0.5) * 50;
+      ambientGlow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    }
+  });
+</script>

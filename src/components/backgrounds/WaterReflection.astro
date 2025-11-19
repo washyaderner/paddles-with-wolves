@@ -1,0 +1,189 @@
+---
+// Water & Lake Reflection Scene SVG Background
+---
+
+<svg
+  class="water-reflection-bg"
+  viewBox="0 0 1200 600"
+  preserveAspectRatio="xMidYMax slice"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <!-- Water Surface Gradient -->
+    <linearGradient id="water-surface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C8E3E8;stop-opacity:0.4" />
+      <stop offset="50%" style="stop-color:#1A5F7A;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#0A3A4A;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Reflection Gradient -->
+    <linearGradient id="reflection-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#1A5F7A;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#C8E3E8;stop-opacity:0.1" />
+    </linearGradient>
+
+    <!-- Ripple Pattern -->
+    <pattern id="ripples" x="0" y="0" width="200" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 0,20 Q 50,15 100,20 T 200,20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <path d="M 0,25 Q 50,22 100,25 T 200,25" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Sky Reflection in Water (upper portion) -->
+  <rect x="0" y="0" width="1200" height="300" fill="url(#water-surface)" opacity="0.3"/>
+
+  <!-- Main Water Body -->
+  <path
+    class="water-main"
+    d="M 0,300 Q 300,290 600,300 T 1200,300 L 1200,600 L 0,600 Z"
+    fill="url(#water-surface)"
+  />
+
+  <!-- Distant Shore/Horizon Line -->
+  <path
+    class="shore-line"
+    d="M 0,300 L 200,295 L 400,298 L 600,293 L 800,297 L 1000,295 L 1200,300"
+    fill="none"
+    stroke="rgba(107, 70, 193, 0.3)"
+    stroke-width="2"
+  />
+
+  <!-- Reflected Mountains (inverted, blurred effect) -->
+  <g class="mountain-reflections" opacity="0.3">
+    <path
+      d="M 0,300 L 150,250 L 300,280 L 450,240 L 600,270 L 750,250 L 900,275 L 1050,255 L 1200,280 L 1200,300 Z"
+      fill="url(#reflection-gradient)"
+    />
+  </g>
+
+  <!-- Water Ripples -->
+  <rect x="0" y="300" width="1200" height="300" fill="url(#ripples)" opacity="0.4"/>
+
+  <!-- Animated Water Surface Waves -->
+  <g class="surface-waves">
+    <ellipse cx="300" cy="350" rx="40" ry="3" fill="rgba(255,255,255,0.1)">
+      <animate attributeName="rx" values="40;50;40" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="4s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="700" cy="380" rx="35" ry="2.5" fill="rgba(255,255,255,0.1)">
+      <animate attributeName="rx" values="35;45;35" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.25;0.1" dur="5s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="900" cy="420" rx="30" ry="2" fill="rgba(255,255,255,0.08)">
+      <animate attributeName="rx" values="30;40;30" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.08;0.15;0.08" dur="6s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Moon/Sun Reflection on Water -->
+  <g class="celestial-reflection">
+    <ellipse cx="600" cy="400" rx="60" ry="15" fill="rgba(253, 180, 98, 0.3)">
+      <animate attributeName="ry" values="15;18;15" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.4;0.3" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="600" cy="420" rx="40" ry="10" fill="rgba(253, 180, 98, 0.2)">
+      <animate attributeName="ry" values="10;12;10" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.2;0.3;0.2" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Floating Lily Pads / Organic Elements -->
+  <g class="lily-pads" opacity="0.4">
+    <ellipse cx="200" cy="450" rx="25" ry="15" fill="#2D5F4C">
+      <animate attributeName="cy" values="450;448;450" dur="4s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="500" cy="480" rx="20" ry="12" fill="#2D5F4C">
+      <animate attributeName="cy" values="480;478;480" dur="5s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="950" cy="510" rx="22" ry="13" fill="#2D5F4C">
+      <animate attributeName="cy" values="510;508;510" dur="4.5s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Foreground Reeds/Cattails -->
+  <g class="reeds" opacity="0.5">
+    <!-- Reed 1 -->
+    <line x1="100" y1="550" x2="100" y2="480" stroke="#2D5F4C" stroke-width="3">
+      <animate attributeName="x2" values="100;98;100" dur="3s" repeatCount="indefinite"/>
+    </line>
+    <ellipse cx="100" cy="475" rx="5" ry="10" fill="#7BA05B"/>
+
+    <!-- Reed 2 -->
+    <line x1="1050" y1="560" x2="1050" y2="470" stroke="#2D5F4C" stroke-width="2.5">
+      <animate attributeName="x2" values="1050;1048;1050" dur="3.5s" repeatCount="indefinite"/>
+    </line>
+    <ellipse cx="1050" cy="465" rx="4" ry="9" fill="#7BA05B"/>
+
+    <!-- Reed 3 -->
+    <line x1="150" y1="580" x2="150" y2="500" stroke="#2D5F4C" stroke-width="2">
+      <animate attributeName="x2" values="150;152;150" dur="4s" repeatCount="indefinite"/>
+    </line>
+    <ellipse cx="150" cy="495" rx="3" ry="8" fill="#7BA05B"/>
+  </g>
+</svg>
+
+<style>
+  .water-reflection-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .water-main {
+    animation: water-shimmer 8s ease-in-out infinite;
+  }
+
+  .mountain-reflections {
+    animation: reflection-wave 6s ease-in-out infinite;
+  }
+
+  .surface-waves {
+    animation: wave-drift 10s linear infinite;
+  }
+
+  @keyframes water-shimmer {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes reflection-wave {
+    0%, 100% {
+      transform: scaleY(1) translateY(0);
+    }
+    50% {
+      transform: scaleY(1.02) translateY(-2px);
+    }
+  }
+
+  @keyframes wave-drift {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(20px);
+    }
+  }
+</style>
+
+<script>
+  // Add parallax effect on scroll
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const water = document.querySelector('.water-main') as HTMLElement;
+    const reflections = document.querySelector('.mountain-reflections') as HTMLElement;
+
+    if (water) {
+      water.style.transform = `translateY(${scrolled * 0.15}px)`;
+    }
+
+    if (reflections) {
+      reflections.style.transform = `translateY(${scrolled * 0.1}px)`;
+    }
+  });
+</script>

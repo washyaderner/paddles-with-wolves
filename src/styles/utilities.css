@@ -1,0 +1,399 @@
+@import './variables.css';
+
+/*
+ * Utility Classes
+ * Reusable CSS utilities for common effects and animations
+ */
+
+/* ==========================================================================
+   GLOW EFFECTS
+   ========================================================================== */
+
+/* Basic glow effect */
+.glow-effect {
+  box-shadow: var(--shadow-glow-purple);
+  transition: box-shadow var(--transition-base);
+}
+
+.glow-effect:hover {
+  box-shadow: var(--shadow-glow-healing);
+}
+
+/* Glow variations */
+.glow-purple {
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.glow-teal {
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.glow-healing {
+  box-shadow: var(--shadow-glow-healing);
+}
+
+/* Text glow effects */
+.text-glow-subtle {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.text-glow {
+  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+}
+
+.text-glow-strong {
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 30px currentColor,
+    0 0 40px currentColor;
+}
+
+/* Pulsing glow animation */
+.glow-pulse {
+  animation: glow-pulse-animation 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-animation {
+  0%, 100% {
+    box-shadow: var(--shadow-glow-purple);
+  }
+  50% {
+    box-shadow: var(--shadow-glow-healing);
+  }
+}
+
+/* Inner glow (for cards/containers) */
+.glow-inner {
+  box-shadow: var(--shadow-inner-glow);
+}
+
+/* ==========================================================================
+   FLOAT ANIMATIONS
+   ========================================================================== */
+
+/* Gentle floating effect */
+.float-animation {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Float with rotation */
+.float-rotate {
+  animation: float-rotate-animation 8s ease-in-out infinite;
+}
+
+@keyframes float-rotate-animation {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+/* Subtle hover float */
+.float-hover {
+  transition: transform var(--transition-base);
+}
+
+.float-hover:hover {
+  transform: translateY(-8px);
+}
+
+/* Float speeds */
+.float-slow {
+  animation: float-gentle 10s ease-in-out infinite;
+}
+
+.float-fast {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+/* Horizontal float (sway) */
+.float-horizontal {
+  animation: float-horizontal-animation 5s ease-in-out infinite;
+}
+
+@keyframes float-horizontal-animation {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+/* ==========================================================================
+   FADE IN ON SCROLL
+   ========================================================================== */
+
+/* Base fade-in class (requires Intersection Observer) */
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade in from different directions */
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-down {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-down.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scale fade in */
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered animation delays */
+.fade-delay-100 { transition-delay: 100ms; }
+.fade-delay-200 { transition-delay: 200ms; }
+.fade-delay-300 { transition-delay: 300ms; }
+.fade-delay-400 { transition-delay: 400ms; }
+.fade-delay-500 { transition-delay: 500ms; }
+.fade-delay-600 { transition-delay: 600ms; }
+
+/* ==========================================================================
+   GLASSMORPHISM EFFECTS
+   ========================================================================== */
+
+.glass {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(107, 70, 193, 0.3);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(107, 70, 193, 0.4);
+}
+
+/* ==========================================================================
+   SHIMMER & SHINE EFFECTS
+   ========================================================================== */
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer-animation 3s infinite;
+}
+
+@keyframes shimmer-animation {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ==========================================================================
+   GRADIENT TEXT
+   ========================================================================== */
+
+.gradient-text {
+  background: var(--gradient-mystic);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-sunset {
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-healing {
+  background: var(--gradient-healing);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   MYSTICAL BORDERS
+   ========================================================================== */
+
+.border-mystical {
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(var(--twilight-blue), var(--twilight-blue)),
+    var(--gradient-mystic);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.border-glow {
+  border: 2px solid var(--mystic-purple);
+  box-shadow: 0 0 15px rgba(107, 70, 193, 0.5);
+}
+
+/* ==========================================================================
+   HOVER EFFECTS
+   ========================================================================== */
+
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-glow {
+  transition: box-shadow var(--transition-base);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow-healing);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   LOADING & SPINNER
+   ========================================================================== */
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(107, 70, 193, 0.2);
+  border-top-color: var(--mystic-purple);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .float-animation,
+  .float-rotate,
+  .float-slow,
+  .float-fast,
+  .float-horizontal,
+  .glow-pulse,
+  .shimmer::before,
+  .spinner {
+    animation: none;
+  }
+
+  .fade-in-scroll,
+  .fade-in-left,
+  .fade-in-right,
+  .fade-in-up,
+  .fade-in-down,
+  .fade-in-scale {
+    transition-duration: 0.1s;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.focus-glow:focus-visible {
+  outline: 3px solid var(--mystic-purple);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-glow-purple);
+}

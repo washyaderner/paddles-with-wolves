@@ -1,21 +1,36 @@
 ---
 import Navigation from '../components/Navigation.astro';
-import MountainSilhouette from '../components/MountainSilhouette.astro';
+import AnimatedBackground from '../components/backgrounds/AnimatedBackground.astro';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  keywords?: string;
+  author?: string;
+  type?: string;
+  canonicalUrl?: string;
+  noIndex?: boolean;
+  backgroundTheme?: 'mountain' | 'water' | 'forest' | 'sunset' | 'mystic';
 }
 
 const {
   title = 'Paddles with Wolves - Healing Arts & Wellness',
   description = 'Holistic healing services combining ancient wisdom with modern wellness practices. Discover transformative healing through massage, energy work, and natural apothecary.',
-  image = '/og-images/default-og.jpg'
+  image = '/og-images/default-og.jpg',
+  keywords = 'healing arts, wellness, holistic health, massage therapy, energy healing, natural remedies, apothecary, spiritual healing, alternative medicine',
+  author = 'Paddles with Wolves',
+  type = 'website',
+  canonicalUrl,
+  noIndex = false,
+  backgroundTheme = 'mystic'
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = canonicalUrl ? new URL(canonicalUrl, Astro.site) : new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.site);
+const siteName = 'Paddles with Wolves';
+const currentYear = new Date().getFullYear();
 ---
 
 <!DOCTYPE html>
@@ -23,41 +38,103 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon & App Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#6B46C1" />
+
+    <!-- Generator -->
     <meta name="generator" content={Astro.generator} />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Robots -->
+    {noIndex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow" />
+    )}
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <!-- Additional SEO -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content={siteName} />
+
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "Paddles with Wolves",
+        "description": "Holistic healing arts and wellness services",
+        "url": "https://paddleswithwolves.com",
+        "logo": "https://paddleswithwolves.com/favicons/apple-touch-icon.png",
+        "image": "https://paddleswithwolves.com/og-images/default-og.jpg",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Your City",
+          "addressRegion": "Your State",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ],
+        "sameAs": [
+          "https://facebook.com/paddleswithwolves",
+          "https://instagram.com/paddleswithwolves"
+        ]
+      }
+    </script>
 
     <!-- Preload fonts for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/styles/global.css" as="style" />
   </head>
+
   <body>
-    <!-- SVG Background -->
-    <div class="background-container">
-      <div class="gradient-overlay"></div>
-      <div id="mountain-silhouette">
-        <MountainSilhouette />
-      </div>
-    </div>
+    <!-- Animated Background -->
+    <AnimatedBackground theme={backgroundTheme} />
 
     <!-- Navigation -->
     <Navigation />
@@ -74,7 +151,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <div class="footer-section">
             <h3>Paddles with Wolves</h3>
             <p>Healing arts and wellness services rooted in ancient wisdom.</p>
+            <p class="footer-tagline">Restore. Renew. Reconnect.</p>
           </div>
+
           <div class="footer-section">
             <h4>Quick Links</h4>
             <ul>
@@ -84,49 +163,37 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
               <li><a href="/booking">Book Now</a></li>
             </ul>
           </div>
+
           <div class="footer-section">
             <h4>Connect</h4>
             <ul>
               <li><a href="/contact">Contact</a></li>
               <li><a href="mailto:info@paddleswithwolves.com">Email</a></li>
+              <li><a href="tel:+1234567890">Call Us</a></li>
             </ul>
           </div>
+
+          <div class="footer-section">
+            <h4>Hours</h4>
+            <p class="hours">Mon-Fri: 9am - 6pm</p>
+            <p class="hours">Sat-Sun: By Appointment</p>
+          </div>
         </div>
+
         <div class="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Paddles with Wolves. All rights reserved.</p>
+          <p>&copy; {currentYear} Paddles with Wolves. All rights reserved.</p>
+          <p class="footer-links">
+            <a href="/privacy">Privacy Policy</a> •
+            <a href="/terms">Terms of Service</a>
+          </p>
         </div>
       </div>
     </footer>
 
+    <!-- Scroll Animations Script -->
+    <script src="../scripts/scroll-animations.ts"></script>
+
     <style>
-      .background-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        overflow: hidden;
-      }
-
-      .gradient-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-mystic);
-      }
-
-      #mountain-silhouette {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 40%;
-        opacity: 0.3;
-      }
-
       .main-content {
         position: relative;
         z-index: 1;
@@ -146,7 +213,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
       .footer-content {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: var(--space-8);
         margin-bottom: var(--space-8);
       }
@@ -155,16 +222,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       .footer-section h4 {
         color: var(--sunset-gold);
         margin-bottom: var(--space-4);
+        font-size: var(--text-lg);
       }
 
       .footer-section p {
         color: var(--light-gray);
         font-size: var(--text-sm);
+        line-height: var(--line-height-relaxed);
+      }
+
+      .footer-tagline {
+        font-style: italic;
+        color: var(--dusk-lavender);
+        margin-top: var(--space-2);
       }
 
       .footer-section ul {
         list-style: none;
         padding: 0;
+        margin: 0;
       }
 
       .footer-section ul li {
@@ -182,6 +258,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         color: var(--sunset-gold);
       }
 
+      .hours {
+        margin-bottom: var(--space-1);
+        font-size: var(--text-sm);
+      }
+
       .footer-bottom {
         text-align: center;
         padding-top: var(--space-8);
@@ -191,6 +272,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       .footer-bottom p {
         color: var(--medium-gray);
         font-size: var(--text-sm);
+        margin-bottom: var(--space-2);
+      }
+
+      .footer-links a {
+        color: var(--medium-gray);
+        text-decoration: none;
+        transition: color var(--transition-base);
+      }
+
+      .footer-links a:hover {
+        color: var(--sunset-gold);
       }
 
       @media (max-width: 768px) {

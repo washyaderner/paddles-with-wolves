@@ -1,0 +1,257 @@
+---
+// Sunset Gradient Overlay SVG Background
+---
+
+<svg
+  class="sunset-overlay-bg"
+  viewBox="0 0 1200 800"
+  preserveAspectRatio="xMidYMid slice"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <!-- Main Sunset Gradient -->
+    <linearGradient id="sunset-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D3561;stop-opacity:1">
+        <animate attributeName="stop-color" values="#2D3561;#3A4575;#2D3561" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="20%" style="stop-color:#9D7FB8;stop-opacity:1">
+        <animate attributeName="stop-color" values="#9D7FB8;#B89FCE;#9D7FB8" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="40%" style="stop-color:#F4A7B9;stop-opacity:1">
+        <animate attributeName="stop-color" values="#F4A7B9;#FFB8CA;#F4A7B9" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="60%" style="stop-color:#FF9B85;stop-opacity:1">
+        <animate attributeName="stop-color" values="#FF9B85;#FFAB95;#FF9B85" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="80%" style="stop-color:#F2A74B;stop-opacity:1">
+        <animate attributeName="stop-color" values="#F2A74B;#FFB75B;#F2A74B" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#D4A259;stop-opacity:1">
+        <animate attributeName="stop-color" values="#D4A259;#E4B269;#D4A259" dur="20s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- Lower Horizon Gradient -->
+    <linearGradient id="horizon-glow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#EA580C;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#F2A74B;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#FDB462;stop-opacity:0.2" />
+    </linearGradient>
+
+    <!-- Sun Glow Gradient -->
+    <radialGradient id="sun-glow">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="20%" style="stop-color:#FDB462;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#EA580C;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#C84630;stop-opacity:0" />
+    </radialGradient>
+
+    <!-- Cloud Gradient -->
+    <linearGradient id="cloud-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF9B85;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#F4A7B9;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FF9B85;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main Sunset Sky -->
+  <rect x="0" y="0" width="1200" height="800" fill="url(#sunset-sky)"/>
+
+  <!-- Sun -->
+  <g class="sun-group">
+    <circle cx="600" cy="550" r="120" fill="url(#sun-glow)" opacity="0.9">
+      <animate attributeName="r" values="120;125;120" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="550" r="80" fill="#FDB462" opacity="1">
+      <animate attributeName="r" values="80;82;80" dur="8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Horizon Glow Band -->
+  <ellipse cx="600" cy="600" rx="600" ry="100" fill="url(#horizon-glow)" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="10s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Stylized Clouds -->
+  <g class="clouds-layer-1" opacity="0.6">
+    <!-- Cloud 1 -->
+    <ellipse cx="150" cy="150" rx="80" ry="30" fill="url(#cloud-gradient)">
+      <animate attributeName="cx" values="150;180;150" dur="40s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="180" cy="160" rx="60" ry="25" fill="url(#cloud-gradient)"/>
+    <ellipse cx="120" cy="165" rx="50" ry="20" fill="url(#cloud-gradient)"/>
+
+    <!-- Cloud 2 -->
+    <ellipse cx="900" cy="200" rx="100" ry="35" fill="url(#cloud-gradient)">
+      <animate attributeName="cx" values="900;920;900" dur="45s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="940" cy="210" rx="70" ry="28" fill="url(#cloud-gradient)"/>
+    <ellipse cx="860" cy="215" rx="60" ry="23" fill="url(#cloud-gradient)"/>
+  </g>
+
+  <g class="clouds-layer-2" opacity="0.5">
+    <!-- Cloud 3 -->
+    <ellipse cx="400" cy="280" rx="90" ry="32" fill="url(#cloud-gradient)">
+      <animate attributeName="cx" values="400;430;400" dur="50s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="440" cy="290" rx="65" ry="26" fill="url(#cloud-gradient)"/>
+    <ellipse cx="360" cy="295" rx="55" ry="22" fill="url(#cloud-gradient)"/>
+
+    <!-- Cloud 4 -->
+    <ellipse cx="1050" cy="320" rx="85" ry="30" fill="url(#cloud-gradient)">
+      <animate attributeName="cx" values="1050;1070;1050" dur="55s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="1085" cy="330" rx="60" ry="24" fill="url(#cloud-gradient)"/>
+  </g>
+
+  <!-- Light Rays from Sun -->
+  <g class="light-rays" opacity="0.3">
+    <path
+      d="M 600,550 L 200,100"
+      stroke="url(#horizon-glow)"
+      stroke-width="40"
+      stroke-linecap="round"
+      opacity="0.4"
+    >
+      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite"/>
+    </path>
+
+    <path
+      d="M 600,550 L 450,50"
+      stroke="url(#horizon-glow)"
+      stroke-width="50"
+      stroke-linecap="round"
+      opacity="0.5"
+    >
+      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite"/>
+    </path>
+
+    <path
+      d="M 600,550 L 750,50"
+      stroke="url(#horizon-glow)"
+      stroke-width="50"
+      stroke-linecap="round"
+      opacity="0.5"
+    >
+      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite" begin="1s"/>
+    </path>
+
+    <path
+      d="M 600,550 L 1000,100"
+      stroke="url(#horizon-glow)"
+      stroke-width="40"
+      stroke-linecap="round"
+      opacity="0.4"
+    >
+      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+  </g>
+
+  <!-- Flying Birds Silhouettes -->
+  <g class="birds" opacity="0.4">
+    <path d="M 300,250 Q 295,245 290,250 Q 295,255 300,250" fill="none" stroke="#2D3561" stroke-width="2">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 400,-100; 800,-200"
+        dur="30s"
+        repeatCount="indefinite"
+      />
+    </path>
+
+    <path d="M 320,260 Q 315,255 310,260 Q 315,265 320,260" fill="none" stroke="#2D3561" stroke-width="1.5">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 350,-90; 700,-180"
+        dur="32s"
+        repeatCount="indefinite"
+      />
+    </path>
+
+    <path d="M 340,255 Q 335,250 330,255 Q 335,260 340,255" fill="none" stroke="#2D3561" stroke-width="2">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 450,-110; 900,-220"
+        dur="35s"
+        repeatCount="indefinite"
+      />
+    </path>
+  </g>
+
+  <!-- Atmospheric Particles/Dust -->
+  <g class="particles">
+    <circle cx="200" cy="300" r="1" fill="#FDB462" opacity="0.6">
+      <animate attributeName="cy" values="300;100;300" dur="15s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="15s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="500" cy="400" r="1.5" fill="#FF9B85" opacity="0.5">
+      <animate attributeName="cy" values="400;150;400" dur="18s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.1;0.5" dur="18s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="800" cy="350" r="1" fill="#F2A74B" opacity="0.7">
+      <animate attributeName="cy" values="350;100;350" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="20s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="1000" cy="450" r="1.5" fill="#EA580C" opacity="0.5">
+      <animate attributeName="cy" values="450;200;450" dur="22s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.1;0.5" dur="22s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
+
+<style>
+  .sunset-overlay-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .sun-group {
+    animation: sun-pulse 10s ease-in-out infinite;
+  }
+
+  .light-rays {
+    animation: rays-rotate 60s linear infinite;
+    transform-origin: 600px 550px;
+  }
+
+  @keyframes sun-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes rays-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(15deg);
+    }
+  }
+</style>
+
+<script>
+  // Subtle parallax effect
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const sun = document.querySelector('.sun-group') as HTMLElement;
+    const clouds1 = document.querySelector('.clouds-layer-1') as HTMLElement;
+    const clouds2 = document.querySelector('.clouds-layer-2') as HTMLElement;
+
+    if (sun) sun.style.transform = `translateY(${scrolled * 0.05}px)`;
+    if (clouds1) clouds1.style.transform = `translateY(${scrolled * 0.1}px)`;
+    if (clouds2) clouds2.style.transform = `translateY(${scrolled * 0.15}px)`;
+  });
+</script>

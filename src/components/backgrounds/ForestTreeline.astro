@@ -1,0 +1,247 @@
+---
+// Forest Treeline with Mist SVG Background
+---
+
+<svg
+  class="forest-treeline-bg"
+  viewBox="0 0 1200 500"
+  preserveAspectRatio="xMidYMax slice"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <!-- Mist Gradient -->
+    <linearGradient id="mist-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E2E8F0;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#94A3B8;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#1E293B;stop-opacity:0" />
+    </linearGradient>
+
+    <!-- Tree Gradient -->
+    <linearGradient id="tree-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D5F4C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F172A;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="tree-mid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D5F4C;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1E293B;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Fog Pattern -->
+    <radialGradient id="fog-spot">
+      <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#F8F9FA;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Mist Layer -->
+  <rect x="0" y="0" width="1200" height="500" fill="url(#mist-gradient)" opacity="0.4"/>
+
+  <!-- Distant Trees (Layer 1 - Most Faded) -->
+  <g class="tree-layer-1" opacity="0.3">
+    <!-- Simplified distant tree shapes -->
+    <polygon points="100,350 90,380 110,380" fill="#2D5F4C"/>
+    <polygon points="100,360 85,400 115,400" fill="#2D5F4C"/>
+
+    <polygon points="250,340 240,370 260,370" fill="#2D5F4C"/>
+    <polygon points="250,350 235,390 265,390" fill="#2D5F4C"/>
+
+    <polygon points="400,360 390,390 410,390" fill="#2D5F4C"/>
+    <polygon points="400,370 385,410 415,410" fill="#2D5F4C"/>
+
+    <polygon points="650,345 640,375 660,375" fill="#2D5F4C"/>
+    <polygon points="650,355 635,395 665,395" fill="#2D5F4C"/>
+
+    <polygon points="900,355 890,385 910,385" fill="#2D5F4C"/>
+    <polygon points="900,365 885,405 915,405" fill="#2D5F4C"/>
+
+    <polygon points="1050,350 1040,380 1060,380" fill="#2D5F4C"/>
+    <polygon points="1050,360 1035,400 1065,400" fill="#2D5F4C"/>
+  </g>
+
+  <!-- Mid-Distance Trees (Layer 2) -->
+  <g class="tree-layer-2" opacity="0.5">
+    <!-- Pine Tree 1 -->
+    <polygon points="180,380 165,410 195,410" fill="url(#tree-mid)"/>
+    <polygon points="180,395 160,430 200,430" fill="url(#tree-mid)"/>
+    <polygon points="180,410 155,450 205,450" fill="url(#tree-mid)"/>
+    <rect x="176" y="450" width="8" height="30" fill="#3A3A3C"/>
+
+    <!-- Pine Tree 2 -->
+    <polygon points="350,370 335,400 365,400" fill="url(#tree-mid)"/>
+    <polygon points="350,385 330,420 370,420" fill="url(#tree-mid)"/>
+    <polygon points="350,400 325,440 375,440" fill="url(#tree-mid)"/>
+    <rect x="346" y="440" width="8" height="35" fill="#3A3A3C"/>
+
+    <!-- Pine Tree 3 -->
+    <polygon points="550,390 535,420 565,420" fill="url(#tree-mid)"/>
+    <polygon points="550,405 530,440 570,440" fill="url(#tree-mid)"/>
+    <polygon points="550,420 525,460 575,460" fill="url(#tree-mid)"/>
+    <rect x="546" y="460" width="8" height="25" fill="#3A3A3C"/>
+
+    <!-- Pine Tree 4 -->
+    <polygon points="780,375 765,405 795,405" fill="url(#tree-mid)"/>
+    <polygon points="780,390 760,425 800,425" fill="url(#tree-mid)"/>
+    <polygon points="780,405 755,445 805,445" fill="url(#tree-mid)"/>
+    <rect x="776" y="445" width="8" height="30" fill="#3A3A3C"/>
+
+    <!-- Pine Tree 5 -->
+    <polygon points="1000,385 985,415 1015,415" fill="url(#tree-mid)"/>
+    <polygon points="1000,400 980,435 1020,435" fill="url(#tree-mid)"/>
+    <polygon points="1000,415 975,455 1025,455" fill="url(#tree-mid)"/>
+    <rect x="996" y="455" width="8" height="28" fill="#3A3A3C"/>
+  </g>
+
+  <!-- Foreground Trees (Layer 3 - Darkest) -->
+  <g class="tree-layer-3" opacity="0.8">
+    <!-- Large Pine 1 -->
+    <polygon points="120,400 100,440 140,440" fill="url(#tree-dark)"/>
+    <polygon points="120,420 95,465 145,465" fill="url(#tree-dark)"/>
+    <polygon points="120,440 90,485 150,485" fill="url(#tree-dark)"/>
+    <polygon points="120,460 85,500 155,500" fill="url(#tree-dark)"/>
+    <rect x="115" y="490" width="10" height="50" fill="#0F172A"/>
+
+    <!-- Large Pine 2 -->
+    <polygon points="450,410 430,450 470,450" fill="url(#tree-dark)"/>
+    <polygon points="450,430 425,475 475,475" fill="url(#tree-dark)"/>
+    <polygon points="450,450 420,495 480,495" fill="url(#tree-dark)"/>
+    <polygon points="450,470 415,510 485,510" fill="url(#tree-dark)"/>
+    <rect x="445" y="500" width="10" height="50" fill="#0F172A"/>
+
+    <!-- Large Pine 3 -->
+    <polygon points="720,395 700,435 740,435" fill="url(#tree-dark)"/>
+    <polygon points="720,415 695,460 745,460" fill="url(#tree-dark)"/>
+    <polygon points="720,435 690,480 750,480" fill="url(#tree-dark)"/>
+    <polygon points="720,455 685,500 755,500" fill="url(#tree-dark)"/>
+    <rect x="715" y="490" width="10" height="50" fill="#0F172A"/>
+
+    <!-- Large Pine 4 -->
+    <polygon points="950,405 930,445 970,445" fill="url(#tree-dark)"/>
+    <polygon points="950,425 925,470 975,470" fill="url(#tree-dark)"/>
+    <polygon points="950,445 920,490 980,490" fill="url(#tree-dark)"/>
+    <polygon points="950,465 915,505 985,505" fill="url(#tree-dark)"/>
+    <rect x="945" y="495" width="10" height="50" fill="#0F172A"/>
+  </g>
+
+  <!-- Animated Mist Layers -->
+  <g class="mist-layer">
+    <ellipse cx="300" cy="350" rx="200" ry="80" fill="url(#fog-spot)" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;0.7;0.5" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="300;320;300" dur="15s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <ellipse cx="700" cy="380" rx="250" ry="100" fill="url(#fog-spot)" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;0.6;0.4" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="700;680;700" dur="18s" repeatCount="indefinite"/>
+    </ellipse>
+
+    <ellipse cx="1000" cy="360" rx="180" ry="70" fill="url(#fog-spot)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="12s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="1000;1020;1000" dur="20s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Ground/Forest Floor -->
+  <path
+    class="forest-floor"
+    d="M 0,480 Q 300,470 600,480 T 1200,480 L 1200,500 L 0,500 Z"
+    fill="#0F172A"
+    opacity="0.6"
+  />
+
+  <!-- Floating Fireflies/Light Particles -->
+  <g class="fireflies">
+    <circle cx="200" cy="420" r="2" fill="#FDB462" opacity="0.8">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="420;410;420" dur="4s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="500" cy="450" r="1.5" fill="#FDB462" opacity="0.7">
+      <animate attributeName="opacity" values="0.2;0.9;0.2" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="450;440;450" dur="5s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="850" cy="430" r="2" fill="#F2A74B" opacity="0.8">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="430;420;430" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
+
+<style>
+  .forest-treeline-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .tree-layer-1 {
+    animation: tree-sway-slow 20s ease-in-out infinite;
+  }
+
+  .tree-layer-2 {
+    animation: tree-sway-medium 15s ease-in-out infinite;
+  }
+
+  .tree-layer-3 {
+    animation: tree-sway-fast 12s ease-in-out infinite;
+  }
+
+  .mist-layer {
+    animation: mist-drift 25s linear infinite;
+  }
+
+  @keyframes tree-sway-slow {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(3px);
+    }
+  }
+
+  @keyframes tree-sway-medium {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-2px);
+    }
+  }
+
+  @keyframes tree-sway-fast {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(1px);
+    }
+  }
+
+  @keyframes mist-drift {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(50px);
+    }
+  }
+</style>
+
+<script>
+  // Parallax effect on scroll
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const layer1 = document.querySelector('.tree-layer-1') as HTMLElement;
+    const layer2 = document.querySelector('.tree-layer-2') as HTMLElement;
+    const layer3 = document.querySelector('.tree-layer-3') as HTMLElement;
+    const mist = document.querySelector('.mist-layer') as HTMLElement;
+
+    if (layer1) layer1.style.transform = `translateY(${scrolled * 0.05}px)`;
+    if (layer2) layer2.style.transform = `translateY(${scrolled * 0.1}px)`;
+    if (layer3) layer3.style.transform = `translateY(${scrolled * 0.15}px)`;
+    if (mist) mist.style.transform = `translateY(${scrolled * 0.08}px)`;
+  });
+</script>

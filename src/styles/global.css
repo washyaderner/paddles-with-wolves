@@ -1,4 +1,6 @@
 @import './variables.css';
+@import './typography.css';
+@import './utilities.css';
 
 /* CSS Reset */
 *, *::before, *::after {
