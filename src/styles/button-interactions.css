@@ -1,0 +1,360 @@
+/**
+ * Button Micro-Interactions
+ * Smooth animations and feedback for all button elements
+ */
+
+/* ========================================
+   Base Button Enhancements
+======================================== */
+
+button,
+.btn,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+a.button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ripple effect container */
+button::before,
+.btn::before,
+[role="button"]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease-out, height 0.6s ease-out;
+  pointer-events: none;
+}
+
+button:active::before,
+.btn:active::before,
+[role="button"]:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Glow effect on hover */
+button::after,
+.btn::after,
+[role="button"]::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg,
+    var(--mystic-purple),
+    var(--sunset-gold),
+    var(--mystic-purple));
+  background-size: 200% 200%;
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  animation: gradient-rotate 3s ease-in-out infinite;
+  filter: blur(8px);
+}
+
+@keyframes gradient-rotate {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+button:hover::after,
+.btn:hover::after,
+[role="button"]:hover::after {
+  opacity: 0.6;
+}
+
+/* ========================================
+   Hover States
+======================================== */
+
+button:hover,
+.btn:hover,
+[role="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(107, 70, 193, 0.3),
+              0 0 20px rgba(253, 180, 98, 0.2);
+}
+
+/* ========================================
+   Active/Press States
+======================================== */
+
+button:active,
+.btn:active,
+[role="button"]:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 5px 15px rgba(107, 70, 193, 0.2);
+}
+
+/* ========================================
+   Focus States (Accessibility)
+======================================== */
+
+button:focus-visible,
+.btn:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--sunset-gold);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(253, 180, 98, 0.2);
+}
+
+/* ========================================
+   Loading State
+======================================== */
+
+button.loading,
+.btn.loading {
+  pointer-events: none;
+  position: relative;
+  color: transparent !important;
+}
+
+button.loading::after,
+.btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  opacity: 1;
+  filter: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   Disabled State
+======================================== */
+
+button:disabled,
+.btn:disabled,
+[role="button"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
+}
+
+button:disabled::before,
+button:disabled::after,
+.btn:disabled::before,
+.btn:disabled::after {
+  display: none;
+}
+
+/* ========================================
+   Button Variants
+======================================== */
+
+/* Primary buttons */
+.btn-primary,
+button[class*="primary"] {
+  background: linear-gradient(135deg, var(--mystic-purple), var(--forest-green));
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.btn-primary:hover,
+button[class*="primary"]:hover {
+  background-position: 100% 50%;
+}
+
+/* Secondary buttons */
+.btn-secondary,
+button[class*="secondary"] {
+  background: transparent;
+  border: 2px solid var(--mystic-purple);
+  position: relative;
+}
+
+.btn-secondary::before,
+button[class*="secondary"]::before {
+  background: linear-gradient(135deg,
+    rgba(107, 70, 193, 0.2),
+    rgba(253, 180, 98, 0.2));
+}
+
+/* Ghost buttons */
+.btn-ghost {
+  background: transparent;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(107, 70, 193, 0.1);
+}
+
+/* Icon buttons */
+.btn-icon,
+button[aria-label]:not([aria-label=""]) {
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.btn-icon:active {
+  transform: rotate(0deg) scale(0.95);
+}
+
+/* ========================================
+   Touch Optimizations
+======================================== */
+
+@media (hover: none) {
+  /* Disable hover effects on touch devices */
+  button:hover::after,
+  .btn:hover::after,
+  [role="button"]:hover::after {
+    opacity: 0;
+  }
+
+  button:hover,
+  .btn:hover,
+  [role="button"]:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Enhanced active states for touch */
+  button:active,
+  .btn:active,
+  [role="button"]:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+  }
+}
+
+/* ========================================
+   Magnetic Effect (Desktop Only)
+======================================== */
+
+@media (hover: hover) and (min-width: 769px) {
+  .btn-magnetic {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* JavaScript will add inline transforms for magnetic effect */
+}
+
+/* ========================================
+   Pulse Animation (CTA buttons)
+======================================== */
+
+.btn-pulse {
+  animation: pulse-scale 2s ease-in-out infinite;
+}
+
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(107, 70, 193, 0.7);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(107, 70, 193, 0);
+  }
+}
+
+/* ========================================
+   Shimmer Effect
+======================================== */
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-shimmer:hover::before {
+  left: 100%;
+}
+
+/* ========================================
+   Reduced Motion
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  .btn,
+  [role="button"],
+  button::before,
+  button::after,
+  .btn::before,
+  .btn::after {
+    animation: none !important;
+    transition: opacity 0.1s linear, background-color 0.1s linear;
+  }
+
+  button:hover,
+  .btn:hover,
+  [role="button"]:hover {
+    transform: none;
+  }
+
+  button:active,
+  .btn:active,
+  [role="button"]:active {
+    transform: none;
+    opacity: 0.8;
+  }
+}

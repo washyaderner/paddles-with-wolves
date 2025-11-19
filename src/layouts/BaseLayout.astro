@@ -1,9 +1,13 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import FloatingNav from '../components/navigation/FloatingNav.astro';
 import AnimatedBackground from '../components/backgrounds/AnimatedBackground.astro';
 import ShoppingCart from '../components/cart/ShoppingCart.astro';
 import FloatingContactBubbles from '../components/contact/FloatingContactBubbles.astro';
+import LoadingScreen from '../components/ui/LoadingScreen.astro';
+import ScrollProgress from '../components/ui/ScrollProgress.astro';
 import '../styles/global.css';
+import '../styles/button-interactions.css';
 
 interface Props {
   title?: string;
@@ -132,9 +136,18 @@ const currentYear = new Date().getFullYear();
 
     <!-- Preload critical assets -->
     <link rel="preload" href="/src/styles/global.css" as="style" />
+
+    <!-- View Transitions -->
+    <ViewTransitions />
   </head>
 
   <body>
+    <!-- Loading Screen -->
+    <LoadingScreen />
+
+    <!-- Scroll Progress Indicator -->
+    <ScrollProgress />
+
     <!-- Animated Background -->
     <AnimatedBackground theme={backgroundTheme} />
 
@@ -198,8 +211,10 @@ const currentYear = new Date().getFullYear();
     <!-- Floating Contact Bubbles -->
     <FloatingContactBubbles />
 
-    <!-- Scroll Animations Script -->
+    <!-- Animation Scripts -->
     <script src="../scripts/scroll-animations.ts"></script>
+    <script src="../scripts/button-magnetic.ts"></script>
+    <script src="../scripts/page-transitions.ts"></script>
 
     <style>
       .main-content {
