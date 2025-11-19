@@ -1,0 +1,393 @@
+---
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/apothecary', label: 'Apothecary' },
+  { href: '/booking', label: 'Booking' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="floating-nav" id="floating-nav">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="/">
+        <span class="logo-icon">🐺</span>
+        <span class="logo-text">Paddles with Wolves</span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" id="nav-toggle">
+      <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-menu" id="nav-menu">
+      {navItems.map(item => (
+        <li class="nav-item">
+          <a
+            href={item.href}
+            class:list={['nav-link', { active: currentPath === item.href }]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .floating-nav {
+    position: fixed;
+    top: var(--space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - var(--space-8));
+    max-width: 1200px;
+    z-index: var(--z-sticky);
+    transition: all var(--transition-base);
+  }
+
+  .nav-container {
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(107, 70, 193, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-3) var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-base);
+  }
+
+  /* Solid background class (added via JavaScript on scroll) */
+  .floating-nav.solid .nav-container {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    border-color: rgba(107, 70, 193, 0.4);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+  }
+
+  .nav-logo {
+    flex-shrink: 0;
+  }
+
+  .nav-logo a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    transition: transform var(--transition-base);
+  }
+
+  .nav-logo a:hover {
+    transform: scale(1.05);
+  }
+
+  .logo-icon {
+    font-size: var(--text-2xl);
+    filter: drop-shadow(0 0 8px rgba(107, 70, 193, 0.5));
+  }
+
+  .logo-text {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, var(--sunset-gold), var(--mystic-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    width: 24px;
+    height: 2px;
+    background: var(--sunset-gold);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+  }
+
+  .hamburger {
+    position: relative;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  /* Hamburger animation when active */
+  .nav-toggle.active .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .nav-toggle.active .hamburger::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    list-style: none;
+  }
+
+  .nav-link {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    position: relative;
+  }
+
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 70%;
+    height: 2px;
+    background: var(--sunset-gold);
+    transition: transform var(--transition-base);
+  }
+
+  .nav-link:hover {
+    color: var(--sunset-gold);
+    background: rgba(107, 70, 193, 0.2);
+  }
+
+  .nav-link:hover::before {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  .nav-link.active {
+    color: var(--sunset-gold);
+    background: rgba(107, 70, 193, 0.3);
+  }
+
+  .nav-link.active::before {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .floating-nav {
+      top: var(--space-2);
+      width: calc(100% - var(--space-4));
+    }
+
+    .nav-container {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .logo-text {
+      font-size: var(--text-lg);
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 70px;
+      left: var(--space-2);
+      right: var(--space-2);
+      flex-direction: column;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(107, 70, 193, 0.4);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      gap: var(--space-1);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-20px);
+      transition: all var(--transition-base);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      box-shadow: var(--shadow-2xl);
+    }
+
+    .nav-menu.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      width: 100%;
+      text-align: center;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-base);
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .floating-nav,
+    .nav-container,
+    .nav-link,
+    .nav-menu,
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initFloatingNav() {
+    const nav = document.getElementById('floating-nav');
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (!nav) return;
+
+    // ScrollTrigger for solid background
+    ScrollTrigger.create({
+      trigger: 'body',
+      start: 'top -100',
+      end: 'bottom top',
+      onEnter: () => nav.classList.add('solid'),
+      onLeaveBack: () => nav.classList.remove('solid'),
+    });
+
+    // Hide/show nav on scroll
+    let lastScroll = 0;
+    let ticking = false;
+
+    ScrollTrigger.create({
+      trigger: 'body',
+      start: 'top top',
+      end: 'bottom top',
+      onUpdate: (self) => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const currentScroll = self.scroll();
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+              // Scrolling down - hide nav
+              gsap.to(nav, {
+                y: -120,
+                duration: 0.3,
+                ease: 'power2.out'
+              });
+            } else {
+              // Scrolling up - show nav
+              gsap.to(nav, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+              });
+            }
+
+            lastScroll = currentScroll;
+            ticking = false;
+          });
+
+          ticking = true;
+        }
+      }
+    });
+
+    // Mobile menu toggle
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.floating-nav')) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+
+      // Close menu when clicking on a link
+      const navLinks = navMenu.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+    }
+
+    // Entrance animation
+    gsap.from(nav, {
+      y: -100,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      delay: 0.3
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFloatingNav);
+  } else {
+    initFloatingNav();
+  }
+
+  // Re-initialize on navigation (for Astro View Transitions)
+  document.addEventListener('astro:page-load', initFloatingNav);
+</script>

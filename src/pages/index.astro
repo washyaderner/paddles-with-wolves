@@ -1,104 +1,117 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/hero/HeroSection.astro';
 ---
 
 <BaseLayout>
-  <section class="hero">
+  <!-- Hero Section with Energy Particles -->
+  <HeroSection />
+
+  <!-- Services Preview Section -->
+  <section class="services-preview fade-in-scroll">
     <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">Paddles with Wolves</h1>
-        <p class="hero-subtitle">Healing Arts & Wellness</p>
-        <p class="hero-description">
-          Journey into transformative healing through ancient wisdom and modern wellness practices.
-          Discover the balance between body, mind, and spirit.
-        </p>
-        <div class="hero-cta">
-          <a href="/booking" class="btn btn-primary">Book a Session</a>
-          <a href="/services" class="btn btn-secondary">Explore Services</a>
+      <h2 class="section-title text-gradient-healing">Healing Modalities</h2>
+      <p class="section-subtitle">Ancient wisdom meets modern wellness</p>
+
+      <div class="services-grid">
+        <div class="service-card glass hover-lift fade-in-up">
+          <div class="service-icon">🙏</div>
+          <h3>Energy Healing</h3>
+          <p>Balance your body's natural energy flow through Reiki and chakra alignment.</p>
+        </div>
+
+        <div class="service-card glass hover-lift fade-in-up fade-delay-100">
+          <div class="service-icon">💆</div>
+          <h3>Therapeutic Massage</h3>
+          <p>Deep tissue and Swedish massage tailored to your body's needs.</p>
+        </div>
+
+        <div class="service-card glass hover-lift fade-in-up fade-delay-200">
+          <div class="service-icon">🌿</div>
+          <h3>Herbal Apothecary</h3>
+          <p>Custom herbal blends and natural remedies from the Pacific Northwest.</p>
+        </div>
+
+        <div class="service-card glass hover-lift fade-in-up fade-delay-300">
+          <div class="service-icon">🧘</div>
+          <h3>Mindful Practice</h3>
+          <p>Guided meditation and breathwork for mental clarity and peace.</p>
+        </div>
+      </div>
+
+      <div class="services-cta fade-in-up fade-delay-400">
+        <a href="/services" class="btn-link">
+          View All Services →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy Section -->
+  <section class="philosophy-section fade-in-scroll">
+    <div class="container">
+      <div class="philosophy-content">
+        <div class="philosophy-text fade-in-left">
+          <h2 class="section-title">Healing with Nature's Wisdom</h2>
+          <p class="lead">
+            In the heart of the Pacific Northwest, where mountains meet the sea and ancient forests whisper their secrets,
+            we practice the healing arts as they were meant to be—in harmony with nature.
+          </p>
+          <p>
+            Drawing from traditional Eastern medicine, indigenous wisdom, and modern holistic practices,
+            we create a personalized healing journey for each individual. Whether you seek physical relief,
+            emotional balance, or spiritual awakening, your path begins here.
+          </p>
+          <blockquote>
+            "The greatest healing comes when we reconnect with the natural rhythms within and around us."
+            <cite>— Tony</cite>
+          </blockquote>
+        </div>
+
+        <div class="philosophy-image fade-in-right">
+          <div class="image-placeholder glass">
+            <span class="image-icon">🏔️</span>
+            <p>Mountains & Waters</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="design-system-showcase">
+  <!-- Testimonials Section -->
+  <section class="testimonials-section fade-in-scroll">
     <div class="container">
-      <h2>Design System Preview</h2>
+      <h2 class="section-title text-gradient-sunset">Client Experiences</h2>
+      <p class="section-subtitle">Stories of transformation and healing</p>
 
-      <!-- Color Palette -->
-      <div class="showcase-section">
-        <h3>Color Palette</h3>
-        <div class="color-grid">
-          <div class="color-card">
-            <div class="color-swatch" style="background: var(--mystic-purple);"></div>
-            <p class="color-name">Mystic Purple</p>
-            <p class="color-value">#6B46C1</p>
-          </div>
-          <div class="color-card">
-            <div class="color-swatch" style="background: var(--sunset-gold);"></div>
-            <p class="color-name">Sunset Gold</p>
-            <p class="color-value">#FDB462</p>
-          </div>
-          <div class="color-card">
-            <div class="color-swatch" style="background: var(--twilight-blue);"></div>
-            <p class="color-name">Twilight Blue</p>
-            <p class="color-value">#1E293B</p>
-          </div>
-          <div class="color-card">
-            <div class="color-swatch" style="background: var(--forest-shadow);"></div>
-            <p class="color-name">Forest Shadow</p>
-            <p class="color-value">#0F172A</p>
-          </div>
-          <div class="color-card">
-            <div class="color-swatch" style="background: var(--flame-orange);"></div>
-            <p class="color-name">Flame Orange</p>
-            <p class="color-value">#EA580C</p>
-          </div>
-          <div class="color-card">
-            <div class="color-swatch" style="background: var(--water-teal);"></div>
-            <p class="color-name">Water Teal</p>
-            <p class="color-value">#0891B2</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card glass fade-in-up">
+          <p class="testimonial-text">
+            "Tony's energy work helped me release years of stored tension. I feel lighter, clearer, and more connected to myself than ever before."
+          </p>
+          <div class="testimonial-author">
+            <strong>Sarah M.</strong>
+            <span>Seattle, WA</span>
           </div>
         </div>
-      </div>
 
-      <!-- Typography -->
-      <div class="showcase-section">
-        <h3>Typography</h3>
-        <div class="typography-samples">
-          <h1>Heading 1 - Serif Font</h1>
-          <h2>Heading 2 - Serif Font</h2>
-          <h3>Heading 3 - Serif Font</h3>
-          <h4>Heading 4 - Serif Font</h4>
-          <p class="lead">Lead paragraph text - slightly larger for emphasis and better readability.</p>
-          <p>Regular paragraph text showcasing the primary font family with comfortable line height.</p>
-        </div>
-      </div>
-
-      <!-- Buttons -->
-      <div class="showcase-section">
-        <h3>Buttons</h3>
-        <div class="button-samples">
-          <button class="btn btn-primary">Primary Button</button>
-          <button class="btn btn-secondary">Secondary Button</button>
-          <button class="btn btn-outline">Outline Button</button>
-        </div>
-      </div>
-
-      <!-- Cards -->
-      <div class="showcase-section">
-        <h3>Cards</h3>
-        <div class="card-grid">
-          <div class="card">
-            <h4>Service Card</h4>
-            <p>Beautiful, glassmorphic card design with backdrop blur and subtle borders.</p>
+        <div class="testimonial-card glass fade-in-up fade-delay-100">
+          <p class="testimonial-text">
+            "The herbal remedies from the apothecary have become an essential part of my wellness routine. Natural, effective, and carefully crafted."
+          </p>
+          <div class="testimonial-author">
+            <strong>Michael L.</strong>
+            <span>Portland, OR</span>
           </div>
-          <div class="card">
-            <h4>Testimonial Card</h4>
-            <p>Perfect for showcasing client testimonials and reviews.</p>
-          </div>
-          <div class="card">
-            <h4>Product Card</h4>
-            <p>Ideal for displaying apothecary products and offerings.</p>
+        </div>
+
+        <div class="testimonial-card glass fade-in-up fade-delay-200">
+          <p class="testimonial-text">
+            "A truly transformative experience. The combination of massage and energy healing addressed issues I didn't even know I was carrying."
+          </p>
+          <div class="testimonial-author">
+            <strong>Jennifer K.</strong>
+            <span>Bellingham, WA</span>
           </div>
         </div>
       </div>
@@ -107,232 +120,200 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    min-height: 80vh;
+  /* Sections */
+  section {
+    padding: var(--space-32) 0;
+    position: relative;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: var(--text-xl);
+    color: var(--medium-gray);
+    margin-bottom: var(--space-16);
+    font-style: italic;
+  }
+
+  /* Services Preview */
+  .services-preview {
+    background: rgba(15, 23, 42, 0.3);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  .service-card {
+    padding: var(--space-8);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    transition: all var(--transition-base);
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+    filter: drop-shadow(0 0 10px rgba(107, 70, 193, 0.5));
+  }
+
+  .service-card h3 {
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .service-card p {
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .services-cta {
+    text-align: center;
+  }
+
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xl);
+    color: var(--sunset-gold);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+  }
+
+  .btn-link:hover {
+    color: var(--amber-glow);
+    gap: var(--space-4);
+  }
+
+  /* Philosophy Section */
+  .philosophy-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .philosophy-text h2 {
+    text-align: left;
+    margin-bottom: var(--space-6);
+  }
+
+  .philosophy-text p {
+    margin-bottom: var(--space-6);
+    font-size: var(--text-lg);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .philosophy-text blockquote {
+    margin: var(--space-8) 0;
+    padding: var(--space-6);
+    border-left: 4px solid var(--mystic-purple);
+    background: rgba(107, 70, 193, 0.1);
+    border-radius: var(--radius-md);
+    font-style: italic;
+    color: var(--off-white);
+  }
+
+  .philosophy-text cite {
+    display: block;
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    font-style: normal;
+    color: var(--sunset-gold);
+  }
+
+  .image-placeholder {
+    aspect-ratio: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: var(--space-20) 0;
-  }
-
-  .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .hero-title {
-    font-size: var(--text-6xl);
-    background: linear-gradient(135deg, var(--sunset-gold), var(--mystic-purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-4);
-    animation: fadeInUp 1s ease-out;
-  }
-
-  .hero-subtitle {
-    font-size: var(--text-2xl);
-    color: var(--sunset-gold);
-    font-family: var(--font-heading);
-    margin-bottom: var(--space-6);
-    animation: fadeInUp 1s ease-out 0.2s both;
-  }
-
-  .hero-description {
-    font-size: var(--text-lg);
-    color: var(--light-gray);
-    line-height: 1.8;
-    margin-bottom: var(--space-8);
-    animation: fadeInUp 1s ease-out 0.4s both;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: var(--space-4);
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeInUp 1s ease-out 0.6s both;
-  }
-
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    padding: var(--space-4) var(--space-8);
-    border-radius: var(--radius-lg);
-    font-weight: 600;
-    font-size: var(--text-base);
-    text-decoration: none;
-    transition: all var(--transition-base);
-    cursor: pointer;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
-    color: var(--white);
-    border: none;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-2xl), var(--shadow-glow);
-  }
-
-  .btn-secondary {
-    background: rgba(107, 70, 193, 0.2);
-    color: var(--sunset-gold);
-    border: 2px solid var(--mystic-purple);
-    backdrop-filter: blur(10px);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(107, 70, 193, 0.4);
-    border-color: var(--sunset-gold);
-    transform: translateY(-2px);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-  }
-
-  .btn-outline:hover {
-    background: var(--white);
-    color: var(--mystic-purple);
-  }
-
-  /* Design System Showcase */
-  .design-system-showcase {
-    padding: var(--space-20) 0;
-  }
-
-  .showcase-section {
-    margin-bottom: var(--space-16);
-    padding: var(--space-8);
-    background: rgba(30, 41, 59, 0.3);
-    backdrop-filter: blur(10px);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(107, 70, 193, 0.2);
+    padding: var(--space-8);
   }
 
-  .showcase-section h3 {
-    color: var(--sunset-gold);
+  .image-icon {
+    font-size: 6rem;
+    margin-bottom: var(--space-4);
+    filter: drop-shadow(0 0 20px rgba(107, 70, 193, 0.5));
+  }
+
+  .image-placeholder p {
+    font-size: var(--text-xl);
+    color: var(--dusk-lavender);
+    font-style: italic;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .testimonial-card {
+    padding: var(--space-8);
+    border-radius: var(--radius-xl);
+  }
+
+  .testimonial-text {
+    font-size: var(--text-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--light-gray);
+    font-style: italic;
     margin-bottom: var(--space-6);
   }
 
-  /* Color Grid */
-  .color-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: var(--space-4);
-  }
-
-  .color-card {
-    text-align: center;
-  }
-
-  .color-swatch {
-    width: 100%;
-    height: 100px;
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-3);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .color-name {
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: var(--space-1);
-  }
-
-  .color-value {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--medium-gray);
-  }
-
-  /* Typography Samples */
-  .typography-samples {
-    padding: var(--space-4);
-  }
-
-  .lead {
-    font-size: var(--text-xl);
-    color: var(--light-gray);
-  }
-
-  /* Button Samples */
-  .button-samples {
+  .testimonial-author {
     display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
-  /* Card Grid */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-6);
-  }
-
-  .card {
-    padding: var(--space-6);
-    background: rgba(30, 41, 59, 0.4);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(107, 70, 193, 0.3);
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
-    border-color: var(--sunset-gold);
-  }
-
-  .card h4 {
+  .testimonial-author strong {
     color: var(--sunset-gold);
-    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
   }
 
-  .card p {
-    color: var(--light-gray);
+  .testimonial-author span {
+    color: var(--medium-gray);
     font-size: var(--text-sm);
   }
 
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Responsive */
+  /* Responsive Design */
   @media (max-width: 768px) {
-    .hero-title {
-      font-size: var(--text-4xl);
+    section {
+      padding: var(--space-20) 0;
     }
 
-    .hero-cta {
-      flex-direction: column;
-      align-items: center;
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
     }
 
-    .btn {
-      width: 100%;
-      max-width: 300px;
+    .philosophy-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
     }
 
-    .color-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .philosophy-text h2 {
+      text-align: center;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
     }
   }
 </style>

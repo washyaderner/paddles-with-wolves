@@ -1,5 +1,5 @@
 ---
-import Navigation from '../components/Navigation.astro';
+import FloatingNav from '../components/navigation/FloatingNav.astro';
 import AnimatedBackground from '../components/backgrounds/AnimatedBackground.astro';
 import '../styles/global.css';
 
@@ -137,7 +137,7 @@ const currentYear = new Date().getFullYear();
     <AnimatedBackground theme={backgroundTheme} />
 
     <!-- Navigation -->
-    <Navigation />
+    <FloatingNav />
 
     <!-- Main Content -->
     <main class="main-content">

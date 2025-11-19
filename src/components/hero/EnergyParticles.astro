@@ -1,0 +1,220 @@
+---
+// Energy Particles Component - Animated Qi energy orbs using GSAP
+---
+
+<div class="energy-particles-container">
+  <canvas id="energy-canvas"></canvas>
+</div>
+
+<style>
+  .energy-particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  #energy-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  // Energy Particle Class
+  class EnergyParticle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    radius: number;
+    alpha: number;
+    color: string;
+    pulseSpeed: number;
+    pulsePhase: number;
+
+    constructor(canvasWidth: number, canvasHeight: number) {
+      // Start particles from bottom of screen
+      this.x = Math.random() * canvasWidth;
+      this.y = canvasHeight + 50;
+
+      // Velocity
+      this.vx = (Math.random() - 0.5) * 1;
+      this.vy = -(Math.random() * 2 + 1); // Always moving up
+
+      // Appearance
+      this.radius = Math.random() * 3 + 2;
+      this.alpha = Math.random() * 0.5 + 0.3;
+
+      // Color palette (purple/gold theme)
+      const colors = [
+        '#6B46C1', // mystic-purple
+        '#FDB462', // sunset-gold
+        '#9D7FB8', // dusk-lavender
+        '#F2A74B', // amber-glow
+        '#8B6FAB', // wildflower-violet
+      ];
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+
+      // Pulsing effect
+      this.pulseSpeed = Math.random() * 0.05 + 0.02;
+      this.pulsePhase = Math.random() * Math.PI * 2;
+    }
+
+    update(canvasWidth: number, canvasHeight: number, mouseX: number | null, mouseY: number | null) {
+      // Update position
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Mouse interaction - particles subtly follow cursor
+      if (mouseX !== null && mouseY !== null) {
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 200) {
+          const force = (200 - distance) / 200;
+          this.vx += (dx / distance) * force * 0.1;
+          this.vy += (dy / distance) * force * 0.1;
+        }
+      }
+
+      // Apply friction
+      this.vx *= 0.98;
+      this.vy *= 0.98;
+
+      // Keep upward movement
+      this.vy -= 0.05;
+
+      // Pulse effect
+      this.pulsePhase += this.pulseSpeed;
+
+      // Reset particle when it goes off screen
+      if (this.y < -50) {
+        this.y = canvasHeight + 50;
+        this.x = Math.random() * canvasWidth;
+        this.vx = (Math.random() - 0.5) * 1;
+        this.vy = -(Math.random() * 2 + 1);
+      }
+
+      // Wrap horizontally
+      if (this.x < -50) this.x = canvasWidth + 50;
+      if (this.x > canvasWidth + 50) this.x = -50;
+    }
+
+    draw(ctx: CanvasRenderingContext2D) {
+      const pulse = Math.sin(this.pulsePhase) * 0.5 + 0.5;
+      const currentRadius = this.radius + pulse * 2;
+      const currentAlpha = this.alpha + pulse * 0.2;
+
+      // Draw glow
+      const gradient = ctx.createRadialGradient(
+        this.x, this.y, 0,
+        this.x, this.y, currentRadius * 3
+      );
+      gradient.addColorStop(0, `${this.color}${Math.floor(currentAlpha * 255).toString(16).padStart(2, '0')}`);
+      gradient.addColorStop(0.5, `${this.color}${Math.floor(currentAlpha * 0.3 * 255).toString(16).padStart(2, '0')}`);
+      gradient.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, currentRadius * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw core
+      ctx.fillStyle = `${this.color}${Math.floor((currentAlpha + 0.3) * 255).toString(16).padStart(2, '0')}`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, currentRadius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Initialize energy particles
+  function initEnergyParticles() {
+    const canvas = document.getElementById('energy-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Create particles
+    const particleCount = window.innerWidth < 768 ? 30 : 50;
+    const particles: EnergyParticle[] = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new EnergyParticle(canvas.width, canvas.height));
+      // Stagger initial positions
+      particles[i].y = canvas.height + Math.random() * canvas.height;
+    }
+
+    // Mouse tracking
+    let mouseX: number | null = null;
+    let mouseY: number | null = null;
+
+    canvas.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      mouseX = null;
+      mouseY = null;
+    });
+
+    // Touch support
+    canvas.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+      }
+    });
+
+    canvas.addEventListener('touchend', () => {
+      mouseX = null;
+      mouseY = null;
+    });
+
+    // Animation loop using GSAP ticker
+    gsap.ticker.add(() => {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update and draw particles
+      particles.forEach(particle => {
+        particle.update(canvas.width, canvas.height, mouseX, mouseY);
+        particle.draw(ctx);
+      });
+    });
+
+    // Add entrance animation
+    gsap.from(canvas, {
+      opacity: 0,
+      duration: 2,
+      ease: 'power2.out'
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEnergyParticles);
+  } else {
+    initEnergyParticles();
+  }
+
+  // Re-initialize on navigation (for Astro View Transitions)
+  document.addEventListener('astro:page-load', initEnergyParticles);
+</script>
