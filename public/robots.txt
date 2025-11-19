@@ -1,0 +1,32 @@
+# robots.txt for Paddles with Wolves
+
+# Allow all bots to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow admin/private areas (add when needed)
+# Disallow: /admin/
+# Disallow: /api/private/
+
+# Sitemap location
+Sitemap: https://paddleswithwolves.com/sitemap.xml
+
+# Crawl-delay for bots (optional, in seconds)
+# Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots (uncomment if needed)
+# User-agent: SemrushBot
+# Disallow: /
+
+# User-agent: AhrefsBot
+# Disallow: /
