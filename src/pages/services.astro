@@ -1,29 +1,494 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/services/ServiceCard.astro';
+import ServiceDetail from '../components/services/ServiceDetail.astro';
 ---
 
-<BaseLayout title="Services - Paddles with Wolves">
-  <section class="page-section">
+<BaseLayout
+  title="Services - Paddles with Wolves Healing Arts"
+  description="Explore our healing services: Energy Healing, Therapeutic Bodywork, Herbal Medicine, and Movement Arts. Pacific Northwest holistic wellness with Tony."
+  keywords="energy healing, qi gong, tai chi, therapeutic massage, bodywork, herbal medicine, tinctures, balms, kayak, disc golf, movement arts, holistic wellness"
+>
+  <!-- Page Hero -->
+  <section class="services-hero">
     <div class="container">
-      <h1>Our Services</h1>
-      <p>Healing services page coming soon...</p>
+      <div class="hero-content fade-in-up">
+        <h1 class="page-title text-gradient-healing">Healing Services</h1>
+        <p class="page-subtitle">
+          Transformative modalities rooted in ancient wisdom and Pacific Northwest tradition
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Cards Grid -->
+  <section class="services-grid-section">
+    <div class="container">
+      <div class="services-grid">
+        <!-- Energy Healing -->
+        <ServiceCard
+          title="Energy Healing"
+          description="Cultivate and balance your vital life force through Qi Gong and Tai Chi practices"
+          icon="🙏"
+          priceRange="$90-120"
+          iconBg="healing"
+          features={[
+            'Qi Gong energy cultivation',
+            'Tai Chi movement meditation',
+            'Chakra balancing',
+            'Energy flow restoration'
+          ]}
+          bookingUrl="/booking?service=energy-healing"
+          delay={0}
+        />
+
+        <!-- Therapeutic Bodywork -->
+        <ServiceCard
+          title="Therapeutic Bodywork"
+          description="Deep tissue massage combined with energy healing for complete mind-body wellness"
+          icon="💆"
+          priceRange="$100-140"
+          iconBg="mystic"
+          features={[
+            'Deep tissue massage',
+            'Swedish relaxation',
+            'Energy point activation',
+            'Myofascial release'
+          ]}
+          bookingUrl="/booking?service=bodywork"
+          delay={100}
+        />
+
+        <!-- Herbal Medicine -->
+        <ServiceCard
+          title="Herbal Medicine"
+          description="Custom tinctures, balms, and remedies crafted from Pacific Northwest botanicals"
+          icon="🌿"
+          priceRange="$30-90"
+          iconBg="forest"
+          features={[
+            'Custom herbal tinctures',
+            'Healing balms & salves',
+            'Tea blends',
+            'Consultation included'
+          ]}
+          bookingUrl="/apothecary"
+          delay={200}
+        />
+
+        <!-- Movement Arts -->
+        <ServiceCard
+          title="Movement Arts"
+          description="Find flow and presence through kayaking and disc golf in natural settings"
+          icon="🛶"
+          priceRange="$60-100"
+          iconBg="water"
+          features={[
+            'Guided kayak meditation',
+            'Disc golf flow practice',
+            'Nature immersion',
+            'Mindful movement coaching'
+          ]}
+          bookingUrl="/booking?service=movement-arts"
+          delay={300}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Service Information -->
+  <section class="services-details-section">
+    <div class="container">
+      <h2 class="section-title fade-in-scroll text-gradient-sunset">
+        Explore Each Practice
+      </h2>
+
+      <!-- Energy Healing Detail -->
+      <ServiceDetail
+        title="Energy Healing: Qi Gong & Tai Chi"
+        subtitle="Ancient Chinese practices for vitality and balance"
+        imageIcon="🙏"
+        duration="60-90 minutes"
+        longDescription="Experience the profound healing power of Qi Gong and Tai Chi. These ancient Chinese practices work with your body's natural energy flow (Qi) to restore balance, increase vitality, and promote deep healing. Through gentle movements, breathwork, and meditation, you'll learn to cultivate and direct your life force energy."
+        benefits={[
+          'Increased energy and vitality',
+          'Reduced stress and anxiety',
+          'Improved balance and coordination',
+          'Enhanced mental clarity and focus',
+          'Strengthened immune system',
+          'Better sleep quality',
+          'Emotional balance and resilience'
+        ]}
+        whatToExpect={[
+          'Initial consultation to understand your needs',
+          'Guided Qi Gong exercises for energy cultivation',
+          'Tai Chi movement sequences tailored to your level',
+          'Breathwork and meditation practices',
+          'Energy assessment and chakra balancing',
+          'Take-home practice routine'
+        ]}
+        contraindications={[
+          'Recent surgery (consult your physician)',
+          'Acute injuries or inflammation',
+          'Severe mobility limitations (modifications available)'
+        ]}
+      />
+
+      <!-- Therapeutic Bodywork Detail -->
+      <ServiceDetail
+        title="Therapeutic Bodywork"
+        subtitle="Massage therapy meets energy healing"
+        imageIcon="💆"
+        duration="60-120 minutes"
+        longDescription="This unique integration combines skilled massage techniques with energy healing principles. Deep tissue work releases physical tension while energy healing addresses the root causes held in your body's energy field. Perfect for chronic pain, stress relief, and deep relaxation."
+        benefits={[
+          'Relief from chronic pain and tension',
+          'Improved circulation and lymphatic flow',
+          'Release of stored emotional trauma',
+          'Enhanced flexibility and range of motion',
+          'Deep relaxation and stress relief',
+          'Accelerated healing and recovery',
+          'Balanced energy throughout the body'
+        ]}
+        whatToExpect={[
+          'Intake discussion about your goals and concerns',
+          'Customized massage pressure (light to deep)',
+          'Integration of Swedish and deep tissue techniques',
+          'Energy healing on key meridian points',
+          'Hot stones or aromatherapy (optional)',
+          'Post-session integration time',
+          'Self-care recommendations'
+        ]}
+        contraindications={[
+          'Open wounds or skin infections',
+          'Recent fractures or sprains',
+          'Pregnancy (prenatal massage available)',
+          'Blood clots or circulatory conditions',
+          'Cancer (with physician approval only)'
+        ]}
+      />
+
+      <!-- Herbal Medicine Detail -->
+      <ServiceDetail
+        title="Herbal Medicine & Apothecary"
+        subtitle="Nature's pharmacy from the Pacific Northwest"
+        imageIcon="🌿"
+        duration="30-60 minute consultation"
+        longDescription="Our apothecary offers custom herbal preparations using plants from the Pacific Northwest and beyond. Each tincture, balm, and tea blend is carefully crafted to address your specific needs. Whether you're seeking immune support, pain relief, or emotional balance, nature provides powerful allies."
+        benefits={[
+          'Natural, plant-based healing',
+          'Personalized to your unique needs',
+          'No harsh side effects',
+          'Supports overall wellness',
+          'Sustainably wildcrafted or organic',
+          'Traditional knowledge meets modern herbalism',
+          'Ongoing support and guidance'
+        ]}
+        whatToExpect={[
+          'Comprehensive health consultation',
+          'Discussion of your symptoms and goals',
+          'Custom herbal formula design',
+          'Preparation of your remedies',
+          'Detailed usage instructions',
+          'Follow-up consultation included',
+          'Access to seasonal herb offerings'
+        ]}
+        contraindications={[
+          'Pregnancy or nursing (many herbs safe, consultation required)',
+          'Medications (check for interactions)',
+          'Allergies to specific plants',
+          'Children under 12 (special formulations available)'
+        ]}
+      />
+
+      <!-- Movement Arts Detail -->
+      <ServiceDetail
+        title="Movement Arts: Kayak & Disc Golf Flow"
+        subtitle="Mindfulness through play in nature"
+        imageIcon="🛶"
+        duration="2-4 hours"
+        longDescription="Connect with the natural world through conscious movement practices. Kayaking becomes a moving meditation on the waters of the Pacific Northwest, while disc golf flow transforms a simple game into a practice of presence, intention, and body awareness. These unique offerings blend recreation with spiritual practice."
+        benefits={[
+          'Deep connection with nature',
+          'Mindfulness and presence',
+          'Physical fitness and coordination',
+          'Stress relief through play',
+          'Community and social connection',
+          'Confidence building',
+          'Joy and creative expression'
+        ]}
+        whatToExpect={[
+          'Meet at a local park or waterway',
+          'Safety briefing and equipment check',
+          'Guided meditation and intention setting',
+          'Mindful movement instruction',
+          'Practice with coaching and support',
+          'Reflection and integration time',
+          'Options for ongoing group sessions'
+        ]}
+        contraindications={[
+          'Non-swimmers (kayaking requires basic swimming ability)',
+          'Severe fear of water',
+          'Recent injuries affecting mobility',
+          'Weather-dependent (rescheduling as needed)'
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="services-cta-section fade-in-scroll">
+    <div class="container">
+      <div class="cta-card glass">
+        <h2>Ready to Begin Your Healing Journey?</h2>
+        <p>
+          Schedule your session today and experience the transformative power of holistic healing.
+          Every journey starts with a single step.
+        </p>
+        <div class="cta-buttons">
+          <a href="/booking" class="btn-primary-large">
+            Book Your Session
+          </a>
+          <a href="/contact" class="btn-ghost-large">
+            Ask a Question
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .page-section {
-    min-height: 60vh;
+  /* Page Hero */
+  .services-hero {
+    padding: var(--space-32) 0 var(--space-20);
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--light-gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Services Grid */
+  .services-grid-section {
     padding: var(--space-20) 0;
   }
 
-  .page-section h1 {
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-8);
+  }
+
+  /* Details Section */
+  .services-details-section {
+    padding: var(--space-32) 0;
+    background: rgba(15, 23, 42, 0.3);
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-16);
+  }
+
+  /* CTA Section */
+  .services-cta-section {
+    padding: var(--space-32) 0;
+  }
+
+  .cta-card {
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+    border-radius: var(--radius-2xl);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-card h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--sunset-gold);
     margin-bottom: var(--space-6);
   }
 
-  .page-section p {
+  .cta-card p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: var(--line-height-relaxed);
     color: var(--light-gray);
-    font-size: var(--text-lg);
+    margin-bottom: var(--space-8);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Button Styles */
+  .btn-primary-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border: none;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+  }
+
+  .btn-primary-large:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .btn-ghost-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: transparent;
+    border: 2px solid var(--mystic-purple);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .btn-ghost-large:hover {
+    border-color: var(--sunset-gold);
+    color: var(--sunset-gold);
+    box-shadow: var(--shadow-glow-purple);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .services-hero {
+      padding: var(--space-20) 0 var(--space-12);
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .services-grid-section {
+      padding: var(--space-12) 0;
+    }
+
+    .services-details-section {
+      padding: var(--space-20) 0;
+    }
+
+    .services-cta-section {
+      padding: var(--space-20) 0;
+    }
+
+    .cta-card {
+      padding: var(--space-12) var(--space-6);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-primary-large,
+    .btn-ghost-large {
+      width: 100%;
+      padding: var(--space-4) var(--space-8);
+      font-size: var(--text-lg);
+    }
   }
 </style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initServicesAnimations() {
+    // Animate service cards on scroll
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceCards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom-=100',
+          end: 'top center',
+          toggleActions: 'play none none none',
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: 'power3.out'
+      });
+    });
+
+    // Animate service details
+    const serviceDetails = document.querySelectorAll('.service-detail');
+
+    serviceDetails.forEach((detail) => {
+      gsap.from(detail, {
+        scrollTrigger: {
+          trigger: detail,
+          start: 'top bottom-=50',
+          end: 'top center',
+          toggleActions: 'play none none none',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out'
+      });
+    });
+
+    // Animate CTA section
+    const ctaCard = document.querySelector('.cta-card');
+    if (ctaCard) {
+      gsap.from(ctaCard, {
+        scrollTrigger: {
+          trigger: ctaCard,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none none',
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'back.out(1.4)'
+      });
+    }
+  }
+
+  // Initialize animations
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServicesAnimations);
+  } else {
+    initServicesAnimations();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initServicesAnimations);
+</script>

@@ -1,0 +1,277 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  priceRange: string;
+  iconBg?: string;
+  features?: string[];
+  bookingUrl?: string;
+  delay?: number;
+}
+
+const {
+  title,
+  description,
+  icon,
+  priceRange,
+  iconBg = 'mystic',
+  features = [],
+  bookingUrl = '/booking',
+  delay = 0
+} = Astro.props;
+
+const bgGradients: Record<string, string> = {
+  mystic: 'var(--gradient-mystic)',
+  sunset: 'var(--gradient-sunset)',
+  healing: 'var(--gradient-healing)',
+  forest: 'var(--gradient-forest)',
+  water: 'var(--gradient-water)',
+  canyon: 'var(--gradient-canyon)',
+};
+---
+
+<div class="service-card glass hover-lift fade-in-up" style={`animation-delay: ${delay}ms`}>
+  <!-- Icon Background -->
+  <div class="service-icon-container" style={`background: ${bgGradients[iconBg]}`}>
+    <div class="service-icon">{icon}</div>
+    <div class="icon-glow"></div>
+  </div>
+
+  <!-- Card Content -->
+  <div class="service-content">
+    <h3 class="service-title">{title}</h3>
+    <p class="service-description">{description}</p>
+
+    <!-- Features List -->
+    {features.length > 0 && (
+      <ul class="service-features">
+        {features.map(feature => (
+          <li>
+            <span class="feature-icon">✓</span>
+            {feature}
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <!-- Price & CTA -->
+    <div class="service-footer">
+      <div class="service-price">
+        <span class="price-label">Investment</span>
+        <span class="price-value">{priceRange}</span>
+      </div>
+
+      <a href={bookingUrl} class="service-cta btn-primary-small">
+        Book This Service
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .service-card {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    transition: all var(--transition-base);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+    border-color: var(--sunset-gold);
+  }
+
+  /* Icon Container */
+  .service-icon-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .service-icon {
+    font-size: 5rem;
+    z-index: 2;
+    position: relative;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    transition: transform var(--transition-base);
+  }
+
+  .service-card:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .icon-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+  }
+
+  .service-card:hover .icon-glow {
+    opacity: 1;
+  }
+
+  /* Card Content */
+  .service-content {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .service-title {
+    font-size: var(--text-2xl);
+    font-family: var(--font-heading);
+    color: var(--sunset-gold);
+    margin: 0;
+  }
+
+  .service-description {
+    font-size: var(--text-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--light-gray);
+    margin: 0;
+  }
+
+  /* Features List */
+  .service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .service-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--light-gray);
+    line-height: var(--line-height-normal);
+  }
+
+  .feature-icon {
+    color: var(--sunset-gold);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .service-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(107, 70, 193, 0.2);
+    margin-top: auto;
+    gap: var(--space-4);
+  }
+
+  .service-price {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .price-label {
+    font-size: var(--text-xs);
+    color: var(--medium-gray);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+  }
+
+  .price-value {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--sunset-gold);
+    font-family: var(--font-mono);
+  }
+
+  /* CTA Button */
+  .btn-primary-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border: none;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+  }
+
+  .btn-primary-small:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .service-icon-container {
+      height: 160px;
+    }
+
+    .service-icon {
+      font-size: 4rem;
+    }
+
+    .service-content {
+      padding: var(--space-5);
+    }
+
+    .service-footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-primary-small {
+      width: 100%;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-icon,
+    .icon-glow,
+    .btn-primary-small {
+      transition: none;
+    }
+
+    .service-card:hover {
+      transform: none;
+    }
+
+    .service-card:hover .service-icon {
+      transform: none;
+    }
+  }
+</style>

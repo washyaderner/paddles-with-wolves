@@ -1,0 +1,267 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  longDescription: string;
+  benefits?: string[];
+  duration?: string;
+  whatToExpect?: string[];
+  contraindications?: string[];
+  imageIcon?: string;
+}
+
+const {
+  title,
+  subtitle,
+  longDescription,
+  benefits = [],
+  duration,
+  whatToExpect = [],
+  contraindications = [],
+  imageIcon = '🌟'
+} = Astro.props;
+---
+
+<div class="service-detail fade-in-scroll">
+  <div class="detail-header">
+    <div class="detail-icon">{imageIcon}</div>
+    <div class="detail-titles">
+      <h2>{title}</h2>
+      {subtitle && <p class="detail-subtitle">{subtitle}</p>}
+    </div>
+  </div>
+
+  <div class="detail-content">
+    <!-- Long Description -->
+    <div class="detail-section">
+      <p class="detail-description">{longDescription}</p>
+    </div>
+
+    <!-- Duration -->
+    {duration && (
+      <div class="detail-info">
+        <span class="info-label">Session Duration:</span>
+        <span class="info-value">{duration}</span>
+      </div>
+    )}
+
+    <!-- Benefits -->
+    {benefits.length > 0 && (
+      <div class="detail-section">
+        <h3 class="section-heading">Benefits</h3>
+        <ul class="detail-list benefits-list">
+          {benefits.map(benefit => (
+            <li>
+              <span class="list-icon">✨</span>
+              {benefit}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- What to Expect -->
+    {whatToExpect.length > 0 && (
+      <div class="detail-section">
+        <h3 class="section-heading">What to Expect</h3>
+        <ul class="detail-list">
+          {whatToExpect.map(item => (
+            <li>
+              <span class="list-icon">→</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Contraindications -->
+    {contraindications.length > 0 && (
+      <div class="detail-section contraindications">
+        <h3 class="section-heading">Important Considerations</h3>
+        <ul class="detail-list">
+          {contraindications.map(item => (
+            <li>
+              <span class="list-icon">⚠️</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .service-detail {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Header */
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 2px solid rgba(107, 70, 193, 0.3);
+  }
+
+  .detail-icon {
+    font-size: 4rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 15px rgba(107, 70, 193, 0.5));
+  }
+
+  .detail-titles h2 {
+    font-size: var(--text-3xl);
+    color: var(--sunset-gold);
+    margin: 0 0 var(--space-2) 0;
+    font-family: var(--font-heading);
+  }
+
+  .detail-subtitle {
+    font-size: var(--text-lg);
+    color: var(--dusk-lavender);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Content */
+  .detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .detail-description {
+    font-size: var(--text-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--light-gray);
+    margin: 0;
+  }
+
+  /* Info Row */
+  .detail-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    background: rgba(107, 70, 193, 0.1);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid var(--mystic-purple);
+  }
+
+  .info-label {
+    font-size: var(--text-sm);
+    color: var(--medium-gray);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .info-value {
+    font-size: var(--text-base);
+    color: var(--sunset-gold);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* Section Headings */
+  .section-heading {
+    font-size: var(--text-xl);
+    color: var(--sunset-gold);
+    margin: 0;
+    font-family: var(--font-heading);
+  }
+
+  /* Lists */
+  .detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .detail-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--light-gray);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(107, 70, 193, 0.05);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-base);
+  }
+
+  .detail-list li:hover {
+    background: rgba(107, 70, 193, 0.15);
+  }
+
+  .list-icon {
+    flex-shrink: 0;
+    font-size: var(--text-lg);
+    margin-top: 2px;
+  }
+
+  .benefits-list .list-icon {
+    filter: drop-shadow(0 0 5px rgba(253, 180, 98, 0.5));
+  }
+
+  /* Contraindications */
+  .contraindications {
+    background: rgba(234, 88, 12, 0.05);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(234, 88, 12, 0.2);
+  }
+
+  .contraindications .section-heading {
+    color: var(--flame-orange);
+  }
+
+  .contraindications .list-icon {
+    font-size: var(--text-base);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .service-detail {
+      padding: var(--space-6);
+    }
+
+    .detail-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .detail-icon {
+      font-size: 3rem;
+    }
+
+    .detail-titles h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .detail-description {
+      font-size: var(--text-base);
+    }
+
+    .detail-list li {
+      padding: var(--space-2) var(--space-3);
+    }
+  }
+</style>
