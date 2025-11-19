@@ -2,6 +2,7 @@
 import FloatingNav from '../components/navigation/FloatingNav.astro';
 import AnimatedBackground from '../components/backgrounds/AnimatedBackground.astro';
 import ShoppingCart from '../components/cart/ShoppingCart.astro';
+import FloatingContactBubbles from '../components/contact/FloatingContactBubbles.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -193,6 +194,9 @@ const currentYear = new Date().getFullYear();
 
     <!-- Shopping Cart -->
     <ShoppingCart />
+
+    <!-- Floating Contact Bubbles -->
+    <FloatingContactBubbles />
 
     <!-- Scroll Animations Script -->
     <script src="../scripts/scroll-animations.ts"></script>

@@ -1,0 +1,471 @@
+---
+/**
+ * FloatingContactBubbles Component
+ * Quick access floating contact buttons
+ */
+
+interface Props {
+  showOnPages?: string[]; // Optional: Only show on specific pages
+}
+
+const { showOnPages } = Astro.props;
+---
+
+<div class="floating-contact-bubbles" id="floating-contact-bubbles">
+  <!-- Main Toggle Button -->
+  <button
+    class="bubble-toggle"
+    id="bubble-toggle"
+    aria-label="Contact options"
+    aria-expanded="false"
+  >
+    <span class="toggle-icon">💬</span>
+    <span class="toggle-close">✕</span>
+  </button>
+
+  <!-- Contact Options -->
+  <div class="bubble-options" id="bubble-options">
+    <!-- Email Bubble -->
+    <a
+      href="mailto:info@paddleswithwolves.com"
+      class="bubble-option email-bubble"
+      data-tooltip="Send Email"
+    >
+      <span class="bubble-icon">📧</span>
+    </a>
+
+    <!-- Phone Bubble -->
+    <a
+      href="tel:+15551234567"
+      class="bubble-option phone-bubble"
+      data-tooltip="Call Us"
+    >
+      <span class="bubble-icon">📞</span>
+    </a>
+
+    <!-- Booking Bubble -->
+    <a
+      href="/booking"
+      class="bubble-option booking-bubble"
+      data-tooltip="Book Session"
+    >
+      <span class="bubble-icon">📅</span>
+    </a>
+
+    <!-- Contact Page Bubble -->
+    <a
+      href="/contact"
+      class="bubble-option contact-bubble"
+      data-tooltip="Contact Form"
+    >
+      <span class="bubble-icon">✉️</span>
+    </a>
+  </div>
+
+  <!-- Floating particle decoration -->
+  <div class="bubble-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+</div>
+
+<style>
+  .floating-contact-bubbles {
+    position: fixed;
+    bottom: var(--space-24);
+    right: var(--space-8);
+    z-index: 998;
+  }
+
+  /* Main Toggle Button */
+  .bubble-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+    transition: all var(--transition-base);
+    position: relative;
+    z-index: 3;
+  }
+
+  .bubble-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .toggle-icon,
+  .toggle-close {
+    font-size: 1.75rem;
+    transition: all var(--transition-base);
+    position: absolute;
+  }
+
+  .toggle-close {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0);
+  }
+
+  .bubble-toggle.active .toggle-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0);
+  }
+
+  .bubble-toggle.active .toggle-close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  /* Bubble Options Container */
+  .bubble-options {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .bubble-options.active {
+    pointer-events: auto;
+  }
+
+  /* Individual Bubble Option */
+  .bubble-option {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: scale(0) translateY(20px);
+    position: relative;
+  }
+
+  .bubble-options.active .bubble-option {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* Staggered animation delays */
+  .bubble-options.active .bubble-option:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+
+  .bubble-options.active .bubble-option:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+
+  .bubble-options.active .bubble-option:nth-child(3) {
+    transition-delay: 0.15s;
+  }
+
+  .bubble-options.active .bubble-option:nth-child(4) {
+    transition-delay: 0.2s;
+  }
+
+  .bubble-option:hover {
+    transform: scale(1.15) translateY(0);
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .bubble-icon {
+    font-size: 1.5rem;
+  }
+
+  /* Individual Bubble Colors */
+  .email-bubble {
+    background: linear-gradient(135deg, #4A90A4, #2D5F7E);
+  }
+
+  .email-bubble:hover {
+    box-shadow: 0 0 20px rgba(74, 144, 164, 0.6);
+  }
+
+  .phone-bubble {
+    background: linear-gradient(135deg, #588157, #3A5A40);
+  }
+
+  .phone-bubble:hover {
+    box-shadow: 0 0 20px rgba(88, 129, 87, 0.6);
+  }
+
+  .booking-bubble {
+    background: linear-gradient(135deg, #FDB462, #FF8C42);
+  }
+
+  .booking-bubble:hover {
+    box-shadow: 0 0 20px rgba(253, 180, 98, 0.6);
+  }
+
+  .contact-bubble {
+    background: linear-gradient(135deg, #6B46C1, #9D7FB8);
+  }
+
+  .contact-bubble:hover {
+    box-shadow: 0 0 20px rgba(107, 70, 193, 0.6);
+  }
+
+  /* Tooltip */
+  .bubble-option::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: calc(100% + var(--space-3));
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    color: var(--white);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+  }
+
+  .bubble-option:hover::before {
+    opacity: 1;
+  }
+
+  /* Floating Particles */
+  .bubble-particles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--sunset-gold);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float-particle 3s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) {
+    top: 20%;
+    left: 30%;
+    animation-delay: 0s;
+  }
+
+  .particle:nth-child(2) {
+    top: 60%;
+    left: 70%;
+    animation-delay: 1s;
+  }
+
+  .particle:nth-child(3) {
+    top: 40%;
+    left: 10%;
+    animation-delay: 2s;
+  }
+
+  @keyframes float-particle {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(10px, -15px);
+      opacity: 0.3;
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .floating-contact-bubbles {
+      bottom: var(--space-20);
+      right: var(--space-6);
+    }
+
+    .bubble-toggle {
+      width: 56px;
+      height: 56px;
+    }
+
+    .toggle-icon,
+    .toggle-close {
+      font-size: 1.5rem;
+    }
+
+    .bubble-option {
+      width: 46px;
+      height: 46px;
+    }
+
+    .bubble-icon {
+      font-size: 1.3rem;
+    }
+
+    /* Move tooltips to top on mobile */
+    .bubble-option::before {
+      right: auto;
+      left: 50%;
+      top: auto;
+      bottom: calc(100% + var(--space-2));
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Hide on very small screens or when cart is present */
+  @media (max-width: 480px) {
+    .floating-contact-bubbles {
+      bottom: var(--space-28);
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .bubble-toggle,
+    .bubble-option,
+    .particle {
+      animation: none;
+      transition: none;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .floating-contact-bubbles {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initFloatingContactBubbles() {
+    const bubbleToggle = document.getElementById('bubble-toggle');
+    const bubbleOptions = document.getElementById('bubble-options');
+    let isOpen = false;
+
+    if (!bubbleToggle || !bubbleOptions) return;
+
+    // Toggle bubbles
+    bubbleToggle.addEventListener('click', () => {
+      isOpen = !isOpen;
+
+      if (isOpen) {
+        bubbleToggle.classList.add('active');
+        bubbleOptions.classList.add('active');
+        bubbleToggle.setAttribute('aria-expanded', 'true');
+
+        // Animate options appearing
+        const options = bubbleOptions.querySelectorAll('.bubble-option');
+        options.forEach((option, index) => {
+          gsap.fromTo(option,
+            {
+              opacity: 0,
+              scale: 0,
+              y: 20
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              y: -((index + 1) * 63), // Space them out vertically
+              duration: 0.3,
+              delay: index * 0.05,
+              ease: 'back.out(1.7)'
+            }
+          );
+        });
+
+        // Animate toggle button
+        gsap.to(bubbleToggle, {
+          rotate: 360,
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+
+      } else {
+        bubbleToggle.classList.remove('active');
+        bubbleOptions.classList.remove('active');
+        bubbleToggle.setAttribute('aria-expanded', 'false');
+
+        // Animate options disappearing
+        const options = bubbleOptions.querySelectorAll('.bubble-option');
+        gsap.to(options, {
+          opacity: 0,
+          scale: 0,
+          y: 20,
+          duration: 0.2,
+          stagger: 0.03,
+          ease: 'power2.in'
+        });
+
+        // Animate toggle button
+        gsap.to(bubbleToggle, {
+          rotate: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      }
+    });
+
+    // Close bubbles when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const bubbles = document.getElementById('floating-contact-bubbles');
+
+      if (isOpen && bubbles && !bubbles.contains(target)) {
+        bubbleToggle.click();
+      }
+    });
+
+    // Close bubbles on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        bubbleToggle.click();
+      }
+    });
+
+    // Optional: Auto-pulse effect on load to draw attention
+    setTimeout(() => {
+      if (!isOpen) {
+        gsap.fromTo(bubbleToggle,
+          { scale: 1 },
+          {
+            scale: 1.15,
+            duration: 0.3,
+            yoyo: true,
+            repeat: 3,
+            ease: 'power2.inOut'
+          }
+        );
+      }
+    }, 2000);
+  }
+
+  // Initialize bubbles
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFloatingContactBubbles);
+  } else {
+    initFloatingContactBubbles();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initFloatingContactBubbles);
+</script>

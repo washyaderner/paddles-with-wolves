@@ -1,0 +1,688 @@
+---
+/**
+ * ContactForm Component
+ * Mystical contact form with glow effects and field validation
+ */
+
+interface Props {
+  formTitle?: string;
+  submitButtonText?: string;
+}
+
+const {
+  formTitle = "Send Us a Message",
+  submitButtonText = "Send Message"
+} = Astro.props;
+
+const serviceOptions = [
+  { value: '', label: 'Select a service (optional)' },
+  { value: 'energy-healing', label: 'Energy Healing (Qi Gong & Tai Chi)' },
+  { value: 'therapeutic-bodywork', label: 'Therapeutic Bodywork' },
+  { value: 'herbal-consultation', label: 'Herbal Consultation' },
+  { value: 'movement-arts', label: 'Movement Arts (Kayak/Disc Golf)' },
+  { value: 'apothecary', label: 'Herbal Products Inquiry' },
+  { value: 'general', label: 'General Question' }
+];
+---
+
+<section class="contact-form-section">
+  <div class="form-header">
+    <h2 class="form-title text-gradient-healing">{formTitle}</h2>
+    <p class="form-subtitle">
+      We typically respond within 24 hours
+    </p>
+  </div>
+
+  <form class="contact-form glass" id="contact-form">
+    <!-- Success Message (Hidden by default) -->
+    <div class="form-success" id="form-success" style="display: none;">
+      <div class="success-icon">✨</div>
+      <h3>Message Sent!</h3>
+      <p>Thank you for reaching out. We'll get back to you soon.</p>
+    </div>
+
+    <!-- Form Fields -->
+    <div class="form-fields" id="form-fields">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name" class="form-label">
+          Your Name <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-input"
+            placeholder="Enter your name"
+            required
+            autocomplete="name"
+          />
+          <div class="input-glow"></div>
+        </div>
+        <span class="form-error" id="name-error"></span>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email" class="form-label">
+          Email Address <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <span class="input-icon">📧</span>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            placeholder="your.email@example.com"
+            required
+            autocomplete="email"
+          />
+          <div class="input-glow"></div>
+        </div>
+        <span class="form-error" id="email-error"></span>
+      </div>
+
+      <!-- Phone Field (Optional) -->
+      <div class="form-group">
+        <label for="phone" class="form-label">
+          Phone Number <span class="optional">(optional)</span>
+        </label>
+        <div class="input-wrapper">
+          <span class="input-icon">📱</span>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="form-input"
+            placeholder="(555) 123-4567"
+            autocomplete="tel"
+          />
+          <div class="input-glow"></div>
+        </div>
+      </div>
+
+      <!-- Service Interest -->
+      <div class="form-group">
+        <label for="service" class="form-label">
+          Service Interest
+        </label>
+        <div class="input-wrapper">
+          <span class="input-icon">🌿</span>
+          <select
+            id="service"
+            name="service"
+            class="form-select"
+          >
+            {serviceOptions.map(option => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+          <div class="input-glow"></div>
+        </div>
+      </div>
+
+      <!-- Message Field -->
+      <div class="form-group">
+        <label for="message" class="form-label">
+          Your Message <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <span class="input-icon textarea-icon">💬</span>
+          <textarea
+            id="message"
+            name="message"
+            class="form-textarea"
+            placeholder="Tell us about your wellness goals, questions, or how we can help you..."
+            rows="6"
+            required
+          ></textarea>
+          <div class="input-glow"></div>
+        </div>
+        <span class="form-error" id="message-error"></span>
+        <span class="character-count" id="character-count">0 / 1000</span>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit" id="btn-submit">
+        <span class="submit-icon">✨</span>
+        <span class="submit-text">{submitButtonText}</span>
+        <span class="submit-loading" style="display: none;">
+          <span class="loading-spinner"></span>
+          Sending...
+        </span>
+      </button>
+    </div>
+  </form>
+
+  <!-- Alternative Contact Methods -->
+  <div class="alternative-contact">
+    <p class="alternative-text">Or reach us directly:</p>
+    <div class="contact-methods">
+      <a href="mailto:info@paddleswithwolves.com" class="contact-method">
+        <span class="method-icon">📧</span>
+        <span class="method-text">info@paddleswithwolves.com</span>
+      </a>
+      <a href="tel:+15551234567" class="contact-method">
+        <span class="method-icon">📞</span>
+        <span class="method-text">(555) 123-4567</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-form-section {
+    width: 100%;
+  }
+
+  /* Form Header */
+  .form-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .form-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: var(--space-3);
+  }
+
+  .form-subtitle {
+    font-size: var(--text-base);
+    color: var(--medium-gray);
+    font-style: italic;
+  }
+
+  /* Contact Form */
+  .contact-form {
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    margin-bottom: var(--space-8);
+    position: relative;
+  }
+
+  /* Form Fields */
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .required {
+    color: var(--flame-orange);
+  }
+
+  .optional {
+    font-size: var(--text-xs);
+    color: var(--medium-gray);
+    font-weight: var(--font-weight-normal);
+  }
+
+  /* Input Wrapper with Glow Effect */
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-icon {
+    position: absolute;
+    left: var(--space-4);
+    font-size: var(--text-xl);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .textarea-icon {
+    top: var(--space-4);
+  }
+
+  .input-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 0 20px rgba(107, 70, 193, 0.6);
+  }
+
+  /* Form Inputs */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-lg);
+    color: var(--white);
+    font-size: var(--text-base);
+    font-family: inherit;
+    transition: all var(--transition-base);
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--sunset-gold);
+  }
+
+  .form-input:focus ~ .input-glow,
+  .form-select:focus ~ .input-glow,
+  .form-textarea:focus ~ .input-glow {
+    opacity: 1;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--medium-gray);
+  }
+
+  .form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23FDB462' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-4) center;
+    padding-right: var(--space-12);
+  }
+
+  .form-select option {
+    background: var(--deep-charcoal);
+    color: var(--white);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 150px;
+    font-family: inherit;
+  }
+
+  /* Form Errors */
+  .form-error {
+    font-size: var(--text-xs);
+    color: var(--flame-orange);
+    display: none;
+    padding-left: var(--space-2);
+  }
+
+  .form-error.visible {
+    display: block;
+  }
+
+  .form-group.error .form-input,
+  .form-group.error .form-textarea {
+    border-color: var(--flame-orange);
+  }
+
+  /* Character Count */
+  .character-count {
+    font-size: var(--text-xs);
+    color: var(--medium-gray);
+    text-align: right;
+  }
+
+  /* Submit Button */
+  .btn-submit {
+    width: 100%;
+    padding: var(--space-5);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--white);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .submit-icon {
+    font-size: var(--text-xl);
+  }
+
+  .submit-loading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Success Message */
+  .form-success {
+    text-align: center;
+    padding: var(--space-12);
+    animation: fadeInScale 0.6s ease-out;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .success-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-4);
+    filter: drop-shadow(0 0 20px rgba(253, 180, 98, 0.6));
+  }
+
+  .form-success h3 {
+    font-size: var(--text-2xl);
+    color: var(--sunset-gold);
+    margin-bottom: var(--space-3);
+    font-family: var(--font-heading);
+  }
+
+  .form-success p {
+    font-size: var(--text-base);
+    color: var(--light-gray);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Alternative Contact */
+  .alternative-contact {
+    text-align: center;
+  }
+
+  .alternative-text {
+    font-size: var(--text-sm);
+    color: var(--medium-gray);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-6);
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-full);
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+
+  .contact-method:hover {
+    border-color: var(--sunset-gold);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-purple);
+  }
+
+  .method-icon {
+    font-size: var(--text-xl);
+  }
+
+  .method-text {
+    font-size: var(--text-base);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact-form {
+      padding: var(--space-6);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      font-size: var(--text-sm);
+    }
+
+    .contact-methods {
+      width: 100%;
+    }
+
+    .contact-method {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .btn-submit,
+    .form-success,
+    .loading-spinner {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const formFields = document.getElementById('form-fields');
+    const formSuccess = document.getElementById('form-success');
+    const submitBtn = document.getElementById('btn-submit') as HTMLButtonElement;
+    const submitText = submitBtn?.querySelector('.submit-text');
+    const submitLoading = submitBtn?.querySelector('.submit-loading');
+
+    // Character count
+    const messageTextarea = document.getElementById('message') as HTMLTextAreaElement;
+    const characterCount = document.getElementById('character-count');
+
+    if (messageTextarea && characterCount) {
+      messageTextarea.addEventListener('input', () => {
+        const length = messageTextarea.value.length;
+        characterCount.textContent = `${length} / 1000`;
+
+        if (length > 1000) {
+          characterCount.style.color = 'var(--flame-orange)';
+        } else {
+          characterCount.style.color = 'var(--medium-gray)';
+        }
+      });
+
+      messageTextarea.addEventListener('keydown', (e) => {
+        if (messageTextarea.value.length >= 1000 && e.key !== 'Backspace' && e.key !== 'Delete') {
+          e.preventDefault();
+        }
+      });
+    }
+
+    // Form validation
+    function validateField(field: HTMLInputElement | HTMLTextAreaElement): boolean {
+      const formGroup = field.closest('.form-group');
+      const errorSpan = document.getElementById(`${field.id}-error`);
+
+      if (!field.value.trim() && field.required) {
+        formGroup?.classList.add('error');
+        if (errorSpan) {
+          errorSpan.textContent = 'This field is required';
+          errorSpan.classList.add('visible');
+        }
+        return false;
+      }
+
+      if (field.type === 'email' && field.value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(field.value)) {
+          formGroup?.classList.add('error');
+          if (errorSpan) {
+            errorSpan.textContent = 'Please enter a valid email address';
+            errorSpan.classList.add('visible');
+          }
+          return false;
+        }
+      }
+
+      formGroup?.classList.remove('error');
+      errorSpan?.classList.remove('visible');
+      return true;
+    }
+
+    // Clear errors on input
+    const inputs = form?.querySelectorAll('input, textarea');
+    inputs?.forEach(input => {
+      input.addEventListener('input', () => {
+        const formGroup = input.closest('.form-group');
+        formGroup?.classList.remove('error');
+        const errorSpan = document.getElementById(`${input.id}-error`);
+        errorSpan?.classList.remove('visible');
+      });
+    });
+
+    // Form submission
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validate all required fields
+      const nameInput = document.getElementById('name') as HTMLInputElement;
+      const emailInput = document.getElementById('email') as HTMLInputElement;
+      const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+
+      const isNameValid = validateField(nameInput);
+      const isEmailValid = validateField(emailInput);
+      const isMessageValid = validateField(messageInput);
+
+      if (!isNameValid || !isEmailValid || !isMessageValid) {
+        // Shake the form
+        gsap.fromTo(form,
+          { x: 0 },
+          {
+            x: [-10, 10, -10, 10, 0],
+            duration: 0.4,
+            ease: 'power2.inOut'
+          }
+        );
+        return;
+      }
+
+      // Show loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        if (submitText) submitText.style.display = 'none';
+        if (submitLoading) submitLoading.style.display = 'flex';
+      }
+
+      // Simulate form submission (replace with actual API call)
+      try {
+        // TODO: Implement actual form submission to backend/API
+        // const formData = new FormData(form);
+        // await fetch('/api/contact', { method: 'POST', body: formData });
+
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Show success message
+        gsap.to(formFields, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          onComplete: () => {
+            if (formFields) formFields.style.display = 'none';
+            if (formSuccess) {
+              formSuccess.style.display = 'block';
+              gsap.fromTo(formSuccess,
+                { opacity: 0, scale: 0.9 },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.5,
+                  ease: 'back.out(1.4)'
+                }
+              );
+            }
+          }
+        });
+
+        // Reset form after success
+        form.reset();
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
+
+        // Reset button state
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          if (submitText) submitText.style.display = 'inline';
+          if (submitLoading) submitLoading.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  // Initialize form
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initContactForm);
+</script>
