@@ -1,29 +1,189 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PractitionerBio from '../components/about/PractitionerBio.astro';
+import PhilosophySection from '../components/about/PhilosophySection.astro';
+import TestimonialCarousel from '../components/testimonials/TestimonialCarousel.astro';
 ---
 
-<BaseLayout title="About - Paddles with Wolves">
-  <section class="page-section">
+<BaseLayout
+  title="About Tony - Paddles with Wolves Healing Arts"
+  description="Meet Tony, your guide to holistic healing in the Pacific Northwest. With 15+ years of experience in Qi Gong, Tai Chi, massage therapy, and herbal medicine, Tony helps you awaken your body's natural healing wisdom."
+  keywords="Tony healer, Pacific Northwest healing, Qi Gong instructor, Tai Chi teacher, massage therapist Seattle, herbalist, Awaken Healing Light, holistic practitioner"
+>
+  <!-- Page Hero -->
+  <section class="about-hero">
     <div class="container">
-      <h1>About Us</h1>
-      <p>Learn more about our healing practice...</p>
+      <div class="hero-content fade-in-up">
+        <h1 class="page-title text-gradient-mystic">About Tony</h1>
+        <p class="page-subtitle">
+          Your guide to holistic healing in the Pacific Northwest
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practitioner Bio -->
+  <PractitionerBio />
+
+  <!-- Philosophy Section -->
+  <PhilosophySection />
+
+  <!-- Testimonials -->
+  <TestimonialCarousel />
+
+  <!-- Call to Action -->
+  <section class="about-cta-section fade-in-scroll">
+    <div class="container">
+      <div class="cta-card glass">
+        <div class="cta-icon">🌟</div>
+        <h2>Ready to Start Your Healing Journey?</h2>
+        <p>
+          Whether you're new to energy work or have been on this path for years,
+          I'm here to support you with presence, skill, and deep respect for your unique process.
+        </p>
+        <div class="cta-buttons">
+          <a href="/booking" class="btn-primary-large">
+            Schedule a Session
+          </a>
+          <a href="/services" class="btn-ghost-large">
+            Explore Services
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .page-section {
-    min-height: 60vh;
-    padding: var(--space-20) 0;
+  /* Page Hero */
+  .about-hero {
+    padding: var(--space-32) 0 var(--space-20);
+    text-align: center;
   }
 
-  .page-section h1 {
+  .page-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--light-gray);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: var(--line-height-relaxed);
+    font-style: italic;
+  }
+
+  /* CTA Section */
+  .about-cta-section {
+    padding: var(--space-32) 0;
+  }
+
+  .cta-card {
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+    border-radius: var(--radius-2xl);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-6);
+    filter: drop-shadow(0 0 15px rgba(107, 70, 193, 0.5));
+  }
+
+  .cta-card h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--sunset-gold);
     margin-bottom: var(--space-6);
   }
 
-  .page-section p {
+  .cta-card p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: var(--line-height-relaxed);
     color: var(--light-gray);
-    font-size: var(--text-lg);
+    margin-bottom: var(--space-8);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Button Styles */
+  .btn-primary-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: linear-gradient(135deg, var(--mystic-purple), var(--flame-orange));
+    border: none;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-purple);
+  }
+
+  .btn-primary-large:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow-healing);
+  }
+
+  .btn-ghost-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5) var(--space-12);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: transparent;
+    border: 2px solid var(--mystic-purple);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .btn-ghost-large:hover {
+    border-color: var(--sunset-gold);
+    color: var(--sunset-gold);
+    box-shadow: var(--shadow-glow-purple);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .about-hero {
+      padding: var(--space-20) 0 var(--space-12);
+    }
+
+    .about-cta-section {
+      padding: var(--space-20) 0;
+    }
+
+    .cta-card {
+      padding: var(--space-12) var(--space-6);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-primary-large,
+    .btn-ghost-large {
+      width: 100%;
+      padding: var(--space-4) var(--space-8);
+      font-size: var(--text-lg);
+    }
   }
 </style>

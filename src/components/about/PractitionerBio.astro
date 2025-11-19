@@ -1,0 +1,398 @@
+---
+// Practitioner Bio Component - Split layout with illustration and bio
+---
+
+<section class="practitioner-bio">
+  <div class="container">
+    <div class="bio-grid">
+      <!-- Left: Illustrated Silhouette -->
+      <div class="bio-image-container" id="bio-image">
+        <div class="image-wrapper">
+          <!-- SVG Illustrated Silhouette with Wolf/Water Theme -->
+          <svg viewBox="0 0 400 500" class="bio-illustration" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="person-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#0891B2;stop-opacity:0.8" />
+              </linearGradient>
+
+              <linearGradient id="water-gradient-bio" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#57B8D4;stop-opacity:0.6" />
+                <stop offset="100%" style="stop-color:#0A3A4A;stop-opacity:0.8" />
+              </linearGradient>
+
+              <radialGradient id="energy-glow">
+                <stop offset="0%" style="stop-color:#FDB462;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#FDB462;stop-opacity:0" />
+              </radialGradient>
+            </defs>
+
+            <!-- Background Mountains -->
+            <path d="M 0,350 L 80,280 L 150,320 L 250,260 L 350,310 L 400,280 L 400,500 L 0,500 Z"
+                  fill="#1E293B" opacity="0.4"/>
+
+            <!-- Water/Lake -->
+            <path d="M 0,400 Q 100,390 200,395 T 400,400 L 400,500 L 0,500 Z"
+                  fill="url(#water-gradient-bio)"/>
+
+            <!-- Person Silhouette in Meditation Pose -->
+            <g class="person-silhouette">
+              <!-- Body -->
+              <ellipse cx="200" cy="260" rx="45" ry="60" fill="url(#person-gradient)"/>
+
+              <!-- Head -->
+              <circle cx="200" cy="180" r="35" fill="url(#person-gradient)"/>
+
+              <!-- Legs (crossed meditation) -->
+              <ellipse cx="180" cy="315" rx="25" ry="15" fill="url(#person-gradient)"/>
+              <ellipse cx="220" cy="315" rx="25" ry="15" fill="url(#person-gradient)"/>
+
+              <!-- Arms (meditation mudra) -->
+              <ellipse cx="160" cy="270" rx="12" ry="40" fill="url(#person-gradient)" transform="rotate(-30 160 270)"/>
+              <ellipse cx="240" cy="270" rx="12" ry="40" fill="url(#person-gradient)" transform="rotate(30 240 270)"/>
+
+              <!-- Hands in lap -->
+              <circle cx="190" cy="290" r="10" fill="url(#person-gradient)"/>
+              <circle cx="210" cy="290" r="10" fill="url(#person-gradient)"/>
+
+              <!-- Energy aura -->
+              <circle cx="200" cy="200" r="80" fill="url(#energy-glow)" class="energy-aura">
+                <animate attributeName="r" values="80;90;80" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.3;0.5;0.3" dur="4s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+
+            <!-- Wolf Silhouette -->
+            <g class="wolf-silhouette" opacity="0.6">
+              <!-- Wolf sitting beside, facing person -->
+              <ellipse cx="290" cy="340" rx="30" ry="35" fill="#2D5F4C"/>
+              <circle cx="290" cy="310" r="18" fill="#2D5F4C"/>
+              <!-- Ears -->
+              <polygon points="285,295 280,285 290,290" fill="#2D5F4C"/>
+              <polygon points="295,295 300,285 290,290" fill="#2D5F4C"/>
+              <!-- Tail -->
+              <ellipse cx="320" cy="345" rx="20" ry="12" fill="#2D5F4C" transform="rotate(45 320 345)"/>
+            </g>
+
+            <!-- Floating particles/energy -->
+            <g class="floating-particles">
+              <circle cx="150" cy="150" r="3" fill="#FDB462" opacity="0.7">
+                <animate attributeName="cy" values="150;130;150" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="250" cy="170" r="2" fill="#FDB462" opacity="0.6">
+                <animate attributeName="cy" values="170;150;170" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="200" cy="120" r="2.5" fill="#6B46C1" opacity="0.7">
+                <animate attributeName="cy" values="120;100;120" dur="3.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3.5s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+
+            <!-- Kayak -->
+            <g class="kayak" opacity="0.5" transform="translate(50, 420)">
+              <ellipse cx="60" cy="0" rx="45" ry="8" fill="#B85C38"/>
+              <rect x="58" y="-3" width="4" height="6" fill="#8B8D8A"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Right: Bio Text -->
+      <div class="bio-content">
+        <div class="bio-header fade-in-right">
+          <span class="bio-label">Meet Your Guide</span>
+          <h2>Tony: Healer, Teacher, Nature Guide</h2>
+        </div>
+
+        <div class="bio-text fade-in-right fade-delay-200">
+          <p class="lead">
+            Born and raised in the Pacific Northwest, Tony's connection to the healing arts
+            began where mountains meet water and ancient forests whisper wisdom.
+          </p>
+
+          <p>
+            For over 15 years, Tony has walked the path of healing—studying Qi Gong and Tai Chi
+            with masters in the tradition, apprenticing in herbal medicine with local plant teachers,
+            and receiving massage therapy training at the Seattle School of Body Therapy. But his
+            deepest teacher has always been nature itself.
+          </p>
+
+          <p>
+            Inspired by the philosophy of <strong>"Awaken Healing Light"</strong>, Tony's practice
+            integrates Eastern energy work with Pacific Northwest wisdom traditions. Whether guiding
+            clients through Qi Gong movements, providing therapeutic bodywork, or kayaking meditation
+            sessions on Puget Sound, his approach honors the body's innate intelligence and the
+            healing power of natural connection.
+          </p>
+
+          <p>
+            When not working with clients, you'll find Tony on the disc golf course, paddling local
+            waterways, or wildcrafting herbs in the Cascade foothills—always deepening his relationship
+            with the land that shapes his practice.
+          </p>
+        </div>
+
+        <!-- Credentials -->
+        <div class="bio-credentials fade-in-right fade-delay-400">
+          <h3>Training & Experience</h3>
+          <ul>
+            <li>
+              <span class="credential-icon">🎓</span>
+              <span>Certified Massage Therapist - Seattle School of Body Therapy</span>
+            </li>
+            <li>
+              <span class="credential-icon">🙏</span>
+              <span>Qi Gong & Tai Chi Instructor - 15+ years of practice</span>
+            </li>
+            <li>
+              <span class="credential-icon">🌿</span>
+              <span>Clinical Herbalist - Pacific Northwest School of Herbal Medicine</span>
+            </li>
+            <li>
+              <span class="credential-icon">🛶</span>
+              <span>Wilderness First Responder & Kayak Guide</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .practitioner-bio {
+    padding: var(--space-32) 0;
+    position: relative;
+  }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  /* Image Container */
+  .bio-image-container {
+    position: relative;
+    will-change: transform;
+  }
+
+  .image-wrapper {
+    position: relative;
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 70, 193, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .bio-illustration {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .energy-aura {
+    mix-blend-mode: screen;
+  }
+
+  /* Bio Content */
+  .bio-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .bio-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .bio-label {
+    display: inline-block;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--sunset-gold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-bottom: var(--space-2);
+  }
+
+  .bio-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    margin: 0;
+    font-family: var(--font-heading);
+  }
+
+  .bio-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .bio-text p {
+    font-size: var(--text-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--light-gray);
+    margin: 0;
+  }
+
+  .bio-text .lead {
+    font-size: var(--text-xl);
+    color: var(--off-white);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .bio-text strong {
+    color: var(--sunset-gold);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* Credentials */
+  .bio-credentials {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(107, 70, 193, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  .bio-credentials h3 {
+    font-size: var(--text-xl);
+    color: var(--sunset-gold);
+    margin: 0 0 var(--space-4) 0;
+    font-family: var(--font-heading);
+  }
+
+  .bio-credentials ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .bio-credentials li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    color: var(--light-gray);
+    padding: var(--space-2) 0;
+  }
+
+  .credential-icon {
+    font-size: var(--text-2xl);
+    flex-shrink: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .bio-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+
+    .bio-image-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .practitioner-bio {
+      padding: var(--space-20) 0;
+    }
+
+    .bio-header h2 {
+      font-size: var(--text-3xl);
+    }
+
+    .bio-text p,
+    .bio-text .lead {
+      font-size: var(--text-base);
+    }
+
+    .image-wrapper {
+      padding: var(--space-6);
+    }
+
+    .bio-credentials {
+      padding: var(--space-5);
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initBioAnimations() {
+    const bioImage = document.getElementById('bio-image');
+
+    if (bioImage) {
+      // Parallax effect on bio image
+      gsap.to(bioImage, {
+        y: -50,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.practitioner-bio',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1
+        }
+      });
+    }
+
+    // Animate person silhouette on scroll
+    const personSilhouette = document.querySelector('.person-silhouette');
+    if (personSilhouette) {
+      gsap.from(personSilhouette, {
+        scrollTrigger: {
+          trigger: '.practitioner-bio',
+          start: 'top center',
+          toggleActions: 'play none none none'
+        },
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'back.out(1.4)'
+      });
+    }
+
+    // Animate wolf with delay
+    const wolfSilhouette = document.querySelector('.wolf-silhouette');
+    if (wolfSilhouette) {
+      gsap.from(wolfSilhouette, {
+        scrollTrigger: {
+          trigger: '.practitioner-bio',
+          start: 'top center',
+          toggleActions: 'play none none none'
+        },
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: 'power2.out'
+      });
+    }
+  }
+
+  // Initialize animations
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBioAnimations);
+  } else {
+    initBioAnimations();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initBioAnimations);
+</script>
