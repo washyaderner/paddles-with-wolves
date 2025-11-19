@@ -124,7 +124,7 @@ export function createFadeIn(
     stagger,
     ease,
     scrollTrigger: {
-      trigger: element,
+      trigger: element as gsap.DOMTarget,
       ...scrollTriggerConfig.fadeIn,
     },
   });
@@ -156,7 +156,7 @@ export function createScaleIn(
     delay,
     ease,
     scrollTrigger: {
-      trigger: element,
+      trigger: element as gsap.DOMTarget,
       ...scrollTriggerConfig.fadeIn,
     },
   });
@@ -188,7 +188,7 @@ export function createStaggerAnimation(
     stagger,
     ease,
     scrollTrigger: {
-      trigger: elements,
+      trigger: elements as gsap.DOMTarget,
       ...scrollTriggerConfig.fadeIn,
     },
   });
@@ -210,7 +210,7 @@ export function createParallax(
     y,
     ease: 'none',
     scrollTrigger: {
-      trigger: element,
+      trigger: element as gsap.DOMTarget,
       ...scrollTriggerConfig.parallax,
       scrub: speed,
     },

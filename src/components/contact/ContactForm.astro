@@ -614,6 +614,7 @@ const serviceOptions = [
         gsap.fromTo(form,
           { x: 0 },
           {
+            // @ts-ignore - GSAP keyframe values
             x: [-10, 10, -10, 10, 0],
             duration: 0.4,
             ease: 'power2.inOut'
@@ -625,8 +626,8 @@ const serviceOptions = [
       // Show loading state
       if (submitBtn) {
         submitBtn.disabled = true;
-        if (submitText) submitText.style.display = 'none';
-        if (submitLoading) submitLoading.style.display = 'flex';
+        if (submitText) (submitText as HTMLElement).style.display = 'none';
+        if (submitLoading) (submitLoading as HTMLElement).style.display = 'flex';
       }
 
       // Simulate form submission (replace with actual API call)
@@ -669,8 +670,8 @@ const serviceOptions = [
         // Reset button state
         if (submitBtn) {
           submitBtn.disabled = false;
-          if (submitText) submitText.style.display = 'inline';
-          if (submitLoading) submitLoading.style.display = 'none';
+          if (submitText) (submitText as HTMLElement).style.display = 'inline';
+          if (submitLoading) (submitLoading as HTMLElement).style.display = 'none';
         }
       }
     });

@@ -153,7 +153,7 @@ class PageTransitions {
 }
 
 // Initialize
-let pageTransitions: PageTransitions;
+let pageTransitions: PageTransitions | undefined;
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
@@ -163,4 +163,4 @@ if (document.readyState === 'loading') {
   pageTransitions = new PageTransitions();
 }
 
-export default pageTransitions;
+export default pageTransitions!;

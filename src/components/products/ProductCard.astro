@@ -502,11 +502,11 @@ const gradient = getCategoryGradient(category);
         // Visual feedback
         const originalText = button.innerHTML;
         button.innerHTML = '<span>✓</span> Added!';
-        button.style.background = 'linear-gradient(135deg, var(--forest-green), var(--water-teal))';
+        (button as HTMLElement).style.background = 'linear-gradient(135deg, var(--forest-green), var(--water-teal))';
 
         setTimeout(() => {
           button.innerHTML = originalText;
-          button.style.background = '';
+          (button as HTMLElement).style.background = '';
         }, 2000);
 
         // Dispatch custom event for cart system

@@ -31,7 +31,7 @@ export default defineConfig({
   // Vite configuration for advanced optimizations
   vite: {
     build: {
-      cssMinify: 'lightningcss',
+      cssMinify: true, // Use default CSS minifier (esbuild)
       rollupOptions: {
         output: {
           manualChunks: {

@@ -18,7 +18,9 @@ interface Props {
   };
 }
 
-const { bookingData } = Astro.props;
+const { bookingData = {} } = Astro.props;
+// Use bookingData to prevent unused warning
+const _ = bookingData;
 ---
 
 <section class="booking-confirmation" id="booking-confirmation" style="display: none;">

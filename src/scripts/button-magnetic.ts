@@ -4,12 +4,13 @@
  */
 
 class MagneticButtons {
-  private buttons: NodeListOf<HTMLElement>;
+  private buttons!: NodeListOf<HTMLElement>;
   private strength: number = 0.3;
 
   constructor() {
     // Only enable on desktop with hover capability
     if (!this.isDesktop()) {
+      this.buttons = document.querySelectorAll('[data-no-init]'); // Empty NodeList
       return;
     }
 

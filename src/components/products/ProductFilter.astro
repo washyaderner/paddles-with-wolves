@@ -295,7 +295,9 @@ const { categories } = Astro.props;
         y: -10,
         duration: 0.2,
         onComplete: () => {
-          categoryDescription.textContent = description;
+          if (categoryDescription) {
+            categoryDescription.textContent = description;
+          }
           if (activeCategorySpan) {
             activeCategorySpan.textContent = categoryName;
           }

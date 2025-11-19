@@ -355,7 +355,7 @@ const {
         duration: 0.4,
         ease: 'power2.in',
         onComplete: () => {
-          currentSlide.style.display = 'none';
+          (currentSlide as HTMLElement).style.display = 'none';
           gsap.set(currentSlide, { x: 0 });
         }
       });

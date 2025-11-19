@@ -183,12 +183,12 @@
 
 <script>
   class LoadingScreen {
-    private canvas: HTMLCanvasElement;
-    private ctx: CanvasRenderingContext2D;
+    private canvas!: HTMLCanvasElement;
+    private ctx!: CanvasRenderingContext2D;
     private particles: Particle[] = [];
     private animationId: number = 0;
-    private progressBar: HTMLElement;
-    private loadingScreen: HTMLElement;
+    private progressBar!: HTMLElement;
+    private loadingScreen!: HTMLElement;
     private progress: number = 0;
 
     constructor() {
