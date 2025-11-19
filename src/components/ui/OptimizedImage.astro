@@ -59,7 +59,7 @@ const calculatedAspectRatio = aspectRatio || (width && height ? `${width} / ${he
     fetchpriority={fetchpriority}
     sizes={sizes}
     class="optimized-image"
-    style={objectFit ? `object-fit: ${objectFit}` : undefined}
+    style={objectFit ? `object-fit: ${objectFit}; opacity: 1;` : `opacity: 1;`}
   />
 </div>
 
@@ -70,6 +70,16 @@ const calculatedAspectRatio = aspectRatio || (width && height ? `${width} / ${he
     background: linear-gradient(135deg,
       rgba(107, 70, 193, 0.1) 0%,
       rgba(253, 180, 98, 0.1) 100%);
+  }
+
+  /* Ensure image is always visible */
+  .optimized-image-container .optimized-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .optimized-image-container[data-aspect-ratio] {
@@ -90,6 +100,12 @@ const calculatedAspectRatio = aspectRatio || (width && height ? `${width} / ${he
     animation: shimmer 2s infinite;
     pointer-events: none;
     z-index: 1;
+    display: none; /* Hide placeholder when not needed */
+  }
+
+  /* Show placeholder only for lazy loading */
+  .optimized-image-container:has(.optimized-image[loading="lazy"]) .image-placeholder {
+    display: block;
   }
 
   @keyframes shimmer {
@@ -105,9 +121,12 @@ const calculatedAspectRatio = aspectRatio || (width && height ? `${width} / ${he
     width: 100%;
     height: 100%;
     display: block;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
+    opacity: 1 !important; /* Force visibility */
   }
 
   /* Fade in image when loaded */
@@ -116,7 +135,12 @@ const calculatedAspectRatio = aspectRatio || (width && height ? `${width} / ${he
   }
 
   .optimized-image[loading="lazy"].loaded {
-    opacity: 1;
+    opacity: 1 !important;
+  }
+
+  /* Eager loaded images should be visible immediately */
+  .optimized-image[loading="eager"] {
+    opacity: 1 !important;
   }
 
   /* Hide placeholder when image is loaded */
@@ -148,19 +172,35 @@ const calculatedAspectRatio = aspectRatio || (width && height ? `${width} / ${he
 
 <script>
   // Add loaded class when image loads
-  document.addEventListener('astro:page-load', () => {
-    const images = document.querySelectorAll('.optimized-image[loading="lazy"]');
+  function initImages() {
+    const images = document.querySelectorAll('.optimized-image');
 
     images.forEach((img) => {
       if (img instanceof HTMLImageElement) {
-        if (img.complete) {
+        // For eager loaded images, ensure they're visible immediately
+        if (img.loading === 'eager') {
+          img.style.opacity = '1';
           img.classList.add('loaded');
-        } else {
-          img.addEventListener('load', () => {
+        } else if (img.loading === 'lazy') {
+          if (img.complete) {
             img.classList.add('loaded');
-          });
+          } else {
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            });
+          }
         }
       }
     });
-  });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImages);
+  } else {
+    initImages();
+  }
+
+  // Re-initialize on navigation
+  document.addEventListener('astro:page-load', initImages);
 </script>

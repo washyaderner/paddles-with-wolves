@@ -7,6 +7,7 @@
   viewBox="0 0 1200 800"
   preserveAspectRatio="xMidYMid slice"
   xmlns="http://www.w3.org/2000/svg"
+  style="overflow: hidden;"
 >
   <defs>
     <!-- Deep Blue Sky Gradient -->
@@ -61,43 +62,279 @@
 
   <!-- Sun positioned behind the hill (partially hidden) -->
   <g class="sun-group">
-    <!-- Sun rays emanating from behind the hill -->
+    <!-- Sun rays emanating from behind the hill - flickering with fade effects -->
     <g class="light-rays" opacity="0.3">
+      <!-- Main rays - flickering with random timing and smooth fade -->
+      <!-- Rays extended beyond viewBox boundaries so tips are clipped and not visible -->
       <path
-        d="M 600,620 L 200,100"
+        d="M 600,620 L -200,-200"
         stroke="#FDB462"
         stroke-width="40"
-        stroke-linecap="round"
-        opacity="0.4"
+        stroke-linecap="butt"
+        opacity="0"
       >
-        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.4;0" dur="3.2s" repeatCount="indefinite" begin="0s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
       </path>
       <path
-        d="M 600,620 L 450,50"
+        d="M 600,620 L 450,-150"
         stroke="#FDB462"
         stroke-width="50"
-        stroke-linecap="round"
-        opacity="0.5"
+        stroke-linecap="butt"
+        opacity="0"
       >
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.5;0" dur="4.7s" repeatCount="indefinite" begin="1.3s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
       </path>
       <path
-        d="M 600,620 L 750,50"
+        d="M 600,620 L 750,-150"
         stroke="#FDB462"
         stroke-width="50"
-        stroke-linecap="round"
-        opacity="0.5"
+        stroke-linecap="butt"
+        opacity="0"
       >
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="7s" repeatCount="indefinite" begin="1s"/>
+        <animate attributeName="opacity" values="0;0.5;0" dur="5.1s" repeatCount="indefinite" begin="0.7s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
       </path>
       <path
-        d="M 600,620 L 1000,100"
+        d="M 600,620 L 1400,-200"
         stroke="#FDB462"
         stroke-width="40"
-        stroke-linecap="round"
-        opacity="0.4"
+        stroke-linecap="butt"
+        opacity="0"
       >
-        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite" begin="0.5s"/>
+        <animate attributeName="opacity" values="0;0.4;0" dur="3.8s" repeatCount="indefinite" begin="2.1s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      
+      <!-- Additional rays - left side spread -->
+      <!-- Extended beyond left edge of viewBox -->
+      <path
+        d="M 600,620 L -300,50"
+        stroke="#FDB462"
+        stroke-width="35"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.35;0" dur="2.4s" repeatCount="indefinite" begin="1.8s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 300,-100"
+        stroke="#FDB462"
+        stroke-width="45"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.45;0" dur="4.2s" repeatCount="indefinite" begin="0.4s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 350,-50"
+        stroke="#FDB462"
+        stroke-width="38"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.4;0" dur="3.5s" repeatCount="indefinite" begin="2.6s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      
+      <!-- Additional rays - center spread -->
+      <!-- Extended beyond top edge of viewBox -->
+      <path
+        d="M 600,620 L 500,-150"
+        stroke="#FDB462"
+        stroke-width="48"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.5;0" dur="5.8s" repeatCount="indefinite" begin="0.2s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 700,-150"
+        stroke="#FDB462"
+        stroke-width="48"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.5;0" dur="4.3s" repeatCount="indefinite" begin="1.5s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 550,-100"
+        stroke="#FDB462"
+        stroke-width="42"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.45;0" dur="3.1s" repeatCount="indefinite" begin="2.9s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 650,-100"
+        stroke="#FDB462"
+        stroke-width="42"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.45;0" dur="2.7s" repeatCount="indefinite" begin="0.9s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      
+      <!-- Additional rays - right side spread -->
+      <!-- Extended beyond right edge of viewBox -->
+      <path
+        d="M 600,620 L 900,-100"
+        stroke="#FDB462"
+        stroke-width="45"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.45;0" dur="4.5s" repeatCount="indefinite" begin="1.1s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 850,-50"
+        stroke="#FDB462"
+        stroke-width="38"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.4;0" dur="3.6s" repeatCount="indefinite" begin="2.4s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 1400,50"
+        stroke="#FDB462"
+        stroke-width="35"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.35;0" dur="2.9s" repeatCount="indefinite" begin="0.6s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      
+      <!-- Wider spread rays for artistic effect -->
+      <!-- Extended beyond viewBox boundaries -->
+      <path
+        d="M 600,620 L -250,100"
+        stroke="#FDB462"
+        stroke-width="30"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.3;0" dur="5.3s" repeatCount="indefinite" begin="1.7s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 250,-50"
+        stroke="#FDB462"
+        stroke-width="32"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.32;0" dur="4.1s" repeatCount="indefinite" begin="0.3s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 1450,100"
+        stroke="#FDB462"
+        stroke-width="30"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.3;0" dur="5.6s" repeatCount="indefinite" begin="2.2s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 950,-50"
+        stroke="#FDB462"
+        stroke-width="32"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.32;0" dur="3.9s" repeatCount="indefinite" begin="1.4s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      
+      <!-- Subtle outer rays -->
+      <!-- Extended beyond viewBox boundaries -->
+      <path
+        d="M 600,620 L -350,150"
+        stroke="#FDB462"
+        stroke-width="25"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.25;0" dur="2.1s" repeatCount="indefinite" begin="0.8s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 1550,150"
+        stroke="#FDB462"
+        stroke-width="25"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.25;0" dur="2.5s" repeatCount="indefinite" begin="1.9s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      
+      <!-- Additional left side rays - extending further down the horizon -->
+      <!-- Extended beyond left edge of viewBox -->
+      <path
+        d="M 600,620 L -400,100"
+        stroke="#FDB462"
+        stroke-width="28"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.28;0" dur="3.4s" repeatCount="indefinite" begin="0.5s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L -400,140"
+        stroke="#FDB462"
+        stroke-width="26"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.26;0" dur="4.6s" repeatCount="indefinite" begin="1.2s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L -350,120"
+        stroke="#FDB462"
+        stroke-width="27"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.27;0" dur="3.7s" repeatCount="indefinite" begin="2.3s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L -300,160"
+        stroke="#FDB462"
+        stroke-width="24"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.24;0" dur="2.8s" repeatCount="indefinite" begin="1.6s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L -250,130"
+        stroke="#FDB462"
+        stroke-width="29"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.29;0" dur="4.9s" repeatCount="indefinite" begin="0.8s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L -200,170"
+        stroke="#FDB462"
+        stroke-width="23"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.23;0" dur="3.3s" repeatCount="indefinite" begin="2.7s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 250,-50"
+        stroke="#FDB462"
+        stroke-width="26"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.26;0" dur="4.4s" repeatCount="indefinite" begin="1.4s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+      </path>
+      <path
+        d="M 600,620 L 400,-50"
+        stroke="#FDB462"
+        stroke-width="22"
+        stroke-linecap="butt"
+        opacity="0"
+      >
+        <animate attributeName="opacity" values="0;0.22;0" dur="2.6s" repeatCount="indefinite" begin="0.3s" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
       </path>
     </g>
     
@@ -184,6 +421,103 @@
       <animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite" begin="1.5s"/>
     </path>
     <path d="M 1127,600 L 1135,560 L 1143,600 Z" fill="#1A3A2C" opacity="1"/>
+    
+    <!-- Second row of trees - further down the hill -->
+    <path d="M 120,660 L 135,600 L 150,660 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="9s" repeatCount="indefinite" begin="0.3s"/>
+    </path>
+    <path d="M 127,660 L 135,620 L 143,660 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <path d="M 220,665 L 235,605 L 250,665 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="8s" repeatCount="indefinite" begin="1.8s"/>
+    </path>
+    <path d="M 227,665 L 235,625 L 243,665 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <path d="M 350,662 L 365,602 L 380,662 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="10s" repeatCount="indefinite" begin="0.7s"/>
+    </path>
+    <path d="M 357,662 L 365,622 L 373,662 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <path d="M 470,658 L 485,598 L 500,658 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="11s" repeatCount="indefinite" begin="2.2s"/>
+    </path>
+    <path d="M 477,658 L 485,618 L 493,658 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 580,660 L 595,600 L 610,660 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="9s" repeatCount="indefinite" begin="1.4s"/>
+    </path>
+    <path d="M 587,660 L 595,620 L 603,660 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 680,662 L 695,602 L 710,662 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="8s" repeatCount="indefinite" begin="0.9s"/>
+    </path>
+    <path d="M 687,662 L 695,622 L 703,662 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <path d="M 780,658 L 795,598 L 810,658 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="10s" repeatCount="indefinite" begin="1.6s"/>
+    </path>
+    <path d="M 787,658 L 795,618 L 803,658 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <path d="M 950,660 L 965,600 L 980,660 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="9s" repeatCount="indefinite" begin="2.8s"/>
+    </path>
+    <path d="M 957,660 L 965,620 L 973,660 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <path d="M 1080,665 L 1095,605 L 1110,665 Z" fill="#1A3A2C" opacity="0.85">
+      <animate attributeName="opacity" values="0.75;0.95;0.75" dur="8s" repeatCount="indefinite" begin="1.1s"/>
+    </path>
+    <path d="M 1087,665 L 1095,625 L 1103,665 Z" fill="#1A3A2C" opacity="0.95"/>
+    
+    <!-- Third row of trees - even further down -->
+    <path d="M 50,700 L 65,640 L 80,700 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="10s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+    <path d="M 57,700 L 65,660 L 73,700 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 160,705 L 175,645 L 190,705 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="9s" repeatCount="indefinite" begin="2.3s"/>
+    </path>
+    <path d="M 167,705 L 175,665 L 183,705 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 290,702 L 305,642 L 320,702 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="11s" repeatCount="indefinite" begin="1.7s"/>
+    </path>
+    <path d="M 297,702 L 305,662 L 313,702 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 430,700 L 445,640 L 460,700 Z" fill="#1A3A2C" opacity="0.75">
+      <animate attributeName="opacity" values="0.65;0.85;0.65" dur="10s" repeatCount="indefinite" begin="0.8s"/>
+    </path>
+    <path d="M 437,700 L 445,660 L 453,700 Z" fill="#1A3A2C" opacity="0.85"/>
+    
+    <path d="M 540,698 L 555,638 L 570,698 Z" fill="#1A3A2C" opacity="0.75">
+      <animate attributeName="opacity" values="0.65;0.85;0.65" dur="9s" repeatCount="indefinite" begin="2.5s"/>
+    </path>
+    <path d="M 547,698 L 555,658 L 563,698 Z" fill="#1A3A2C" opacity="0.85"/>
+    
+    <path d="M 640,700 L 655,640 L 670,700 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="8s" repeatCount="indefinite" begin="1.3s"/>
+    </path>
+    <path d="M 647,700 L 655,660 L 663,700 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 760,702 L 775,642 L 790,702 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="10s" repeatCount="indefinite" begin="0.6s"/>
+    </path>
+    <path d="M 767,702 L 775,662 L 783,702 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 880,700 L 895,640 L 910,700 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="9s" repeatCount="indefinite" begin="1.9s"/>
+    </path>
+    <path d="M 887,700 L 895,660 L 903,700 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 1000,705 L 1015,645 L 1030,705 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="8s" repeatCount="indefinite" begin="2.7s"/>
+    </path>
+    <path d="M 1007,705 L 1015,665 L 1023,705 Z" fill="#1A3A2C" opacity="0.9"/>
+    
+    <path d="M 1140,702 L 1155,642 L 1170,702 Z" fill="#1A3A2C" opacity="0.8">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="11s" repeatCount="indefinite" begin="1.2s"/>
+    </path>
+    <path d="M 1147,702 L 1155,662 L 1163,702 Z" fill="#1A3A2C" opacity="0.9"/>
   </g>
 
   <!-- Stylized Clouds -->

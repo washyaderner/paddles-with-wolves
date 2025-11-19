@@ -16,7 +16,7 @@ import { Sparkles } from 'lucide-astro';
   <section class="about-hero">
     <div class="container">
       <div class="hero-content fade-in-up">
-        <h1 class="page-title text-gradient-mystic">About Tony</h1>
+        <h1 class="page-title">About Tony</h1>
         <p class="page-subtitle">
           Your guide to holistic healing in the Pacific Northwest
         </p>
@@ -64,8 +64,15 @@ import { Sparkles } from 'lucide-astro';
   }
 
   .page-title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
     margin-bottom: var(--space-4);
+    color: var(--white);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    opacity: 1;
   }
 
   .page-subtitle {
@@ -75,6 +82,8 @@ import { Sparkles } from 'lucide-astro';
     margin: 0 auto;
     line-height: var(--line-height-relaxed);
     font-style: italic;
+    opacity: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }
 
   /* CTA Section */
