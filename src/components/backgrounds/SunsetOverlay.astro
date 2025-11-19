@@ -520,36 +520,64 @@
     <path d="M 1147,702 L 1155,662 L 1163,702 Z" fill="#1A3A2C" opacity="0.9"/>
   </g>
 
-  <!-- Stylized Clouds -->
+  <!-- Stylized Clouds - with side-to-side movement -->
   <g class="clouds-layer-1" opacity="0.6">
-    <!-- Cloud 1 -->
-    <ellipse cx="150" cy="150" rx="80" ry="30" fill="url(#cloud-gradient)">
-      <animate attributeName="cx" values="150;180;150" dur="40s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="180" cy="160" rx="60" ry="25" fill="url(#cloud-gradient)"/>
-    <ellipse cx="120" cy="165" rx="50" ry="20" fill="url(#cloud-gradient)"/>
+    <!-- Cloud 1 - all parts move together -->
+    <g class="cloud-1">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 80,0; 0,0"
+        dur="40s"
+        repeatCount="indefinite"
+      />
+      <ellipse cx="150" cy="150" rx="80" ry="30" fill="url(#cloud-gradient)"/>
+      <ellipse cx="180" cy="160" rx="60" ry="25" fill="url(#cloud-gradient)"/>
+      <ellipse cx="120" cy="165" rx="50" ry="20" fill="url(#cloud-gradient)"/>
+    </g>
 
-    <!-- Cloud 2 -->
-    <ellipse cx="900" cy="200" rx="100" ry="35" fill="url(#cloud-gradient)">
-      <animate attributeName="cx" values="900;920;900" dur="45s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="940" cy="210" rx="70" ry="28" fill="url(#cloud-gradient)"/>
-    <ellipse cx="860" cy="215" rx="60" ry="23" fill="url(#cloud-gradient)"/>
+    <!-- Cloud 2 - all parts move together -->
+    <g class="cloud-2">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; -70,0; 0,0"
+        dur="45s"
+        repeatCount="indefinite"
+      />
+      <ellipse cx="900" cy="200" rx="100" ry="35" fill="url(#cloud-gradient)"/>
+      <ellipse cx="940" cy="210" rx="70" ry="28" fill="url(#cloud-gradient)"/>
+      <ellipse cx="860" cy="215" rx="60" ry="23" fill="url(#cloud-gradient)"/>
+    </g>
   </g>
 
   <g class="clouds-layer-2" opacity="0.5">
-    <!-- Cloud 3 -->
-    <ellipse cx="400" cy="280" rx="90" ry="32" fill="url(#cloud-gradient)">
-      <animate attributeName="cx" values="400;430;400" dur="50s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="440" cy="290" rx="65" ry="26" fill="url(#cloud-gradient)"/>
-    <ellipse cx="360" cy="295" rx="55" ry="22" fill="url(#cloud-gradient)"/>
+    <!-- Cloud 3 - all parts move together -->
+    <g class="cloud-3">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 90,0; 0,0"
+        dur="50s"
+        repeatCount="indefinite"
+      />
+      <ellipse cx="400" cy="280" rx="90" ry="32" fill="url(#cloud-gradient)"/>
+      <ellipse cx="440" cy="290" rx="65" ry="26" fill="url(#cloud-gradient)"/>
+      <ellipse cx="360" cy="295" rx="55" ry="22" fill="url(#cloud-gradient)"/>
+    </g>
 
-    <!-- Cloud 4 -->
-    <ellipse cx="1050" cy="320" rx="85" ry="30" fill="url(#cloud-gradient)">
-      <animate attributeName="cx" values="1050;1070;1050" dur="55s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="1085" cy="330" rx="60" ry="24" fill="url(#cloud-gradient)"/>
+    <!-- Cloud 4 - all parts move together -->
+    <g class="cloud-4">
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; -60,0; 0,0"
+        dur="55s"
+        repeatCount="indefinite"
+      />
+      <ellipse cx="1050" cy="320" rx="85" ry="30" fill="url(#cloud-gradient)"/>
+      <ellipse cx="1085" cy="330" rx="60" ry="24" fill="url(#cloud-gradient)"/>
+    </g>
   </g>
 
   <!-- Flying Birds Silhouettes -->
@@ -612,10 +640,17 @@
 <style>
   .sunset-overlay-bg {
     width: 100%;
-    height: 100%;
-    position: absolute;
+    height: 100vh;
+    position: sticky;
     top: 0;
     left: 0;
+    z-index: -1;
+  }
+
+  /* Clouds stay in top portion and move side-to-side */
+  .clouds-layer-1,
+  .clouds-layer-2 {
+    transform-origin: center top;
   }
 
   .sun-group {
@@ -647,15 +682,23 @@
 </style>
 
 <script>
-  // Subtle parallax effect
+  // Keep clouds fixed above the fold while allowing side-to-side movement
   window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const sun = document.querySelector('.sun-group') as HTMLElement;
-    const clouds1 = document.querySelector('.clouds-layer-1') as HTMLElement;
-    const clouds2 = document.querySelector('.clouds-layer-2') as HTMLElement;
-
+    const svg = document.querySelector('.sunset-overlay-bg') as HTMLElement;
+    
+    // Sun moves with parallax
     if (sun) sun.style.transform = `translateY(${scrolled * 0.05}px)`;
-    if (clouds1) clouds1.style.transform = `translateY(${scrolled * 0.1}px)`;
-    if (clouds2) clouds2.style.transform = `translateY(${scrolled * 0.15}px)`;
+    
+    // Keep clouds in viewport top - they stay above the fold
+    // The SVG itself moves, but clouds are positioned in the top portion
+    if (svg) {
+      // Calculate how much to shift SVG to keep clouds visible
+      // Clouds are in top 40% of viewBox (y: 150-320 out of 800)
+      const maxScroll = window.innerHeight * 0.4;
+      const cloudOffset = Math.min(scrolled, maxScroll);
+      svg.style.transform = `translateY(${-cloudOffset}px)`;
+    }
   });
 </script>
