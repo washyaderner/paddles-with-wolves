@@ -1,4 +1,5 @@
 ---
+import OptimizedImage from '../ui/OptimizedImage.astro';
 // Philosophy Section - Tony's Healing Philosophy
 ---
 
@@ -63,8 +64,18 @@
       </div>
     </div>
 
-    <!-- Quote Section -->
+    <!-- Quote Section with Background Image -->
     <div class="philosophy-quote fade-in-scroll">
+      <div class="quote-image-wrapper">
+        <OptimizedImage
+          src="/og-images/zen-lake.jpg"
+          alt="Serene zen lake reflecting mountains - Healing philosophy"
+          class="quote-background-image"
+          loading="lazy"
+          objectFit="cover"
+          aspectRatio="16 / 9"
+        />
+      </div>
       <div class="quote-content glass">
         <div class="quote-mark">"</div>
         <blockquote>
@@ -196,6 +207,31 @@
   /* Quote Section */
   .philosophy-quote {
     margin-bottom: var(--space-20);
+    position: relative;
+  }
+
+  .quote-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.15;
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+  }
+
+  .quote-background-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .quote-background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(3px) brightness(0.7);
   }
 
   .quote-content {
@@ -205,6 +241,7 @@
     border-radius: var(--radius-2xl);
     position: relative;
     text-align: center;
+    z-index: 1;
   }
 
   .quote-mark {

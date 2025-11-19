@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '../ui/OptimizedImage.astro';
+
 /**
  * LocationMap Component
  * Illustrated Pacific Northwest location map with mystical overlay
@@ -24,6 +26,18 @@ const {
   </div>
 
   <div class="map-container glass">
+    <!-- Background Image -->
+    <div class="map-background-image">
+      <OptimizedImage
+        src="/og-images/cliff.jpg"
+        alt="Pacific Northwest cliff and water view"
+        class="location-bg-image"
+        loading="lazy"
+        objectFit="cover"
+        aspectRatio="16 / 9"
+      />
+    </div>
+
     <!-- Illustrated Map -->
     <div class="illustrated-map">
       <!-- Pacific Northwest Illustrated Map SVG -->
@@ -259,9 +273,34 @@ const {
 
   /* Map Container */
   .map-container {
+    position: relative;
     padding: var(--space-8);
     border-radius: var(--radius-2xl);
     border: 1px solid rgba(107, 70, 193, 0.3);
+    overflow: hidden;
+  }
+
+  /* Background Image */
+  .map-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.2;
+  }
+
+  .location-bg-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .location-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(2px) brightness(0.6);
   }
 
   /* Illustrated Map */
@@ -271,8 +310,9 @@ const {
     margin-bottom: var(--space-8);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    background: rgba(15, 23, 42, 0.4);
-    border: 2px solid rgba(107, 70, 193, 0.2);
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px solid rgba(107, 70, 193, 0.3);
+    z-index: 1;
   }
 
   .map-svg {
@@ -352,6 +392,8 @@ const {
 
   /* Location Details */
   .location-details {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--space-4);

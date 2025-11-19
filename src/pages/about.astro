@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PractitionerBio from '../components/about/PractitionerBio.astro';
 import PhilosophySection from '../components/about/PhilosophySection.astro';
 import TestimonialCarousel from '../components/testimonials/TestimonialCarousel.astro';
+import OptimizedImage from '../components/ui/OptimizedImage.astro';
+import { Sparkles } from 'lucide-astro';
 ---
 
 <BaseLayout
@@ -35,7 +37,7 @@ import TestimonialCarousel from '../components/testimonials/TestimonialCarousel.
   <section class="about-cta-section fade-in-scroll">
     <div class="container">
       <div class="cta-card glass">
-        <div class="cta-icon">🌟</div>
+        <Sparkles class="cta-icon" />
         <h2>Ready to Start Your Healing Journey?</h2>
         <p>
           Whether you're new to energy work or have been on this path for years,
@@ -89,8 +91,10 @@ import TestimonialCarousel from '../components/testimonials/TestimonialCarousel.
   }
 
   .cta-icon {
-    font-size: 4rem;
+    width: 64px;
+    height: 64px;
     margin-bottom: var(--space-6);
+    color: var(--sunset-gold);
     filter: drop-shadow(0 0 15px rgba(107, 70, 193, 0.5));
   }
 

@@ -170,25 +170,13 @@ import { Sparkles } from 'lucide-astro';
     opacity: 1;
   }
 
-  /* Override gradient for better contrast - fully opaque white text */
+  /* Override gradient - use solid white text */
   .page-title.text-gradient-mystic {
-    background: linear-gradient(135deg, #FFFFFF 0%, #FDB462 25%, #FFFFFF 50%, #FDB462 75%, #FFFFFF 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 1)) drop-shadow(0 0 30px rgba(253, 180, 98, 0.8));
+    color: var(--white);
+    -webkit-text-fill-color: var(--white);
+    background: none;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
     opacity: 1;
-    background-size: 200% 100%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
   }
 
   .page-subtitle {
