@@ -6,6 +6,7 @@ import ShoppingCart from '../components/cart/ShoppingCart.astro';
 import FloatingContactBubbles from '../components/contact/FloatingContactBubbles.astro';
 import LoadingScreen from '../components/ui/LoadingScreen.astro';
 import ScrollProgress from '../components/ui/ScrollProgress.astro';
+import StarParticles from '../components/hero/StarParticles.astro';
 import '../styles/global.css';
 import '../styles/button-interactions.css';
 
@@ -150,6 +151,11 @@ const currentYear = new Date().getFullYear();
 
     <!-- Animated Background -->
     <AnimatedBackground theme={backgroundTheme} />
+
+    <!-- Star Particles - Show for mystic theme -->
+    {backgroundTheme === 'mystic' && (
+      <StarParticles />
+    )}
 
     <!-- Navigation -->
     <FloatingNav />

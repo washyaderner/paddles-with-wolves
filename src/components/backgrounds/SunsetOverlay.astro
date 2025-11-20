@@ -10,34 +10,41 @@
   style="overflow: hidden;"
 >
   <defs>
-    <!-- Deep Blue Sky Gradient -->
+    <!-- Deep Blue Sky Gradient - Extended dark space at top transitioning to lighter sky -->
     <linearGradient id="sunset-sky" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#0A3A4A;stop-opacity:1">
+      <!-- Top: Deep space black - extended further down -->
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1">
+        <animate attributeName="stop-color" values="#000000;#0A0A1A;#000000" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="5%" style="stop-color:#000000;stop-opacity:1">
+        <animate attributeName="stop-color" values="#000000;#050510;#000000" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="15%" style="stop-color:#0A0A1A;stop-opacity:1">
+        <animate attributeName="stop-color" values="#0A0A1A;#0F0F1F;#0A0A1A" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="30%" style="stop-color:#0F172A;stop-opacity:1">
+        <animate attributeName="stop-color" values="#0F172A;#1A1A2A;#0F172A" dur="20s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#0A3A4A;stop-opacity:1">
         <animate attributeName="stop-color" values="#0A3A4A;#0F4A5A;#0A3A4A" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="20%" style="stop-color:#1A5F7A;stop-opacity:1">
+      <stop offset="65%" style="stop-color:#1A5F7A;stop-opacity:1">
         <animate attributeName="stop-color" values="#1A5F7A;#2A6F8A;#1A5F7A" dur="20s" repeatCount="indefinite"/>
       </stop>
-      <stop offset="40%" style="stop-color:#0369A1;stop-opacity:1">
+      <stop offset="80%" style="stop-color:#0369A1;stop-opacity:1">
         <animate attributeName="stop-color" values="#0369A1;#0479B1;#0369A1" dur="20s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="60%" style="stop-color:#0891B2;stop-opacity:1">
-        <animate attributeName="stop-color" values="#0891B2;#18A1C2;#0891B2" dur="20s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="80%" style="stop-color:#0EA5E9;stop-opacity:1">
-        <animate attributeName="stop-color" values="#0EA5E9;#1EB5F9;#0EA5E9" dur="20s" repeatCount="indefinite"/>
       </stop>
       <stop offset="100%" style="stop-color:#57B8D4;stop-opacity:1">
         <animate attributeName="stop-color" values="#57B8D4;#67C8E4;#57B8D4" dur="20s" repeatCount="indefinite"/>
       </stop>
     </linearGradient>
 
-    <!-- Green Grass Hill Gradient -->
+    <!-- Green Grass Hill Gradient - Fully opaque to block sun -->
     <linearGradient id="horizon-glow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#2D5F4C;stop-opacity:0.9" />
-      <stop offset="30%" style="stop-color:#7BA05B;stop-opacity:0.8" />
-      <stop offset="60%" style="stop-color:#7BA05B;stop-opacity:0.7" />
-      <stop offset="100%" style="stop-color:#2D5F4C;stop-opacity:0.6" />
+      <stop offset="0%" style="stop-color:#2D5F4C;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#7BA05B;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#7BA05B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2D5F4C;stop-opacity:1" />
     </linearGradient>
 
     <!-- Sun Glow Gradient -->
@@ -349,13 +356,12 @@
 
   <!-- Single Rolling Hill with Pine Trees -->
   <!-- Hill shape: one continuous rolling curve from left to right, high enough to cover sun -->
+  <!-- Fully opaque to completely block sun from showing through -->
   <path
     d="M 0,650 Q 150,580 300,600 Q 450,610 550,600 Q 600,595 650,600 Q 750,610 900,600 Q 1050,590 1200,580 L 1200,800 L 0,800 Z"
     fill="url(#horizon-glow)"
-    opacity="0.9"
-  >
-    <animate attributeName="opacity" values="0.85;0.95;0.85" dur="10s" repeatCount="indefinite"/>
-  </path>
+    opacity="1"
+  />
 
   <!-- Pine Tree Silhouettes positioned along the hill curve -->
   <g class="pine-trees" opacity="0.8">
