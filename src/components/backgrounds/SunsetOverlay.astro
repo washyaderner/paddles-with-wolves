@@ -647,10 +647,11 @@
   .sunset-overlay-bg {
     width: 100%;
     height: 100vh;
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
+    pointer-events: none;
   }
 
   /* Clouds stay in top portion and move side-to-side */
@@ -688,23 +689,6 @@
 </style>
 
 <script>
-  // Keep clouds fixed above the fold while allowing side-to-side movement
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const sun = document.querySelector('.sun-group') as HTMLElement;
-    const svg = document.querySelector('.sunset-overlay-bg') as HTMLElement;
-    
-    // Sun moves with parallax
-    if (sun) sun.style.transform = `translateY(${scrolled * 0.05}px)`;
-    
-    // Keep clouds in viewport top - they stay above the fold
-    // The SVG itself moves, but clouds are positioned in the top portion
-    if (svg) {
-      // Calculate how much to shift SVG to keep clouds visible
-      // Clouds are in top 40% of viewBox (y: 150-320 out of 800)
-      const maxScroll = window.innerHeight * 0.4;
-      const cloudOffset = Math.min(scrolled, maxScroll);
-      svg.style.transform = `translateY(${-cloudOffset}px)`;
-    }
-  });
+  // Background is now fixed - no scroll movement needed
+  // All background elements stay in place while content scrolls over them
 </script>

@@ -12,7 +12,7 @@ interface Props {
 }
 
 const {
-  formTitle = "Send Us a Message",
+  formTitle = "Send Me a Message",
   submitButtonText = "Send Message"
 } = Astro.props;
 
@@ -31,7 +31,7 @@ const serviceOptions = [
   <div class="form-header">
     <h2 class="form-title text-gradient-healing">{formTitle}</h2>
     <p class="form-subtitle">
-      We typically respond within 24 hours
+      I typically respond within 24 hours
     </p>
   </div>
 
@@ -40,7 +40,7 @@ const serviceOptions = [
     <div class="form-success" id="form-success" style="display: none;">
       <Sparkles class="success-icon" />
       <h3>Message Sent!</h3>
-      <p>Thank you for reaching out. We'll get back to you soon.</p>
+      <p>Thank you for reaching out. I'll get back to you soon.</p>
     </div>
 
     <!-- Form Fields -->
@@ -137,7 +137,7 @@ const serviceOptions = [
             id="message"
             name="message"
             class="form-textarea"
-            placeholder="Tell us about your wellness goals, questions, or how we can help you..."
+            placeholder="Tell me about your wellness goals, questions, or how I can help you..."
             rows="6"
             required
           ></textarea>
@@ -161,7 +161,7 @@ const serviceOptions = [
 
   <!-- Alternative Contact Methods -->
   <div class="alternative-contact">
-    <p class="alternative-text">Or reach us directly:</p>
+    <p class="alternative-text">Or reach me directly:</p>
     <div class="contact-methods">
       <a href="mailto:info@paddleswithwolves.com" class="contact-method">
         <Mail class="method-icon" />
@@ -681,7 +681,7 @@ const serviceOptions = [
 
       } catch (error) {
         console.error('Form submission error:', error);
-        alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
+        alert('Sorry, there was an error sending your message. Please try again or contact me directly.');
 
         // Reset button state
         if (submitBtn) {
