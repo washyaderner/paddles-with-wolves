@@ -235,28 +235,62 @@ npm run preview  # Preview production build
 
 # Scratchpad
 
-## Current Task
-[x] Updated cursorrules file to match actual project structure
-- Added missing components (about, booking, products, seo, services, testimonials)
-- Added missing scripts (scroll-trigger-config.ts, gsap-mobile-optimizer.ts)
-- Added missing style files (typography.css, mobile.css)
-- Updated color palette with all actual variables
-- Added Vercel configuration documentation
-- Added site URL information
-- Fixed prefetch configuration description
-- Removed non-existent Navigation.astro reference
+## Recent Updates & Learnings
+
+### Hero Section Refinements (Nov 2024)
+- Removed "transformative" from hero description for more direct messaging
+- Removed comma after "Find Your Center" for cleaner typography
+- Hero text now reads: "Experience healing through ancient wisdom and modern wellness practices"
+- Title format: "Find Your Center" (no comma) followed by "Awaken Your Qi"
+
+### Healing Modalities Section Enhancements
+- Added book inspiration section featuring "Awaken Healing Light of the Tao" book
+- Book section includes:
+  - Book cover image from `/og-images/awaken-healing-light.jpg`
+  - Paraphrased text about book's influence on practice
+  - Reference to Jacob who introduced the book 20+ years ago
+- Changed subtitle from `<p>` to `<h3>` tag for semantic HTML
+- Updated subtitle styling to header size: `clamp(1.5rem, 3vw, 2.25rem)`
+- Improved color contrast: changed from `medium-gray` to `light-gray`
+
+### Layout & Spacing Improvements
+- Reduced section padding from `var(--space-32)` (128px) to `var(--space-16)` (64px)
+- Reduced subtitle margin-bottom from `var(--space-16)` to `var(--space-8)`
+- Book inspiration card:
+  - Centered layout with `max-width: 600px`
+  - Vertical flex layout (image on top, text below)
+  - Image size: 400px width (doubled from original 200px)
+  - Narrower card for better readability
+- Increased book section background opacity from 0.3 to 0.5 for better visibility
+- Removed `fade-in-scroll` class from services-preview section to ensure immediate visibility
+
+### Image Display Learnings
+- OptimizedImage component requires `aspectRatio` prop to set container height
+- Using `objectFit: contain` shows full image without cropping (important for book covers)
+- Image container needs proper overflow handling for `contain` to work correctly
+- Book cover aspect ratio: `3 / 4` (portrait orientation)
+
+### CSS Best Practices Applied
+- Use semantic HTML (h3 instead of p for headers)
+- Reduce excessive padding for better content density
+- Ensure sections are visible by default (don't rely solely on scroll animations)
+- Center content with `margin: auto` and `max-width` constraints
+- Use `clamp()` for responsive typography
 
 ## Project Status
 - Core structure implemented and documented
-- All components and scripts now accurately reflected in cursorrules
-- Ready for API integrations (Cal.com, Stripe)
+- All components and scripts accurately reflected in cursorrules
+- Hero section copy refined
+- Healing modalities section enhanced with book inspiration
+- Layout spacing optimized
+- Ready for Vercel deployment
 
 ## Next Priority Items
-1. Cal.com booking integration
-2. Stripe product checkout
-3. Contact form email handling
-4. Analytics setup
-5. Production deployment to Vercel
+1. Deploy to Vercel (pending)
+2. Cal.com booking integration
+3. Stripe product checkout
+4. Contact form email handling
+5. Analytics setup
 
 ## Performance Targets
 - Lighthouse 90+ all categories
@@ -264,8 +298,11 @@ npm run preview  # Preview production build
 - 60fps animations on mobile
 - Reduced particle count for mobile devices
 
-## Notes
+## Content & Design Notes
 - Site emphasizes mystical/healing aesthetic
 - Smooth, flowing animations are priority
 - Mobile performance critical
 - Accessibility must be maintained
+- Content should be direct and clear (removed unnecessary words like "transformative")
+- Book references add credibility and personal touch to healing practice
+- Proper semantic HTML improves SEO and accessibility
